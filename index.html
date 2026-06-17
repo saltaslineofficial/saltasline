@@ -3,11 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>SALTAŞ LINE | İLK VE TEK</title>
 
 <style>
-
 *{
 margin:0;
 padding:0;
@@ -17,37 +15,37 @@ font-family:Arial,sans-serif;
 
 body{
 background:#fff;
-color:#000;
+color:#111;
 }
 
 header{
 background:#000;
 color:#fff;
-padding:20px 10%;
+padding:15px 30px;
 display:flex;
 justify-content:space-between;
 align-items:center;
+flex-wrap:wrap;
 }
 
-.logo{
-font-size:32px;
-font-weight:bold;
+.logo img{
+height:140px;
 }
 
 nav a{
-color:#fff;
+color:white;
 text-decoration:none;
 margin-left:20px;
+font-weight:bold;
 }
 
 .hero{
-height:80vh;
+height:70vh;
 display:flex;
+flex-direction:column;
 justify-content:center;
 align-items:center;
-flex-direction:column;
 text-align:center;
-background:#f5f5f5;
 padding:20px;
 }
 
@@ -57,65 +55,59 @@ margin-bottom:10px;
 }
 
 .hero p{
-font-size:22px;
+font-size:24px;
 letter-spacing:5px;
 }
 
 .btn{
-display:inline-block;
-margin-top:25px;
-background:#000;
-color:#fff;
+background:black;
+color:white;
 padding:15px 30px;
 text-decoration:none;
-border-radius:5px;
+border-radius:8px;
+margin-top:20px;
+display:inline-block;
 }
 
 .section{
-padding:70px 10%;
+padding:60px 20px;
+text-align:center;
 }
 
 .section h2{
-text-align:center;
-margin-bottom:40px;
+margin-bottom:30px;
 }
 
-.categories{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+.cards{
+display:flex;
+justify-content:center;
 gap:20px;
+flex-wrap:wrap;
 }
 
 .card{
 border:1px solid #ddd;
-padding:25px;
-text-align:center;
-font-weight:bold;
-}
-
-.about{
-background:#f8f8f8;
+padding:20px;
+width:250px;
+border-radius:10px;
 }
 
 footer{
 background:#000;
 color:#fff;
-padding:40px 10%;
-}
-
-footer p{
-margin:10px 0;
+padding:30px;
+text-align:center;
 }
 
 .whatsapp{
 position:fixed;
-right:20px;
 bottom:20px;
+right:20px;
 background:#25D366;
 color:white;
-text-decoration:none;
 padding:15px 20px;
 border-radius:50px;
+text-decoration:none;
 font-weight:bold;
 }
 
@@ -129,97 +121,132 @@ nav{
 margin-top:15px;
 }
 
+nav a{
+display:block;
+margin:10px 0;
+}
+
 .hero h1{
-font-size:40px;
+font-size:38px;
+}
+
+.logo img{
+height:100px;
 }
 
 }
-
 </style>
-</head>
 
+</head>
 <body>
 
 <header>
 
 <div class="logo">
-<img src="logo.png.jpeg" alt="SALTAŞ LINE Logo" height="200">
-</div>
-
-
-<header>
-
-<div class="logo">
-<img src="logo.png.jpeg" alt="SALTAŞ LINE Logo" height="180">
+<img src="logo.png.jpeg" alt="SALTAŞ LINE Logo">
 </div>
 
 <nav>
 <a href="#">Ana Sayfa</a>
-<a href="#kategoriler">Ürünler</a>
+<a href="#urunler">Ürünler</a>
 <a href="#hakkimizda">Hakkımızda</a>
 <a href="#iletisim">İletişim</a>
-<a href="https://instagram.com/SALTASLİNEOFFİCİAL" target="_blank">Instagram</a>
+<a href="https://instagram.com/SALTASLINEOFFICIAL" target="_blank">Instagram</a>
 </nav>
 
 </header>
+
 <section class="hero">
-
 <h1>SALTAŞ LINE</h1>
-
 <p>İLK VE TEK</p>
 
-<a href="#kategoriler" class="btn">
+<a href="#urunler" class="btn">
 Ürünleri İncele
 </a>
 
 </section>
 
-<section class="section" id="kategoriler">
+<section id="urunler" class="section">
 
-<h2>Kategoriler</h2>
+<h2>Ürünler</h2>
 
-<div class="categories">
+<div class="cards">
 
-<div class="card">Ferace</div>
-<div class="card">Elbise</div>
-<div class="card">Tunik</div>
-<div class="card">Takım</div>
-<div class="card">Şal</div>
-<div class="card">Eşarp</div>
-<div class="card">Dış Giyim</div>
+<div class="card">
+<h3>Ürün 1</h3>
+<p>Fotoğraf ve fiyat daha sonra eklenecek.</p>
+</div>
+
+<div class="card">
+<h3>Ürün 2</h3>
+<p>Fotoğraf ve fiyat daha sonra eklenecek.</p>
+</div>
+
+<div class="card">
+<h3>Ürün 3</h3>
+<p>Fotoğraf ve fiyat daha sonra eklenecek.</p>
+</div>
 
 </div>
 
 </section>
 
-<section class="section about" id="hakkimizda">
+<section class="section">
+
+<h2>Neden SALTAŞ LINE?</h2>
+
+<div class="cards">
+
+<div class="card">✔ Kaliteli Kumaş</div>
+
+<div class="card">✔ Modern Tasarımlar</div>
+
+<div class="card">✔ Güvenli Alışveriş</div>
+
+<div class="card">✔ Hızlı Destek</div>
+
+</div>
+
+</section>
+
+<section id="hakkimizda" class="section">
 
 <h2>Hakkımızda</h2>
 
 <p>
-SALTAŞ LINE olarak modern ve kaliteli tesettür bayan giyim ürünlerini müşterilerimizle buluşturuyoruz.
-Amacımız kaliteli ürünleri uygun hizmet anlayışıyla sunmaktır.
+SALTAŞ LINE, tesettür bayan giyim alanında
+modern, kaliteli ve şık ürünleri müşterileriyle buluşturmak için kurulmuştur.
 </p>
 
 </section>
 
-<footer id="iletisim">
+<section id="iletisim" class="section">
 
 <h2>İletişim</h2>
 
-<p><strong>Telefon:</strong> 0530 110 39 44</p>
+<p>📞 05301103944</p>
 
-<p><strong>WhatsApp:</strong> 0530 110 39 44</p>
+<p>📧 saltasfurkan9@gmail.com</p>
 
-<p><strong>E-posta:</strong> saltasfurkan9@gmail.com</p>
+<p>
+📍 Karayolları Mahallesi 580/1 No:24/A
+Gaziosmanpaşa
+</p>
 
-<p><strong>Adres:</strong> Karayolları Mahallesi 580/1 No:24/A Gaziosmanpaşa</p>
+</section>
+
+<footer>
+
+<p>SALTAŞ LINE - İLK VE TEK</p>
 
 </footer>
 
 <a class="whatsapp"
-href="https://wa.me/905301103944">
+href="https://wa.me/905301103944"
+target="_blank">
+
 WhatsApp Sipariş
+
 </a>
 
 </body>
