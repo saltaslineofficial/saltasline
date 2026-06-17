@@ -3,12 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SALTAŞ LINE - İLK VE TEK</title>
+
+<title>SALTAŞ LINE | İLK VE TEK</title>
 
 <style>
-body{
+
+*{
 margin:0;
+padding:0;
+box-sizing:border-box;
 font-family:Arial,sans-serif;
+}
+
+body{
 background:#fff;
 color:#000;
 }
@@ -16,128 +23,196 @@ color:#000;
 header{
 background:#000;
 color:#fff;
-text-align:center;
-padding:25px;
+padding:20px 10%;
+display:flex;
+justify-content:space-between;
+align-items:center;
 }
 
-header h1{
-margin:0;
-font-size:42px;
+.logo{
+font-size:32px;
+font-weight:bold;
 }
 
-header p{
-margin-top:10px;
-letter-spacing:5px;
+nav a{
+color:#fff;
+text-decoration:none;
+margin-left:20px;
 }
 
 .hero{
+height:80vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
 text-align:center;
-padding:60px 20px;
 background:#f5f5f5;
+padding:20px;
 }
 
-.hero h2{
-font-size:40px;
+.hero h1{
+font-size:60px;
+margin-bottom:10px;
 }
 
-.products{
-padding:40px;
+.hero p{
+font-size:22px;
+letter-spacing:5px;
+}
+
+.btn{
+display:inline-block;
+margin-top:25px;
+background:#000;
+color:#fff;
+padding:15px 30px;
+text-decoration:none;
+border-radius:5px;
+}
+
+.section{
+padding:70px 10%;
+}
+
+.section h2{
+text-align:center;
+margin-bottom:40px;
+}
+
+.categories{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
 gap:20px;
 }
 
-.product{
+.card{
 border:1px solid #ddd;
-padding:15px;
+padding:25px;
 text-align:center;
+font-weight:bold;
 }
 
-.product img{
-width:100%;
-height:300px;
-object-fit:cover;
-}
-
-.whatsapp{
-background:#25D366;
-color:white;
-padding:10px 15px;
-text-decoration:none;
-border-radius:5px;
-display:inline-block;
-margin-top:10px;
+.about{
+background:#f8f8f8;
 }
 
 footer{
 background:#000;
 color:#fff;
-padding:30px;
-margin-top:30px;
+padding:40px 10%;
 }
 
-.floating{
+footer p{
+margin:10px 0;
+}
+
+.whatsapp{
 position:fixed;
 right:20px;
 bottom:20px;
 background:#25D366;
 color:white;
-padding:15px;
-border-radius:50%;
-font-size:25px;
 text-decoration:none;
+padding:15px 20px;
+border-radius:50px;
+font-weight:bold;
 }
+
+@media(max-width:768px){
+
+header{
+flex-direction:column;
+}
+
+nav{
+margin-top:15px;
+}
+
+.hero h1{
+font-size:40px;
+}
+
+}
+
 </style>
 </head>
 
 <body>
 
 <header>
-<h1>SALTAŞ LINE</h1>
-<p>İLK VE TEK</p>
+
+<div class="logo">
+SALTAŞ LINE
+</div>
+
+<nav>
+<a href="#">Ana Sayfa</a>
+<a href="#kategoriler">Ürünler</a>
+<a href="#hakkimizda">Hakkımızda</a>
+<a href="#iletisim">İletişim</a>
+</nav>
+
 </header>
 
 <section class="hero">
-<h2>Tesettür Giyimde Şıklığın Adresi</h2>
-<p>Kaliteli ve modern tesettür giyim ürünleri</p>
-</section>
 
-<section class="products">
+<h1>SALTAŞ LINE</h1>
 
-<div class="product">
-<img src="https://via.placeholder.com/300x400">
-<h3>Siyah Ferace</h3>
-<p>1299 TL</p>
-<a class="whatsapp"
-href="https://wa.me/905301103944?text=Siyah%20Ferace%20hakkında%20bilgi%20almak%20istiyorum">
-WhatsApp Sipariş
+<p>İLK VE TEK</p>
+
+<a href="#kategoriler" class="btn">
+Ürünleri İncele
 </a>
-</div>
-
-<div class="product">
-<img src="https://via.placeholder.com/300x400">
-<h3>Bej Ferace</h3>
-<p>1199 TL</p>
-<a class="whatsapp"
-href="https://wa.me/905301103944?text=Bej%20Ferace%20hakkında%20bilgi%20almak%20istiyorum">
-WhatsApp Sipariş
-</a>
-</div>
 
 </section>
 
-<footer>
+<section class="section" id="kategoriler">
+
+<h2>Kategoriler</h2>
+
+<div class="categories">
+
+<div class="card">Ferace</div>
+<div class="card">Elbise</div>
+<div class="card">Tunik</div>
+<div class="card">Takım</div>
+<div class="card">Şal</div>
+<div class="card">Eşarp</div>
+<div class="card">Dış Giyim</div>
+
+</div>
+
+</section>
+
+<section class="section about" id="hakkimizda">
+
 <h2>Hakkımızda</h2>
-<p>SALTAŞ LINE olarak kaliteli tesettür giyim ürünleri sunuyoruz.</p>
+
+<p>
+SALTAŞ LINE olarak modern ve kaliteli tesettür bayan giyim ürünlerini müşterilerimizle buluşturuyoruz.
+Amacımız kaliteli ürünleri uygun hizmet anlayışıyla sunmaktır.
+</p>
+
+</section>
+
+<footer id="iletisim">
 
 <h2>İletişim</h2>
-<p>Telefon: 0530 110 39 44</p>
-<p>E-posta: saltasfurkan9@gmail.com</p>
+
+<p><strong>Telefon:</strong> 0530 110 39 44</p>
+
+<p><strong>WhatsApp:</strong> 0530 110 39 44</p>
+
+<p><strong>E-posta:</strong> saltasfurkan9@gmail.com</p>
+
+<p><strong>Adres:</strong> Karayolları Mahallesi 580/1 No:24/A Gaziosmanpaşa</p>
+
 </footer>
 
-<a class="floating"
+<a class="whatsapp"
 href="https://wa.me/905301103944">
-💬
+WhatsApp Sipariş
 </a>
 
 </body>
