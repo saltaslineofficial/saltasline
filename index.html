@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SALTAŞLİNE | Kadın Giyim</title>
+
+<meta name="description" content="SALTAŞLİNE Tesettür Kadın Giyim">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+background:#faf8f5;
+color:#222;
+}
+
+header{
+
+position:fixed;
+top:0;
+left:0;
+width:100%;
+background:#fff;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 8%;
+box-shadow:0 2px 12px rgba(0,0,0,.08);
+z-index:9999;
+
+}
+
+.logo{
+
+display:flex;
+align-items:center;
+gap:12px;
+
+}
+
+.logo img{
+
+width:55px;
+
+}
+
+.logo h2{
+
+font-size:28px;
+font-weight:700;
+letter-spacing:2px;
+
+}
+
+nav a{
+
+text-decoration:none;
+color:#222;
+margin-left:25px;
+font-weight:500;
+transition:.3s;
+
+}
+
+nav a:hover{
+
+color:#b8955f;
+
+}
+
+.hero{
+
+margin-top:90px;
+height:90vh;
+background:linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),url('hero.jpg');
+background-size:cover;
+background-position:center;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+text-align:center;
+padding:20px;
+
+}
+
+.hero h1{
+
+color:#fff;
+font-size:55px;
+margin-bottom:20px;
+
+}
+
+.hero p{
+
+color:#fff;
+font-size:20px;
+margin-bottom:30px;
+
+}
+
+.btn{
+
+display:inline-block;
+
+padding:15px 35px;
+
+background:#b8955f;
+
+color:white;
+
+text-decoration:none;
+
+border-radius:50px;
+
+transition:.3s;
+
+}
+
+.btn:hover{
+
+background:#000;
+
+}
+
+section{
+
+padding:90px 8%;
+
+}
+
+.title{
+
+text-align:center;
+
+font-size:38px;
+
+margin-bottom:50px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+
+<img src="logo.png.jpeg">
+
+<h2>SALTAŞLİNE</h2>
+
+</div>
+
+<nav>
+
+<a href="#">Ana Sayfa</a>
+
+<a href="#">Ürünler</a>
+
+<a href="#">Hakkımızda</a>
+
+<a href="#">İletişim</a>
+
+</nav>
+
+</header>
+
+<section class="hero">
+
+<div>
+
+<h1>Yeni Sezon Kadın Giyim</h1>
+
+<p>Şıklığın ve Zarafetin Yeni Adresi</p>
+
+<a class="btn" href="#">Alışverişe Başla</a>
+
+</div>
+
+</section>
+<!-- GÜVEN ALANI -->
+
+<section>
+
+<h2 class="title">Neden SALTAŞLİNE?</h2>
+
+<div class="features">
+
+<div class="feature">
+<div class="icon">🚚</div>
+<h3>Hızlı Kargo</h3>
+<p>Türkiye'nin her yerine güvenli teslimat.</p>
+</div>
+
+<div class="feature">
+<div class="icon">🔒</div>
+<h3>Güvenli Ödeme</h3>
+<p>Alışverişleriniz güvenli altyapı ile korunur.</p>
+</div>
+
+<div class="feature">
+<div class="icon">↩️</div>
+<h3>Kolay İade</h3>
+<p>Koşullara uygun ürünlerde kolay iade.</p>
+</div>
+
+<div class="feature">
+<div class="icon">💬</div>
+<h3>7/24 Destek</h3>
+<p>WhatsApp üzerinden bize ulaşabilirsiniz.</p>
+</div>
+
+</div>
+
+</section>
+
+<style>
+
+.features{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:25px;
+
+}
+
+.feature{
+
+background:white;
+
+padding:35px;
+
+border-radius:18px;
+
+text-align:center;
+
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+transition:.35s;
+
+}
+
+.feature:hover{
+
+transform:translateY(-8px);
+
+}
+
+.icon{
+
+font-size:48px;
+
+margin-bottom:15px;
+
+}
+
+.feature h3{
+
+margin-bottom:12px;
+
+font-size:22px;
+
+}
+
+.feature p{
+
+color:#666;
+
+line-height:1.6;
+
+}
+
+.products{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+gap:30px;
+
+}
+
+.product{
+
+background:#fff;
+
+border-radius:18px;
+
+overflow:hidden;
+
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+transition:.35s;
+
+}
+
+.product:hover{
+
+transform:translateY(-8px);
+
+}
+
+.product img{
+
+width:100%;
+
+height:380px;
+
+object-fit:cover;
+
+}
+
+.product-info{
+
+padding:20px;
+
+text-align:center;
+
+}
+
+.product-info h3{
+
+margin-bottom:10px;
+
+}
+
+.price{
+
+font-size:22px;
+
+font-weight:bold;
+
+color:#b8955f;
+
+margin-bottom:15px;
+
+}
+
+.buy{
+
+display:inline-block;
+
+padding:12px 25px;
+
+background:#000;
+
+color:#fff;
+
+text-decoration:none;
+
+border-radius:30px;
+
+transition:.3s;
+
+}
+
+.buy:hover{
+
+background:#b8955f;
+
+}
+
+</style>
+
+<section>
+
+<h2 class="title">Yeni Gelen Ürünler</h2>
+
+<div style="text-align:center;margin-bottom:40px;">
+
+<input
+id="searchBox"
+type="text"
+placeholder="Ürün Ara..."
+style="
+width:350px;
+max-width:90%;
+padding:15px;
+font-size:17px;
+border-radius:40px;
+border:1px solid #ddd;
+outline:none;
+">
+
+</div>
+
+<div class="products">
+
+<div class="product">
+
+<img src="urun1.jpg">
+
+<div class="product-info">
+
+<h3>Piliseli Elbise</h3>
+
+<div class="price">799 ₺</div>
+
+<a href="#" class="buy">Sepete Ekle</a>
+
+</div>
+
+</div>
+
+<div class="product">
+
+<img src="urun2.jpg">
+
+<div class="product-info">
+
+<h3>Desenli Takım</h3>
+
+<div class="price">899 ₺</div>
+
+<a href="#" class="buy">Sepete Ekle</a>
+
+</div>
+
+</div>
+
+<div class="product">
+
+<img src="urun3.jpg">
+
+<div class="product-info">
+
+<h3>Şık Ferace</h3>
+
+<div class="price">1099 ₺</div>
+
+<a href="#" class="buy">Sepete Ekle</a>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const searchBox=document.getElementById("searchBox");
+
+searchBox.addEventListener("keyup",function(){
+
+let value=this.value.toLowerCase();
+
+let products=document.querySelectorAll(".product");
+
+products.forEach(function(item){
+
+let title=item.querySelector("h3").innerText.toLowerCase();
+
+if(title.includes(value)){
+
+item.style.display="block";
+
+}else{
+
+item.style.display="none";
+
+}
+
+});
+
+});
+
+</script>  
+
+  <div class="products">
+
+<div class="product">
+
+<img src="urun1.jpg">
+
+<div class="product-info">
+
+<h3>Piliseli Elbise</h3>
+
+<div class="price">799 ₺</div>
+
+<a href="#" class="buy">Sepete Ekle</a>
+
+</div>
+
+</div>
+
+<div class="product">
+
+<img src="urun2.jpg">
+
+<div class="product-info">
+
+<h3>Desenli Takım</h3>
+
+<div class="price">899 ₺</div>
+
+<a href="#" class="buy">Sepete Ekle</a>
+
+</div>
+
+</div>
+
+<div class="product">
+
+<img src="urun3.jpg">
+
+<div class="product-info">
+
+<h3>Şık Ferace</h3>
+
+<div class="price">1099 ₺</div>
+
+<a href="#" class="buy">Sepete Ekle</a>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+<!-- HAKKIMIZDA -->
+
+<section id="about">
+
+<h2 class="title">Hakkımızda</h2>
+
+<div class="about">
+
+<div>
+
+<h3>SALTAŞLİNE</h3>
+
+<p>
+
+SALTAŞLİNE olarak kaliteli, modern ve tesettür kadın giyim ürünlerini müşterilerimizle buluşturuyoruz.
+
+Kaliteli kumaş, güvenli alışveriş ve müşteri memnuniyeti önceliğimizdir.
+
+</p>
+
+<p>
+
+Her sezon yenilenen koleksiyonlarımızla şıklığı sizlere ulaştırıyoruz.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<style>
+
+.about{
+
+max-width:900px;
+
+margin:auto;
+
+background:white;
+
+padding:45px;
+
+border-radius:20px;
+
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+line-height:1.9;
+
+font-size:17px;
+
+}
+
+.about h3{
+
+margin-bottom:20px;
+
+font-size:30px;
+
+color:#b8955f;
+
+}
+
+.whatsapp{
+
+position:fixed;
+
+right:25px;
+
+bottom:25px;
+
+width:65px;
+
+height:65px;
+
+border-radius:50%;
+
+background:#25D366;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:34px;
+
+color:white;
+
+text-decoration:none;
+
+box-shadow:0 10px 30px rgba(0,0,0,.25);
+
+z-index:99999;
+
+transition:.3s;
+
+}
+
+.whatsapp:hover{
+
+transform:scale(1.1);
+
+}
+
+footer{
+
+background:#111;
+
+color:white;
+
+padding:60px 8% 20px;
+
+margin-top:70px;
+
+}
+
+.footer-grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:35px;
+
+}
+
+.footer-grid h3{
+
+margin-bottom:18px;
+
+color:#b8955f;
+
+}
+
+.footer-grid a{
+
+display:block;
+
+color:#ddd;
+
+text-decoration:none;
+
+margin:8px 0;
+
+}
+
+.footer-grid a:hover{
+
+color:white;
+
+}
+
+.footer-bottom{
+
+text-align:center;
+
+padding-top:35px;
+
+border-top:1px solid rgba(255,255,255,.15);
+
+margin-top:35px;
+
+font-size:14px;
+
+color:#aaa;
+
+}
+
+</style>
+
+<a class="whatsapp" href="https://wa.me/9055XXXXXXXX" target="_blank">
+
+💬
+
+</a>
+
+<footer>
+
+<div class="footer-grid">
+
+<div>
+
+<h3>SALTAŞLİNE</h3>
+
+<p>
+
+Premium Kadın Giyim
+
+Modern • Şık • Güvenilir
+
+</p>
+
+</div>
+
+<div>
+
+<h3>Kurumsal</h3>
+
+<a href="#">Hakkımızda</a>
+
+<a href="#">İletişim</a>
+
+<a href="#">Sık Sorulan Sorular</a>
+
+</div>
+
+<div>
+
+<h3>Yasal</h3>
+
+<a href="#">Gizlilik Politikası</a>
+
+<a href="#">KVKK</a>
+
+<a href="#">Mesafeli Satış</a>
+
+<a href="#">İade Politikası</a>
+
+<a href="#">Teslimat ve Kargo</a>
+
+</div>
+
+<div>
+
+<h3>İletişim</h3>
+
+<p>📍 İstanbul / Türkiye</p>
+
+<p>📞 0555 XXX XX XX</p>
+
+<p>✉️ info@saltasline.com</p>
+
+</div>
+
+</div>
+
+<div class="footer-bottom">
+
+© 2026 SALTAŞLİNE | Tüm Hakları Saklıdır.
+
+</div>
+
+</footer>
