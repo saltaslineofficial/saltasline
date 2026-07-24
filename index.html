@@ -837,8 +837,6 @@ Modern • Şık • Güvenilir
 
 <div id="cartItems">
 
-<p>Henüz ürün eklenmedi.</p>
-
 </div>
 
 <div id="cartTotal">
@@ -890,6 +888,75 @@ cartPanel.classList.add("active");
 closeCart.onclick=function(){
 
 cartPanel.classList.remove("active");
+
+}
+const cartItems=document.getElementById("cartItems");
+const cartTotal=document.getElementById("cartTotal");
+
+let total=0;
+
+document.querySelectorAll(".product").forEach(function(product){
+
+const button=product.querySelector(".buy");
+
+button.addEventListener("click",function(e){
+
+e.preventDefault();
+
+let name=product.querySelector("h3").innerText;
+
+let priceText=product.querySelector(".price").innerText;
+
+let price=parseInt(priceText);
+
+total+=price;
+
+if(cartItems.innerHTML.includes("Henüz ürün")){
+
+    cartItems.innerHTML="";
+
+}
+
+addToCart(name,price);
+
+cartTotal.innerHTML="Toplam: <strong>"+total+" ₺</strong>";
+
+});
+
+});
+
+    function addToCart(name, price){
+
+    let item=document.createElement("div");
+
+    item.className="cart-item";
+
+    item.innerHTML=`
+        <span>${name} - ${price} ₺</span>
+        <button class="removeItem">❌</button>
+    `;
+
+    cartItems.appendChild(item);
+
+    item.querySelector(".removeItem").onclick=function(){
+
+        total-=price;
+
+        cartTotal.innerHTML="Toplam: <strong>"+total+" ₺</strong>";
+
+        item.remove();
+
+        if(cartItems.children.length==0){
+
+            cartItems.innerHTML="<p>Henüz ürün eklenmedi.</p>";
+
+            total=0;
+
+            cartTotal.innerHTML="Toplam: <strong>0 ₺</strong>";
+
+        }
+
+    }
 
 }
 </script>
