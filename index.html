@@ -959,40 +959,7 @@ Kapat
 
 </div>
 </footer>
-  document.getElementById("whatsappOrder").onclick=function(){
-
-let message="🛍️ SALTAŞLİNE Siparişim:%0A%0A";
-
-document.querySelectorAll(".cart-item").forEach(function(item){
-
-message+=item.querySelector("span").innerText+"%0A";
-
-});
-
-message+="%0A"+cartTotal.innerText;
-
-window.open(
-
-"https://wa.me/90555XXXXXXXX?text="+message,
-
-"_blank"
-
-);
-
-}
-  document.getElementById("clearCart").onclick=function(){
-
-cartItems.innerHTML="<p>Henüz ürün eklenmedi.</p>";
-
-total=0;
-
-cart=0;
-
-document.getElementById("cartCount").innerHTML=0;
-
-cartTotal.innerHTML="Toplam: <strong>0 ₺</strong>";
-
-}
+ 
   <script>
 
 let cart=0;
@@ -1099,5 +1066,43 @@ cartTotal.innerHTML="Toplam: <strong>"+total+" ₺</strong>";
     }
 
 }
+    document.getElementById("whatsappOrder").onclick=function(){
+
+let message="🛍️ SALTAŞLİNE Siparişim:%0A%0A";
+
+document.querySelectorAll(".cart-item").forEach(function(item){
+
+message+=item.querySelector("span").innerText+"%0A";
+
+});
+
+message+="%0A"+cartTotal.innerText;
+
+window.open(
+
+"https://wa.me/905301103944?text="+message,
+
+"_blank"
+
+);
+
+};
+
+document.getElementById("clearCart").onclick=function(){
+
+cartItems.innerHTML="<p>Henüz ürün eklenmedi.</p>";
+
+total=0;
+
+cart=0;
+
+document.getElementById("cartCount").innerHTML="0";
+
+cartTotal.innerHTML="Toplam: <strong>0 ₺</strong>";
+
+};
 </script>
+
+</body>
+</html>
   
