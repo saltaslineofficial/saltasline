@@ -794,6 +794,37 @@ cursor:pointer;
 background:#b71c1c;
 
 }
+.whatsapp-order{
+
+width:100%;
+
+padding:16px;
+
+margin-top:20px;
+
+background:#25D366;
+
+color:white;
+
+border:none;
+
+border-radius:12px;
+
+font-size:18px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.whatsapp-order:hover{
+
+background:#1ea851;
+
+}  
 </style>
 
 <a class="whatsapp" href="https://wa.me/905301103944" target="_blank">
@@ -801,7 +832,11 @@ background:#b71c1c;
 💬
 
 </a>
+<button id="whatsappOrder" class="whatsapp-order">
 
+📦 Siparişi WhatsApp ile Gönder
+
+</button>
 <footer>
 
 <div class="footer-grid">
@@ -889,6 +924,27 @@ Kapat
 
 </div>
 </footer>
+  document.getElementById("whatsappOrder").onclick=function(){
+
+let message="🛍️ SALTAŞLİNE Siparişim:%0A%0A";
+
+document.querySelectorAll(".cart-item").forEach(function(item){
+
+message+=item.querySelector("span").innerText+"%0A";
+
+});
+
+message+="%0A"+cartTotal.innerText;
+
+window.open(
+
+"https://wa.me/90555XXXXXXXX?text="+message,
+
+"_blank"
+
+);
+
+}
   <script>
 
 let cart=0;
