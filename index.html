@@ -12,6 +12,35 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+  #clearCart{
+
+width:100%;
+
+padding:14px;
+
+margin-top:15px;
+
+background:#dc3545;
+
+color:white;
+
+border:none;
+
+border-radius:10px;
+
+font-size:16px;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+#clearCart:hover{
+
+background:#b71c1c;
+
+}
 
 *{
 margin:0;
@@ -911,6 +940,12 @@ Modern • Şık • Güvenilir
 </div>
 
 <div id="cartTotal">
+  
+  <button id="clearCart">
+
+🗑️ Sepeti Temizle
+
+</button>
 
 Toplam: <strong>0 ₺</strong>
 
@@ -943,6 +978,19 @@ window.open(
 "_blank"
 
 );
+
+}
+  document.getElementById("clearCart").onclick=function(){
+
+cartItems.innerHTML="<p>Henüz ürün eklenmedi.</p>";
+
+total=0;
+
+cart=0;
+
+document.getElementById("cartCount").innerHTML=0;
+
+cartTotal.innerHTML="Toplam: <strong>0 ₺</strong>";
 
 }
   <script>
