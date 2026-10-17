@@ -538,69 +538,74 @@ item.style.display="none";
 
 </script>  
 
-<!-- HAKKIMIZDA -->
-
-<section id="about">
-
-<h2 class="title">Hakkımızda</h2>
-
-<div class="about">
-
-<div>
-
-<h3>SALTAŞLİNE</h3>
-
-<p>
-
-SALTAŞLİNE olarak kaliteli, modern ve tesettür kadın giyim ürünlerini müşterilerimizle buluşturuyoruz.
-
-Kaliteli kumaş, güvenli alışveriş ve müşteri memnuniyeti önceliğimizdir.
-
-</p>
-
-<p>
-
-Her sezon yenilenen koleksiyonlarımızla şıklığı sizlere ulaştırıyoruz.
-
-</p>
-
-</div>
-
-</div>
-
+<!-- HAKKIMIZDA — SALTAŞLİNE marka hikayesi -->
+<section class="about-story" id="about" aria-labelledby="aboutTitle">
+  <div class="about-layout">
+    <div class="about-gallery" aria-label="SALTAŞLİNE ürünlerinden seçmeler">
+      <div class="about-gallery-primary">
+        <img src="elbise3.jpg" alt="SALTAŞLİNE koleksiyonundan haki yeşil takım" loading="lazy">
+      </div>
+      <div class="about-gallery-secondary">
+        <img src="elbise5.jpg" alt="SALTAŞLİNE koleksiyonundan pembe gömlek" loading="lazy">
+      </div>
+      <div class="about-gallery-seal" aria-label="SALTAŞLİNE, İlk ve Tek">
+        <span>İLK VE TEK</span><strong>SL</strong><small>SALTAŞLİNE</small>
+      </div>
+    </div>
+    <div class="about-story-content">
+      <span class="about-overline">BİZİ TANIYIN · SALTAŞLİNE</span>
+      <h2 id="aboutTitle">Her tarza <em>zarif</em> bir hikâye.</h2>
+      <p class="about-lead">Stil, kendini ifade etmenin en güzel yollarından biri.</p>
+      <p>SALTAŞLİNE olarak modern kadın giyimi ve tesettür stilini bir araya getiren parçaları sizlerle buluşturmak istiyoruz. Günlük kombinlerden özel anlarınıza uzanan seçeneklerle kendi tarzınızı keşfetmenize eşlik ediyoruz.</p>
+      <p>Bizim için önemli olan yalnızca bir ürün sunmak değil; beğendiğiniz parçanın bedenini, rengini ve ayrıntılarını öğrenirken size doğrudan yardımcı olabilmek.</p>
+      <div class="about-values">
+        <div><span aria-hidden="true">✧</span><strong>Modern çizgiler</strong><small>Günlük stile uyum sağlayan parçalar</small></div>
+        <div><span aria-hidden="true">♡</span><strong>Kendine özgü stil</strong><small>Farklı zevklere yer açan seçimler</small></div>
+        <div><span aria-hidden="true">↗</span><strong>Doğrudan iletişim</strong><small>Ürün sorularınız için WhatsApp</small></div>
+      </div>
+      <div class="about-ctas">
+        <a class="about-main-cta" href="#products">Koleksiyonu Keşfet <span aria-hidden="true">↗</span></a>
+        <a class="about-text-cta" href="https://wa.me/905301103944" target="_blank" rel="noopener noreferrer">Bize Yazın <span aria-hidden="true">↗</span></a>
+      </div>
+      <span class="about-slogan">SALTAŞLİNE / İLK VE TEK</span>
+    </div>
+  </div>
 </section>
+<style>
+.about-story{position:relative;padding:100px 8%;background:#f1ebe2;overflow:hidden}
+.about-story::before{content:"";position:absolute;top:-140px;right:-160px;width:480px;height:480px;border:1px solid rgba(162,135,101,.17);border-radius:50%;pointer-events:none}
+.about-layout{position:relative;max-width:1320px;margin:auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.04fr);gap:clamp(35px,6vw,100px);align-items:center}
+.about-gallery{position:relative;display:grid;grid-template-columns:1.2fr .8fr;gap:16px;height:540px;min-width:0}
+.about-gallery-primary,.about-gallery-secondary{overflow:hidden;background:#e4d9ce}
+.about-gallery-primary{margin-bottom:42px}
+.about-gallery-secondary{margin-top:70px}
+.about-gallery img{display:block;width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform .5s ease}
+.about-gallery img:hover{transform:scale(1.035)}
+.about-gallery-seal{position:absolute;bottom:4px;left:50%;transform:translateX(-50%);width:138px;height:138px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;background:#181d19;color:#f7eee2;box-shadow:0 12px 30px rgba(0,0,0,.2);border:5px solid #f1ebe2;text-align:center}
+.about-gallery-seal span{font-size:10px;letter-spacing:1.8px}
+.about-gallery-seal strong{font:normal 42px/1 Georgia,serif}
+.about-gallery-seal small{font-size:8px;letter-spacing:1.4px}
+.about-overline{display:inline-block;font-size:10px;letter-spacing:2.5px;color:#957347;font-weight:700;margin-bottom:17px}
+.about-story-content h2{font:normal clamp(39px,4.3vw,67px)/1.08 Georgia,"Times New Roman",serif;letter-spacing:-1.4px;color:#24261f;margin:0 0 25px}
+.about-story-content h2 em{color:#a17b50;font-weight:400}
+.about-story-content p{font-size:14px;line-height:2;color:#66635b;margin:0 0 16px}
+.about-story-content .about-lead{font-size:17px;line-height:1.6;font-weight:600;color:#292a25;margin-bottom:14px}
+.about-values{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:26px 0 30px;padding-top:22px;border-top:1px solid #d4c9b9}
+.about-values div{display:flex;flex-direction:column;gap:7px;min-width:0}
+.about-values div>span{font-size:24px;line-height:1;color:#ac875b}
+.about-values strong{font-size:12px;line-height:1.4}
+.about-values small{font-size:11px;line-height:1.55;color:#78746c}
+.about-ctas{display:flex;align-items:center;gap:26px;flex-wrap:wrap}
+.about-main-cta{display:inline-flex;align-items:center;justify-content:space-between;gap:22px;padding:15px 19px;background:#20251f;color:#fff;text-decoration:none;border-radius:3px;font-size:12px;font-weight:600}
+.about-main-cta:hover{background:#9e7850}
+.about-text-cta{display:inline-flex;gap:8px;text-decoration:none;color:#312c26;border-bottom:1px solid #bda58a;font-size:12px;padding:11px 0}
+.about-slogan{display:block;font-size:9px;letter-spacing:3px;color:#9f896e;margin-top:38px}
+@media(max-width:950px){.about-story{padding:75px 6%}.about-layout{grid-template-columns:1fr;gap:45px}.about-gallery{max-width:650px;width:100%;height:460px;margin:auto}.about-story-content{max-width:730px;margin:auto}}
+@media(max-width:600px){.about-story{padding:60px 5%}.about-gallery{height:320px;gap:10px}.about-gallery-secondary{margin-top:40px}.about-gallery-primary{margin-bottom:35px}.about-gallery-seal{width:106px;height:106px}.about-gallery-seal strong{font-size:31px}.about-gallery-seal span{font-size:8px}.about-gallery-seal small{font-size:7px}.about-story-content h2{font-size:42px}.about-values{gap:8px}.about-values strong{font-size:11px}.about-values small{font-size:10px}.about-ctas{gap:15px}}
+@media(prefers-reduced-motion:reduce){.about-gallery img{transition:none}}
+</style>
 
 <style>
-
-.about{
-
-max-width:900px;
-
-margin:auto;
-
-background:white;
-
-padding:45px;
-
-border-radius:20px;
-
-box-shadow:0 10px 30px rgba(0,0,0,.08);
-
-line-height:1.9;
-
-font-size:17px;
-
-}
-
-.about h3{
-
-margin-bottom:20px;
-
-font-size:30px;
-
-color:#b8955f;
-
-}
 
 .whatsapp{
 
@@ -786,6 +791,7 @@ background:#1ea851;
 .cart-quantity { min-width:26px; text-align:center; font-size:17px; font-weight:700; color:#111; font-variant-numeric:tabular-nums; }
 #modalQuantity { display:inline-flex; align-items:center; justify-content:center; min-width:40px; min-height:38px; background:#fff; color:#111; border:1px solid #ddd; border-radius:8px; font-size:20px; font-weight:700; font-variant-numeric:tabular-nums; }
 #cartTotal { padding:16px 0; font-size:18px; font-weight:600; }
+.cart-payment-disclaimer{font-size:11px;color:#716e67;line-height:1.65;margin-top:11px;text-align:center}
 #clearCart:disabled, #whatsappOrder:disabled { opacity:.5; cursor:not-allowed; }
 @media (max-width:420px) { #cartPanel { width:100%; right:-100%; padding:22px; } }
 </style>
@@ -812,7 +818,11 @@ background:#1ea851;
     </details>
     <details>
       <summary>Teslimat ve iade hakkında nasıl bilgi alabilirim?</summary>
-      <p>Sipariş vermeden önce teslimat süresi, kargo ve iade koşulları hakkında WhatsApp veya e-posta üzerinden bilgi alabilirsiniz. Yasal bilgilendirme metinleri ayrıca yayınlanacaktır.</p>
+      <p>Sipariş öncesi kargo ve iade koşulları için bizimle iletişime geçebilirsiniz. Ayrıca <a href="teslimat-kargo.html">Teslimat ve Kargo</a>, <a href="iade.html">İptal, İade ve Cayma Hakkı</a> ve <a href="mesafeli-satis.html">Mesafeli Satış</a> sayfalarını inceleyebilirsiniz.</p>
+    </details>
+    <details>
+      <summary>Online kartla ödeme yapabilir miyim?</summary>
+      <p>Şu anda SALTAŞLİNE web sitesinde aktif bir kartla ödeme ekranı bulunmuyor. Ürün, fiyat ve stok bilgileri doğrulandıktan sonra kullanılabilecek ödeme yöntemi ayrıca bildirilecektir. Banka veya ödeme kuruluşunun ödeme bağlantısı hizmeti etkinleştirildiğinde bu bilgilendirme güncellenecektir.</p>
     </details>
   </div>
 </section>
@@ -927,6 +937,7 @@ Modern • Şık • Güvenilir
 <div id="cartTotal">Toplam: <strong>0 ₺</strong></div>
 <button id="clearCart" type="button">🗑️ Sepeti Temizle</button>
 <button id="whatsappOrder" class="whatsapp-order" type="button">💬 Sepeti WhatsApp ile Paylaş</button>
+<p class="cart-payment-disclaimer">Sipariş kesinleşmeden önce fiyat, stok ve ödeme yöntemi teyit edilir. Sitede şu anda kartla ödeme aktif değildir.</p>
 <button id="closeCart">
 
 Kapat
