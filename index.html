@@ -854,6 +854,11 @@ transition:.3s;
 background:#1ea851;
 
 }  
+.cart-controls { display:flex; gap:5px; margin-left:8px; }
+.cart-controls button { min-width:30px; padding:6px 8px; }
+#cartTotal { padding:16px 0; font-size:18px; font-weight:600; }
+#clearCart:disabled, #whatsappOrder:disabled { opacity:.5; cursor:not-allowed; }
+@media (max-width:420px) { #cartPanel { width:100%; right:-100%; padding:22px; } }
 </style>
 
 <a class="whatsapp" href="https://wa.me/905301103944" target="_blank">
@@ -861,11 +866,6 @@ background:#1ea851;
 💬
 
 </a>
-<button id="whatsappOrder" class="whatsapp-order">
-
-📦 Siparişi WhatsApp ile Gönder
-
-</button>
 <footer>
 
 <div class="footer-grid">
@@ -939,18 +939,9 @@ Modern • Şık • Güvenilir
 
 </div>
 
-<div id="cartTotal">
-  
-  <button id="clearCart">
-
-🗑️ Sepeti Temizle
-
-</button>
-
-Toplam: <strong>0 ₺</strong>
-
-</div>
-
+<div id="cartTotal">Toplam: <strong>0 ₺</strong></div>
+<button id="clearCart" type="button">🗑️ Sepeti Temizle</button>
+<button id="whatsappOrder" class="whatsapp-order" type="button">📦 Siparişi WhatsApp ile Gönder</button>
 <button id="closeCart">
 
 Kapat
@@ -961,146 +952,113 @@ Kapat
 </footer>
  
   <script>
+/* PARÇA 11: Sepet yönetimi */
+(function () {
+  const cartButton = document.getElementById("cartButton");
+  const cartPanel = document.getElementById("cartPanel");
+  const closeCart = document.getElementById("closeCart");
+  const cartItems = document.getElementById("cartItems");
+  const cartTotal = document.getElementById("cartTotal");
+  const cartCount = document.getElementById("cartCount");
+  const clearCart = document.getElementById("clearCart");
+  const whatsappOrder = document.getElementById("whatsappOrder");
+  const cart = [];
+  const formatPrice = amount => new Intl.NumberFormat("tr-TR", {
+    style: "currency", currency: "TRY", maximumFractionDigits: 0
+  }).format(amount);
 
-let cart=0;
+  function renderCart() {
+    cartItems.replaceChildren();
+    let total = 0;
+    let count = 0;
 
-document.querySelectorAll(".buy").forEach(function(btn){
-
-btn.addEventListener("click",function(e){
-
-e.preventDefault();
-
-cart++;
-
-document.getElementById("cartCount").innerHTML=cart;
-
-alert("Ürün sepete eklendi.");
-
-});
-
-});
-   
-const cartButton=document.getElementById("cartButton");
-
-const cartPanel=document.getElementById("cartPanel");
-
-const closeCart=document.getElementById("closeCart");
-
-cartButton.onclick=function(){
-
-cartPanel.classList.add("active");
-
-}
-
-closeCart.onclick=function(){
-
-cartPanel.classList.remove("active");
-
-}
-const cartItems=document.getElementById("cartItems");
-const cartTotal=document.getElementById("cartTotal");
-
-let total=0;
-
-document.querySelectorAll(".product").forEach(function(product){
-
-const button=product.querySelector(".buy");
-
-button.addEventListener("click",function(e){
-
-e.preventDefault();
-
-let name=product.querySelector("h3").innerText;
-
-let priceText=product.querySelector(".price").innerText;
-
-let price=parseInt(priceText);
-
-total+=price;
-
-if(cartItems.innerHTML.includes("Henüz ürün")){
-
-    cartItems.innerHTML="";
-
-}
-
-addToCart(name,price);
-
-cartTotal.innerHTML="Toplam: <strong>"+total+" ₺</strong>";
-
-});
-
-});
-
-    function addToCart(name, price){
-
-    let item=document.createElement("div");
-
-    item.className="cart-item";
-
-    item.innerHTML=`
-        <span>${name} - ${price} ₺</span>
-        <button class="removeItem">❌</button>
-    `;
-
-    cartItems.appendChild(item);
-
-    item.querySelector(".removeItem").onclick=function(){
-
-        total-=price;
-
-        cartTotal.innerHTML="Toplam: <strong>"+total+" ₺</strong>";
-
-        item.remove();
-
-        if(cartItems.children.length==0){
-
-            cartItems.innerHTML="<p>Henüz ürün eklenmedi.</p>";
-
-            total=0;
-
-            cartTotal.innerHTML="Toplam: <strong>0 ₺</strong>";
-
-        }
-
+    if (cart.length === 0) {
+      const empty = document.createElement("p");
+      empty.textContent = "Henüz ürün eklenmedi.";
+      cartItems.appendChild(empty);
     }
 
-}
-    document.getElementById("whatsappOrder").onclick=function(){
+    cart.forEach((item, index) => {
+      total += item.price * item.quantity;
+      count += item.quantity;
 
-let message="🛍️ SALTAŞLİNE Siparişim:%0A%0A";
+      const row = document.createElement("div");
+      row.className = "cart-item";
+      const description = document.createElement("div");
+      const title = document.createElement("strong");
+      title.textContent = item.name;
+      const detail = document.createElement("div");
+      detail.textContent = formatPrice(item.price) + " × " + item.quantity;
+      description.append(title, detail);
 
-document.querySelectorAll(".cart-item").forEach(function(item){
+      const controls = document.createElement("div");
+      controls.className = "cart-controls";
+      [["−", "minus"], ["+", "plus"], ["✕", "remove"]].forEach(([label, action]) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.textContent = label;
+        button.dataset.action = action;
+        button.dataset.index = String(index);
+        button.setAttribute("aria-label", item.name + " " + (action === "minus" ? "azalt" : action === "plus" ? "artır" : "sil"));
+        controls.appendChild(button);
+      });
+      row.append(description, controls);
+      cartItems.appendChild(row);
+    });
 
-message+=item.querySelector("span").innerText+"%0A";
+    cartCount.textContent = String(count);
+    cartTotal.textContent = "Toplam: " + formatPrice(total);
+    clearCart.disabled = cart.length === 0;
+    whatsappOrder.disabled = cart.length === 0;
+  }
 
-});
+  document.querySelectorAll(".product").forEach(product => {
+    const button = product.querySelector(".buy");
+    if (!button) return;
+    button.addEventListener("click", event => {
+      event.preventDefault();
+      const name = product.querySelector("h3")?.textContent.trim();
+      const priceText = product.querySelector(".price")?.textContent || "";
+      const price = Number(priceText.replace(/[^\d,]/g, "").replace(",", "."));
+      if (!name || !Number.isFinite(price) || price <= 0) return;
+      const existing = cart.find(item => item.name === name && item.price === price);
+      if (existing) existing.quantity += 1;
+      else cart.push({ name, price, quantity: 1 });
+      renderCart();
+      cartPanel.classList.add("active");
+    });
+  });
 
-message+="%0A"+cartTotal.innerText;
+  cartItems.addEventListener("click", event => {
+    const button = event.target.closest("button[data-action]");
+    if (!button) return;
+    const index = Number(button.dataset.index);
+    const item = cart[index];
+    if (!item) return;
+    if (button.dataset.action === "plus") item.quantity += 1;
+    if (button.dataset.action === "minus") item.quantity -= 1;
+    if (button.dataset.action === "remove" || item.quantity <= 0) cart.splice(index, 1);
+    renderCart();
+  });
 
-window.open(
+  cartButton.addEventListener("click", () => cartPanel.classList.add("active"));
+  closeCart.addEventListener("click", () => cartPanel.classList.remove("active"));
+  clearCart.addEventListener("click", () => { cart.length = 0; renderCart(); });
+  whatsappOrder.addEventListener("click", () => {
+    if (cart.length === 0) return;
+    const lines = ["🛍️ SALTAŞLİNE Siparişim:", ""];
+    let total = 0;
+    cart.forEach(item => {
+      const subtotal = item.price * item.quantity;
+      total += subtotal;
+      lines.push(item.name + " — " + item.quantity + " adet — " + formatPrice(subtotal));
+    });
+    lines.push("", "Toplam: " + formatPrice(total));
+    window.open("https://wa.me/905301103944?text=" + encodeURIComponent(lines.join("\n")), "_blank", "noopener,noreferrer");
+  });
 
-"https://wa.me/905301103944?text="+message,
-
-"_blank"
-
-);
-
-};
-
-document.getElementById("clearCart").onclick=function(){
-
-cartItems.innerHTML="<p>Henüz ürün eklenmedi.</p>";
-
-total=0;
-
-cart=0;
-
-document.getElementById("cartCount").innerHTML="0";
-
-cartTotal.innerHTML="Toplam: <strong>0 ₺</strong>";
-
-};
+  renderCart();
+})();
 </script>
 
 </body>
