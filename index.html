@@ -852,6 +852,9 @@ background:#1ea851;
 }  
 .cart-controls { display:flex; gap:5px; margin-left:8px; }
 .cart-controls button { min-width:30px; padding:6px 8px; }
+.cart-controls { align-items:center; }
+.cart-quantity { min-width:26px; text-align:center; font-size:17px; font-weight:700; color:#111; font-variant-numeric:tabular-nums; }
+#modalQuantity { display:inline-flex; align-items:center; justify-content:center; min-width:40px; min-height:38px; background:#fff; color:#111; border:1px solid #ddd; border-radius:8px; font-size:20px; font-weight:700; font-variant-numeric:tabular-nums; }
 #cartTotal { padding:16px 0; font-size:18px; font-weight:600; }
 #clearCart:disabled, #whatsappOrder:disabled { opacity:.5; cursor:not-allowed; }
 @media (max-width:420px) { #cartPanel { width:100%; right:-100%; padding:22px; } }
@@ -1022,7 +1025,15 @@ Kapat
 
       const controls = document.createElement("div");
       controls.className = "cart-controls";
-      [["−", "minus"], ["+", "plus"], ["✕", "remove"]].forEach(([label, action]) => {
+      const actions = [["−", "minus"], ["+", "plus"], ["✕", "remove"]];
+      actions.forEach(([label, action]) => {
+        if (action === "plus") {
+          const amount = document.createElement("span");
+          amount.className = "cart-quantity";
+          amount.textContent = String(item.quantity);
+          amount.setAttribute("aria-label", "Sepetteki adet: " + item.quantity);
+          controls.appendChild(amount);
+        }
         const button = document.createElement("button");
         button.type = "button";
         button.textContent = label;
@@ -1096,7 +1107,7 @@ Kapat
     const size = modalSize.value;
     const color = modalColor.value.trim();
     const priceText = selectedProduct.querySelector(".price")?.textContent || "";
-    const digits = priceText.replace(/[^\\d,]/g, "").replace(",", ".");
+    const digits = priceText.replace(/[^\d,]/g, "").replace(",", ".");
     const parsedPrice = Number(digits);
     const price = digits && Number.isFinite(parsedPrice) && parsedPrice > 0 ? parsedPrice : null;
     const existing = cart.find(item => item.name === name && item.price === price && item.size === size && item.color === color);
