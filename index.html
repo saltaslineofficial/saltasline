@@ -436,6 +436,9 @@ background:#b8955f;
 }
 .buy { border:0; cursor:pointer; font-family:inherit; font-size:14px; }
 
+.product { position:relative; }
+.product-promo { position:absolute; z-index:2; top:12px; left:12px; background:#9c2836; color:#fff; padding:7px 11px; border-radius:4px; font-size:11px; font-weight:700; letter-spacing:1px; pointer-events:none; box-shadow:0 4px 10px rgba(0,0,0,.12); }
+.product .price[hidden] { display:none!important; }
 .product .inquiry { background:#25D366; }
 .product .inquiry:hover { background:#178a43; }
 .product img { display:block; }
@@ -465,47 +468,48 @@ outline:none;
 </div>
 
 <div class="products">
-<article class="product">
+<article class="product" data-product-id="elbise1">
 <img src="elbise1.jpg.jpeg" alt="Bordo Uzun Elbise" loading="lazy">
 <div class="product-info">
 <h3>Bordo Uzun Elbise</h3>
-<div class="price">Fiyat bilgisi yakında</div>
+<div class="price" data-price-kurus="249999" hidden>2.499,99 ₺</div>
 <button class="buy" type="button">Ürünü İncele · Beden Seç</button>
 </div>
 </article>
 
-<article class="product">
+<article class="product" data-product-id="elbise2">
 <img src="elbise2.jpg" alt="Siyah Puantiyeli Bluz" loading="lazy">
 <div class="product-info">
 <h3>Siyah Puantiyeli Bluz</h3>
-<div class="price">Fiyat bilgisi yakında</div>
+<div class="price" data-price-kurus="299999" hidden>2.999,99 ₺</div>
 <button class="buy" type="button">Ürünü İncele · Beden Seç</button>
 </div>
 </article>
 
-<article class="product">
+<article class="product" data-product-id="elbise3">
 <img src="elbise3.jpg" alt="Haki Yeşil Takım" loading="lazy">
 <div class="product-info">
 <h3>Haki Yeşil Takım</h3>
-<div class="price">Fiyat bilgisi yakında</div>
+<div class="price" data-price-kurus="349999" hidden>3.499,99 ₺</div>
 <button class="buy" type="button">Ürünü İncele · Beden Seç</button>
 </div>
 </article>
 
-<article class="product">
+<article class="product" data-product-id="elbise4">
 <img src="elbise4.jpg" alt="Ekru Uzun Elbise" loading="lazy">
 <div class="product-info">
 <h3>Ekru Uzun Elbise</h3>
-<div class="price">Fiyat bilgisi yakında</div>
+<div class="price" data-price-kurus="299999" hidden>2.999,99 ₺</div>
 <button class="buy" type="button">Ürünü İncele · Beden Seç</button>
 </div>
 </article>
 
-<article class="product">
+<article class="product" data-product-id="elbise5" data-campaign="true">
+<span class="product-promo">KAMPANYA</span>
 <img src="elbise5.jpg" alt="Pembe Gömlek" loading="lazy">
 <div class="product-info">
 <h3>Pembe Gömlek</h3>
-<div class="price">Fiyat bilgisi yakında</div>
+<div class="price" data-price-kurus="149999" hidden>1.499,99 ₺</div>
 <button class="buy" type="button">Ürünü İncele · Beden Seç</button>
 </div>
 </article>
@@ -817,7 +821,7 @@ background:#1ea851;
     </details>
     <details>
       <summary>Ürün fiyatlarını nereden öğrenebilirim?</summary>
-      <p>Fiyatı henüz belirtilmeyen ürünler için WhatsApp üzerinden bilgi isteyebilirsiniz. Fiyatlandırma tamamlandığında ürün kartlarında da gösterilecektir.</p>
+      <p>Ürün fotoğrafına veya “Ürünü İncele” düğmesine tıklayarak fiyatını görebilirsiniz. Sepette ürünlerin toplamı gösterilir; kargo bedeli ve beden-renk stoğu sipariş öncesinde teyit edilir.</p>
     </details>
     <details>
       <summary>Teslimat ve iade hakkında nasıl bilgi alabilirim?</summary>
@@ -955,7 +959,8 @@ Kapat
     <img id="modalImage" src="" alt="">
     <div class="product-modal-info">
       <h2 id="modalName"></h2>
-      <p>Fiyat ve stok bilgisi satıcıdan teyit edilecektir.</p>
+      <div id="modalPrice" class="modal-price" aria-live="polite"></div>
+      <p>Beden ve renk stok durumu sipariş öncesinde teyit edilir. Kargo bedeli ayrıca bildirilir.</p>
       <label for="modalSize">Beden seçimi (stok teyidine tabidir)</label>
       <select id="modalSize"><option value="">Beden seçiniz</option><option>36</option><option>38</option><option>40</option><option>42</option><option>44</option><option>46</option><option>48</option><option>50</option><option>Standart</option><option>Diğer / Emin değilim</option></select>
       <label for="modalColor">İstediğiniz renk (stok teyidine tabidir)</label>
@@ -981,6 +986,10 @@ Kapat
 .modal-qty{display:flex;align-items:center;gap:16px}.modal-qty button{border:1px solid #ddd;background:#faf8f5;padding:8px 16px;border-radius:8px;cursor:pointer}
 .modal-add{background:#111;color:white;border:0;padding:14px;border-radius:9px;cursor:pointer;font:inherit}
 .product-modal-info .modal-error{color:#b42318}
+.modal-price{font-size:22px;font-weight:700;letter-spacing:-.35px;color:#181b17;background:#f5f0e8;border:1px solid #e4d9ca;padding:12px 14px;border-radius:9px}
+.modal-price.is-campaign{background:#fff1ee;color:#a62535;border-color:#f0c3c3}
+html[data-theme="dark"] .modal-price{background:#334035;color:#efddb9;border-color:#687463}
+html[data-theme="dark"] .modal-price.is-campaign{background:#432a2e;color:#ffbec6;border-color:#865359}
 @media(max-width:650px){.product-modal-box{grid-template-columns:1fr;max-width:430px}.product-modal-box>img{height:230px;min-height:0}.product-modal-info{padding:18px;gap:8px}}
 </style>
 <script>
@@ -996,7 +1005,7 @@ Kapat
   const whatsappOrder = document.getElementById("whatsappOrder");
   const cart = [];
   const formatPrice = amount => new Intl.NumberFormat("tr-TR", {
-    style: "currency", currency: "TRY", maximumFractionDigits: 0
+    style: "currency", currency: "TRY", minimumFractionDigits: 2, maximumFractionDigits: 2
   }).format(amount);
 
   function renderCart() {
@@ -1011,7 +1020,7 @@ Kapat
     }
 
     cart.forEach((item, index) => {
-      if (item.price !== null) total += item.price * item.quantity;
+      if (item.price !== null) total += Math.round(item.price * 100) * item.quantity;
       count += item.quantity;
 
       const row = document.createElement("div");
@@ -1056,7 +1065,7 @@ Kapat
     });
 
     cartCount.textContent = String(count);
-    cartTotal.textContent = cart.some(item => item.price === null) ? "Fiyatlar henüz belirlenmedi" : "Toplam: " + formatPrice(total);
+    cartTotal.textContent = cart.some(item => item.price === null) ? "Fiyatlar henüz belirlenmedi" : "Toplam (kargo hariç): " + formatPrice(total / 100);
     clearCart.disabled = cart.length === 0;
     whatsappOrder.disabled = cart.length === 0;
   }
@@ -1064,6 +1073,7 @@ Kapat
   const modal = document.getElementById("productModal");
   const modalImage = document.getElementById("modalImage");
   const modalName = document.getElementById("modalName");
+  const modalPrice = document.getElementById("modalPrice");
   const modalSize = document.getElementById("modalSize");
   const modalColor = document.getElementById("modalColor");
   const modalQuantity = document.getElementById("modalQuantity");
@@ -1081,6 +1091,10 @@ Kapat
     selectedProduct = product;
     previousFocus = document.activeElement;
     modalName.textContent = product.querySelector("h3").textContent.trim();
+    const priceElement = product.querySelector(".price");
+    const isCampaign = product.dataset.campaign === "true";
+    modalPrice.textContent = (isCampaign ? "Kampanyalı fiyat: " : "Satış fiyatı: ") + (priceElement?.textContent.trim() || "Fiyat teyidi bekleniyor");
+    modalPrice.classList.toggle("is-campaign", isCampaign);
     modalImage.src = product.querySelector("img").getAttribute("src");
     modalImage.alt = modalName.textContent;
     modalSize.value = "";
@@ -1115,10 +1129,9 @@ Kapat
     const name = modalName.textContent;
     const size = modalSize.value;
     const color = modalColor.value.trim();
-    const priceText = selectedProduct.querySelector(".price")?.textContent || "";
-    const digits = priceText.replace(/[^\d,]/g, "").replace(",", ".");
-    const parsedPrice = Number(digits);
-    const price = digits && Number.isFinite(parsedPrice) && parsedPrice > 0 ? parsedPrice : null;
+    const priceKurusText = selectedProduct.querySelector(".price")?.dataset.priceKurus || "";
+    const priceKurus = /^\d+$/.test(priceKurusText) ? Number(priceKurusText) : NaN;
+    const price = Number.isSafeInteger(priceKurus) && priceKurus > 0 ? priceKurus / 100 : null;
     const image = selectedProduct.querySelector("img")?.getAttribute("src") || "";
     const existing = cart.find(item => item.name === name && item.price === price && item.size === size && item.color === color);
     if (existing) existing.quantity += selectedQuantity;
@@ -1148,11 +1161,11 @@ Kapat
     const lines = ["🛍️ SALTAŞLİNE Sepetim / Ürün Bilgi Talebim:", ""];
     let total = 0;
     cart.forEach(item => {
-      const subtotal = item.price === null ? null : item.price * item.quantity;
+      const subtotal = item.price === null ? null : Math.round(item.price * 100) * item.quantity;
       if (subtotal !== null) total += subtotal;
-      lines.push(item.name + " — Beden: " + (item.size || "Belirtilmedi") + " — Renk: " + (item.color || "Belirtilmedi") + " — " + item.quantity + " adet — " + (subtotal === null ? "Fiyat bilgisi istiyorum" : formatPrice(subtotal)));
+      lines.push(item.name + " — Beden: " + (item.size || "Belirtilmedi") + " — Renk: " + (item.color || "Belirtilmedi") + " — " + item.quantity + " adet — " + (subtotal === null ? "Fiyat bilgisi istiyorum" : formatPrice(subtotal / 100)));
     });
-    lines.push("", cart.some(item => item.price === null) ? "Fiyat bilgisi ve stok durumunu öğrenmek istiyorum." : "Toplam: " + formatPrice(total));
+    lines.push("", cart.some(item => item.price === null) ? "Fiyat bilgisi ve stok durumunu öğrenmek istiyorum." : "Ürün toplamı (kargo hariç): " + formatPrice(total / 100));
     window.open("https://wa.me/905301103944?text=" + encodeURIComponent(lines.join("\n")), "_blank", "noopener,noreferrer");
   });
 
