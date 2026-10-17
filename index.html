@@ -462,7 +462,7 @@ outline:none;
 </div>
 
 <div class="products">
-<article class="product">
+<article class="product" data-product-id="elbise1">
 <img src="elbise1.jpg.jpeg" alt="Bordo Uzun Elbise" loading="lazy">
 <div class="product-info">
 <h3>Bordo Uzun Elbise</h3>
@@ -471,7 +471,7 @@ outline:none;
 </div>
 </article>
 
-<article class="product">
+<article class="product" data-product-id="elbise2">
 <img src="elbise2.jpg" alt="Siyah Puantiyeli Bluz" loading="lazy">
 <div class="product-info">
 <h3>Siyah Puantiyeli Bluz</h3>
@@ -480,7 +480,7 @@ outline:none;
 </div>
 </article>
 
-<article class="product">
+<article class="product" data-product-id="elbise3">
 <img src="elbise3.jpg" alt="Haki Yeşil Takım" loading="lazy">
 <div class="product-info">
 <h3>Haki Yeşil Takım</h3>
@@ -489,7 +489,7 @@ outline:none;
 </div>
 </article>
 
-<article class="product">
+<article class="product" data-product-id="elbise4">
 <img src="elbise4.jpg" alt="Ekru Uzun Elbise" loading="lazy">
 <div class="product-info">
 <h3>Ekru Uzun Elbise</h3>
@@ -498,7 +498,7 @@ outline:none;
 </div>
 </article>
 
-<article class="product">
+<article class="product" data-product-id="elbise5">
 <img src="elbise5.jpg" alt="Pembe Gömlek" loading="lazy">
 <div class="product-info">
 <h3>Pembe Gömlek</h3>
@@ -792,6 +792,8 @@ background:#1ea851;
 #modalQuantity { display:inline-flex; align-items:center; justify-content:center; min-width:40px; min-height:38px; background:#fff; color:#111; border:1px solid #ddd; border-radius:8px; font-size:20px; font-weight:700; font-variant-numeric:tabular-nums; }
 #cartTotal { padding:16px 0; font-size:18px; font-weight:600; }
 .cart-payment-disclaimer{font-size:11px;color:#716e67;line-height:1.65;margin-top:11px;text-align:center}
+.checkout-paytr{width:100%;border:0;background:#1c211d;color:white;padding:15px 13px;margin-top:12px;border-radius:10px;cursor:pointer;font:600 14px Poppins,sans-serif}
+.checkout-paytr:disabled{background:#aaa;cursor:not-allowed;opacity:.8}
 #clearCart:disabled, #whatsappOrder:disabled { opacity:.5; cursor:not-allowed; }
 @media (max-width:420px) { #cartPanel { width:100%; right:-100%; padding:22px; } }
 </style>
@@ -937,6 +939,7 @@ Modern • Şık • Güvenilir
 <div id="cartTotal">Toplam: <strong>0 ₺</strong></div>
 <button id="clearCart" type="button">🗑️ Sepeti Temizle</button>
 <button id="whatsappOrder" class="whatsapp-order" type="button">💬 Sepeti WhatsApp ile Paylaş</button>
+<button id="startCheckout" class="checkout-paytr" type="button" disabled>PayTR kartla ödeme (kurulumda)</button>
 <p class="cart-payment-disclaimer">Sipariş kesinleşmeden önce fiyat, stok ve ödeme yöntemi teyit edilir. Sitede şu anda kartla ödeme aktif değildir.</p>
 <button id="closeCart">
 
@@ -992,6 +995,26 @@ Kapat
   const clearCart = document.getElementById("clearCart");
   const whatsappOrder = document.getElementById("whatsappOrder");
   const cart = [];
+  const checkoutButton = document.getElementById("startCheckout");
+  // Worker sunucusu kurulup gerçek fiyatlar onaylanınca burada HTTPS adresi tanımlanır.
+  const PAYMENT_API_BASE = "";
+  let checkoutReady = false;
+  const checkoutStorageKey = "SALTASLINE_CHECKOUT_V1";
+  async function checkCheckout() {
+    if (!PAYMENT_API_BASE) return;
+    try {
+      const response = await fetch(new URL("/api/payment/config",PAYMENT_API_BASE),{cache:"no-store",mode:"cors"});
+      const data = await response.json();
+      checkoutReady = response.ok && data.ready === true;
+      checkoutButton.textContent = checkoutReady ? "PayTR ile kartla öde" : "PayTR kartla ödeme (kurulumda)";
+      renderCart();
+    } catch { checkoutReady = false; renderCart(); }
+  }
+  checkoutButton.addEventListener("click", () => {
+    if (!checkoutReady || cart.length===0 || cart.some(i => !Number.isFinite(i.price)||i.price<=0)) return;
+    sessionStorage.setItem(checkoutStorageKey,JSON.stringify(cart));
+    window.location.assign("odeme.html");
+  });
   const formatPrice = amount => new Intl.NumberFormat("tr-TR", {
     style: "currency", currency: "TRY", maximumFractionDigits: 0
   }).format(amount);
@@ -1056,6 +1079,7 @@ Kapat
     cartTotal.textContent = cart.some(item => item.price === null) ? "Fiyatlar henüz belirlenmedi" : "Toplam: " + formatPrice(total);
     clearCart.disabled = cart.length === 0;
     whatsappOrder.disabled = cart.length === 0;
+    checkoutButton.disabled = !checkoutReady || cart.length===0 || cart.some(item=>!Number.isFinite(item.price)||item.price<=0);
   }
 
   const modal = document.getElementById("productModal");
@@ -1117,9 +1141,10 @@ Kapat
     const parsedPrice = Number(digits);
     const price = digits && Number.isFinite(parsedPrice) && parsedPrice > 0 ? parsedPrice : null;
     const image = selectedProduct.querySelector("img")?.getAttribute("src") || "";
-    const existing = cart.find(item => item.name === name && item.price === price && item.size === size && item.color === color);
+    const productId = selectedProduct.dataset.productId;
+    const existing = cart.find(item => item.productId === productId && item.price === price && item.size === size && item.color === color);
     if (existing) existing.quantity += selectedQuantity;
-    else cart.push({ name, size, color, price, quantity: selectedQuantity, image });
+    else cart.push({ productId, name, size, color, price, quantity: selectedQuantity, image });
     closeProduct();
     renderCart();
     cartPanel.classList.add("active");
@@ -1154,6 +1179,7 @@ Kapat
   });
 
   renderCart();
+  checkCheckout();
 })();
 </script>
 
