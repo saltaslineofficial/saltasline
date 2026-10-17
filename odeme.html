@@ -17,7 +17,11 @@ h1{font:normal clamp(36px,5vw,52px)/1.15 Georgia,serif;margin:14px 0 30px}
 .card{background:#fff;border:1px solid #e4ddd4;border-radius:13px;padding:26px;box-shadow:0 7px 35px rgba(0,0,0,.03)}
 h2{font:normal 27px/1.25 Georgia,serif;margin:0 0 18px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.field{display:flex;flex-direction:column;gap:6px;margin-bottom:15px}.field.full{grid-column:1/-1}
 label{font-size:13px;font-weight:600}input,textarea{font:inherit;border:1px solid #ccc7c0;border-radius:7px;padding:12px 13px;background:#fff;max-width:100%}textarea{resize:vertical;min-height:95px}
-.item{display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid #eee9e2}.item img{height:78px;width:62px;object-fit:cover;border-radius:6px;background:#eee}.item div{flex:1;font-size:14px}.item small{display:block;color:#6c6962}.total{display:flex;justify-content:space-between;font-weight:700;margin-top:18px;padding-top:18px;border-top:1px solid #ddd5cc}
+.item{display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid #eee9e2}.item img{height:78px;width:62px;object-fit:cover;border-radius:6px;background:#eee}.item div{flex:1;font-size:14px}.item small{display:block;color:#6c6962}.breakdown{display:flex;align-items:flex-start;justify-content:space-between;gap:13px;padding:11px 0;line-height:1.5;font-size:14px;color:#57524b}
+.breakdown span:last-child{font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap;font-weight:600}
+.total{display:flex;justify-content:space-between;gap:13px;font-weight:700;margin-top:12px;padding-top:18px;border-top:1px solid #ddd5cc}
+.total span:last-child{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.tax-note{font-size:11px;line-height:1.65;color:#82786f;margin:11px 0 14px}
 .terms{display:flex;align-items:start;gap:10px;padding:18px 0}.terms input{margin-top:5px}
 .button{display:block;border:0;background:#1e231f;color:#fff;border-radius:7px;padding:15px 18px;width:100%;font:600 15px system-ui;cursor:pointer}
 .button:disabled{background:#aaa9a4;cursor:not-allowed}.notice{padding:13px 15px;background:#fbf2e3;color:#6e542e;border-radius:8px;font-size:13px;margin:17px 0}.error{color:#a51d1d;font-size:13px;min-height:20px}.successbox{background:#f1f7f1;border:1px solid #d2e5d1;padding:15px;border-radius:9px;margin:17px 0}
@@ -32,7 +36,7 @@ footer{text-align:center;padding:20px;color:#6a655d;font-size:13px}
 <div class="layout">
   <section class="card" aria-labelledby="buyerHeading">
     <h2 id="buyerHeading">Teslimat bilgileriniz</h2>
-    <div class="notice" id="setupNotice">PayTR entegrasyonu henüz etkinleştirilmedi. Gerçek tahsilat başlamadan önce fiyatlar, stoklar, kargo ve güvenli ödeme servisi tamamlanmalıdır.</div>
+    <div class="notice" id="setupNotice">PayTR entegrasyonu henüz etkinleştirilmedi. Kargo 130,00 TL olarak belirlendi; KDV, stoklar ve güvenli ödeme servisi tamamlanmadan gerçek tahsilat yapılamaz.</div>
     <form id="checkoutForm" novalidate>
       <div class="form-grid">
         <div class="field full"><label for="name">Ad soyad</label><input id="name" name="name" autocomplete="name" maxlength="60" required></div>
@@ -54,8 +58,10 @@ footer{text-align:center;padding:20px;color:#6a655d;font-size:13px}
   <aside class="card" aria-labelledby="basketHeading">
     <h2 id="basketHeading">Sipariş özeti</h2>
     <div id="orderItems"><p>Sepetinizden ürün aktarılmadı.</p></div>
-    <div class="total"><span>Toplam</span><span id="total">Fiyat bekleniyor</span></div>
-    <p style="font-size:12px;color:#77716b">Kargo bedeli ve nihai toplam, ödeme başlatılmadan önce sunucu tarafından doğrulanmalıdır.</p>
+    <div class="breakdown"><span>Ürünler toplamı</span><span id="subtotal">Fiyat bekleniyor</span></div>
+    <div class="breakdown"><span>Kargo (sipariş başına)</span><span id="shipping">0,00 ₺</span></div>
+    <div class="total"><span>Genel toplam</span><span id="total">Fiyat bekleniyor</span></div>
+    <p class="tax-note">KDV hesabı henüz kesinleşmedi. Vergiler dahil nihai tutar teyit edilmeden gerçek kartla tahsilat açılmaz.</p>
     <a href="index.html#products">← Ürünlere dön</a>
   </aside>
 </div></main><footer>SALTAŞLİNE · Ödeme işlemleri etkinleştirilmeden tahsilat yapılamaz.</footer>
@@ -65,6 +71,7 @@ footer{text-align:center;padding:20px;color:#6a655d;font-size:13px}
 // Boşken ödeme kapalıdır. API anahtarları BURAYA ASLA yazılmamalıdır.
 const PAYMENT_API_BASE = "";
 const storageKey = "SALTASLINE_CHECKOUT_V1";
+const SHIPPING_KURUS = 13000; // Standart sipariş başına 130 TL.
 const button = document.getElementById("payButton");
 const notice = document.getElementById("setupNotice");
 const error = document.getElementById("error");
@@ -76,7 +83,7 @@ try {
 } catch {}
 const orderItems = document.getElementById("orderItems");
 orderItems.replaceChildren();
-let total = 0, complete = items.length>0;
+let totalKurus = 0, complete = items.length>0;
 const asPrice = n => new Intl.NumberFormat("tr-TR",{style:"currency",currency:"TRY"}).format(n);
 for(const item of items){
   const row=document.createElement("div");row.className="item";
@@ -84,10 +91,12 @@ for(const item of items){
   const detail=document.createElement("div");const title=document.createElement("strong");title.textContent=String(item.name||"Ürün");
   const details=document.createElement("small");details.textContent="Beden: "+item.size+" · Renk: "+item.color+" · "+item.quantity+" adet";
   detail.append(title,details);row.append(image,detail);orderItems.append(row);
-  if(!Number.isFinite(item.price)||item.price<=0)complete=false;else total+=item.price*item.quantity;
+  if(!Number.isFinite(item.price)||item.price<=0)complete=false;else totalKurus+=Math.round(item.price*100)*item.quantity;
 }
 if(items.length===0)orderItems.textContent="Sepet boş. Önce ürün seçiniz.";
-document.getElementById("total").textContent=complete?asPrice(total)+" + kargo (teyit edilecek)":"Fiyatlar bekleniyor";
+document.getElementById("subtotal").textContent=complete?asPrice(totalKurus/100):"Fiyatlar bekleniyor";
+document.getElementById("shipping").textContent=asPrice(items.length?SHIPPING_KURUS/100:0);
+document.getElementById("total").textContent=complete?asPrice((totalKurus+SHIPPING_KURUS)/100):"Fiyatlar bekleniyor";
 let ready=false, confirmedTotalKurus=null;
 const requestItems=()=>items.map(i=>({productId:i.productId,size:i.size,color:i.color,quantity:i.quantity}));
 async function loadStatus(){
@@ -100,10 +109,14 @@ async function loadStatus(){
       method:"POST",mode:"cors",headers:{"Content-Type":"application/json"},body:JSON.stringify({items:requestItems()})});
     const quote=await quoteResponse.json();
     if(!quoteResponse.ok)throw new Error(quote.error||"Fiyat doğrulanamadı.");
-    if(!Number.isSafeInteger(quote.totalKurus) || !Number.isSafeInteger(quote.shippingKurus))
+    if(!Number.isSafeInteger(quote.totalKurus) || !Number.isSafeInteger(quote.shippingKurus) || !Number.isSafeInteger(quote.subtotalKurus))
       throw new Error("Sunucu fiyatı geçersiz.");
+    if(quote.shippingKurus!==SHIPPING_KURUS || quote.totalKurus!==quote.subtotalKurus+quote.shippingKurus)
+      throw new Error("Kargo veya toplam tutar değişmiş. Sipariş öncesi kontrol gerekiyor.");
     confirmedTotalKurus=quote.totalKurus;ready=true;
-    document.getElementById("total").textContent=asPrice(confirmedTotalKurus/100)+" (kargo dahil)";
+    document.getElementById("subtotal").textContent=asPrice(quote.subtotalKurus/100);
+    document.getElementById("shipping").textContent=asPrice(quote.shippingKurus/100);
+    document.getElementById("total").textContent=asPrice(confirmedTotalKurus/100);
     button.disabled=false;button.textContent="PayTR ile güvenli ödeme";
     notice.textContent="Toplam, kargo ücreti dahil "+asPrice(confirmedTotalKurus/100)+". Ödeme öncesinde bu tutarı ve satış koşullarını kontrol ediniz.";
   }catch(e){notice.textContent=e.message||"Ödeme servisine ulaşılamıyor. Lütfen daha sonra deneyin.";}
