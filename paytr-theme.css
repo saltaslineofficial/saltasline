@@ -1,0 +1,23 @@
+/* PayTR hazırlık dalındaki ödeme ve sonuç sayfaları */
+html[data-theme="dark"] .checkout-page,
+html[data-theme="dark"] .payment-result-page{background:#111612;color:#f1eee8}
+html[data-theme="dark"] .checkout-page header,
+html[data-theme="dark"] .payment-result-page .bar{background:#0d1510;color:#f3efe5}
+html[data-theme="dark"] .checkout-page .card,
+html[data-theme="dark"] .payment-result-page main{background:#1d2820;color:#f2ede6;border-color:#495549}
+html[data-theme="dark"] .checkout-page .eyebrow{color:#e0bd8d}
+html[data-theme="dark"] .checkout-page .field input,
+html[data-theme="dark"] .checkout-page .field textarea{background:#263329;color:#f5eee4;border-color:#637366}
+html[data-theme="dark"] .checkout-page .item,
+html[data-theme="dark"] .checkout-page .total,
+html[data-theme="dark"] .payment-result-page .line{border-color:#4a5a4c}
+html[data-theme="dark"] .checkout-page .notice{background:#342f24;color:#f4dfc2}
+html[data-theme="dark"] .checkout-page .button{background:#dabc92;color:#182118}
+html[data-theme="dark"] .checkout-page .button:disabled{background:#586458;color:#e7eee6}
+html[data-theme="dark"] .checkout-page .successbox{background:#213b29;border-color:#5e805f;color:#eff6ed}
+html[data-theme="dark"] .checkout-page a,
+html[data-theme="dark"] .payment-result-page a{color:#e6c294}
+html[data-theme="dark"] .checkout-page header a{color:#f1efe8}
+html[data-theme="dark"] .checkout-page footer,
+html[data-theme="dark"] .payment-result-page p,
+html[data-theme="dark"] .payment-result-page small{color:#c5c8bd}
