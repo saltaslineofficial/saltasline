@@ -60,6 +60,17 @@ const statusResponse = async (req, env, oid, origin) => {
   const found = await env.DB.prepare("SELECT status FROM orders WHERE merchant_oid=? AND receipt=?").bind(oid,receipt).first();
   return found ? reply({ status:found.status },200,origin) : reply({ error:"Kayıt bulunamadı." },404,origin);
 };
+const quote = async (req, env, origin) => {
+  if (!configured(env)) return reply({ error: "Ödeme henüz etkin değil." },503,origin);
+  if (Number(req.headers.get("Content-Length") || 0)>16000) return reply({error:"İstek çok büyük."},413,origin);
+  const body=await req.json().catch(()=>null);
+  let basket;
+  try {basket=cleanCart(body?.items);}catch(e){return reply({error:e.message},400,origin);}
+  const shippingKurus=Number(env.SHIPPING_KURUS);
+  const totalKurus=basket.subtotal+shippingKurus;
+  if (!Number.isSafeInteger(totalKurus)||totalKurus<100) return reply({error:"Toplam tutar geçersiz."},400,origin);
+  return reply({ subtotalKurus:basket.subtotal,shippingKurus,totalKurus,currency:"TRY" },200,origin);
+};
 const start = async (req, env, origin) => {
   if (!configured(env)) return reply({error:"Ödeme sistemi henüz aktif değil."},503,origin);
   if (Number(req.headers.get("Content-Length") || 0) > 16000) return reply({ error:"İstek çok büyük." },413,origin);
@@ -110,7 +121,7 @@ const start = async (req, env, origin) => {
     await env.DB.prepare("UPDATE orders SET status='init_failed',updated_at=CURRENT_TIMESTAMP WHERE merchant_oid=? AND status='pending'").bind(id).run();
     return reply({error:"Ödeme bağlantısı kurulamadı. Lütfen daha sonra deneyin."},502,origin);
   }
-  return reply({orderId:id,receipt,iframeUrl:"https://www.paytr.com/odeme/guvenli/"+api.token},200,origin);
+  return reply({orderId:id,receipt,amountKurus:amount,shippingKurus:shipping,iframeUrl:"https://www.paytr.com/odeme/guvenli/"+api.token},200,origin);
 };
 const callback = async (req,env) => {
   if (!env.PAYTR_MERCHANT_KEY || !env.PAYTR_MERCHANT_SALT || !env.DB) return new Response("Config error",{status:503});
@@ -151,6 +162,7 @@ export default {
       if(url.pathname.startsWith("/api/")) {
         // Sadece SALTAŞLİNE sayfasından tarayıcı isteği kabul edilir; bu ayrıca kimlik doğrulama yerine geçmez.
         if(!origin) return reply({error:"İzin verilmeyen kaynak."},403);
+        if(url.pathname==="/api/payment/quote" && req.method==="POST") return await quote(req,env,origin);
         if(url.pathname==="/api/payment/start" && req.method==="POST") return await start(req,env,origin);
         const match=url.pathname.match(/^\/api\/payment\/status\/([A-Za-z0-9]{10,64})$/);
         if(match && req.method==="GET" && env.DB) return await statusResponse(req,env,match[1],origin);
