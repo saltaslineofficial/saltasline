@@ -7,8 +7,9 @@ compatibility_date = "2026-09-01"
 [vars]
 PAYTR_ACTIVE = "0"
 PAYTR_TEST_MODE = "1"
-# Kargo bedeli, ürün fiyatları netleşince KURUŞ cinsinden belirlenmelidir.
-# SHIPPING_KURUS = "0"
+# Standart kargo bedeli sipariş başına 130,00 TL = 13000 kuruş.
+# KDV henüz ayrıca hesaplanmıyor; vergi durumu teyit edilmeden sistemi açmayın.
+SHIPPING_KURUS = "13000"
 
 [[d1_databases]]
 binding = "DB"
