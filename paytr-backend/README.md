@@ -8,7 +8,7 @@ Canlı tahsilat hazır değildir; ödeme anahtarları GitHub'a yazılmamıştır
 - Kart numarası, CVV ve kartın son kullanma tarihi SALTAŞLİNE sunucularına **gönderilmez**. Form PayTR'ın kendi iFrame'i ile sunulur.
 - Web sayfasından gelen **fiyat/toplam değerlerine güvenilmez**; `src/catalog.js` içindeki kuruş fiyatları ve doğrulanmış varyantlar esas alınır. Fiyatların vergiler dahil nihai tüketici fiyatı olduğu ayrıca teyit edilmelidir.
 - Satış fiyatları girildi (Bordo 249999 kr, Siyah Bluz 299999 kr, Haki Takım 349999 kr, Ekru 299999 kr, Pembe Gömlek kampanyalı 149999 kr). Varyantlar hâlâ `[]`; gerçek beden/renk/stok teyidi olmadan ödeme açılamaz.
-- Kargo fiyatı sunucuda `SHIPPING_KURUS` ile ayrı belirlenir; bilinmiyorsa ödeme kapalıdır.
+- Kargo bedeli sipariş başına **130,00 TL / 13000 kuruş** olarak belirlendi. `SHIPPING_KURUS` sunucuda tanımlanmıştır.
 - `PAYTR_ACTIVE=0` ve `PAYTR_TEST_MODE=1` güvenli ilk ayarlardır. Canlı geçiş ancak test ve işletme onayından sonra yapılır.
 - `merchant_id`, `merchant_key`, `merchant_salt` **asla HTML, JavaScript dosyası veya GitHub commit'ine yazılmamalı**. Worker secret olarak saklanmalı.
 - Siparişler D1 veri tabanına kaydedilir. `merchant_oid` benzersizdir. PayTR bildirimi sunucu tarafında HMAC ile doğrulanır. Tekrar eden bildirimlerde ikinci kez işleme alınmaz.
@@ -23,7 +23,7 @@ Canlı tahsilat hazır değildir; ödeme anahtarları GitHub'a yazılmamıştır
 4. `npx wrangler d1 execute saltasline-paytr-orders --remote --file=./schema.sql` ile tablolar kurulur.
 5. Worker secrets olarak `npx wrangler secret put PAYTR_MERCHANT_ID`, `npx wrangler secret put PAYTR_MERCHANT_KEY`, `npx wrangler secret put PAYTR_MERCHANT_SALT` çalıştırılır. **Anahtarları sohbet üzerinden göndermeyin.**
 6. Ürün fiyatları satıcının belirttiği tutarlarla dolduruldu; bunların KDV dahil nihai satış fiyatları olduğunu teyit edin. Ardından gerçek beden/renk/stok kombinasyonlarını `src/catalog.js` içine girin. Sipariş sırasında gerçek stokların eşzamanlı korunması için stok rezervasyon tasarımı tamamlanmalıdır.
-7. `SHIPPING_KURUS` değeri gerçek kargo ücretine göre belirlenmeli; ürün toplamına eklenirken ön bilgilendirmeyle tutarlı olmalı. Ücret ücretsiz ise bilinçli olarak "0" ayarlanmalı.
+7. `SHIPPING_KURUS = "13000"` olarak ayarlandı: sipariş başına 130,00 TL, ürün sayısıyla çarpılmaz. Sipariş ekranında, WhatsApp mesajında ve yasal sayfalarda bu tutar gösterilir. **KDV hesabı henüz eklenmedi:** ürün fiyatlarının KDV dahil mi hariç mi olduğu ve uygun vergi işleyişi netleşmeden aktif ödeme başlatmayın.
 8. `npx wrangler deploy` ile Worker yayınlanır. PayTR Mağaza Paneli'nde **Bildirim URL**: `https://WORKER_ADRESI/api/paytr/callback`. HTTPS üzerinden dışarıdan POST alabilmeli.
 9. GitHub Pages'teki `odeme.html` ve `odeme-sonuc.html` içinde `PAYMENT_API_BASE` değişkeni gerçek Worker HTTPS kök adresiyle güncellenmeli.
 10. PayTR panelinden test modunda deneme, HMAC yanlış bildirim reddi, tekrarlanan bildirim, tutar hatası, sepet miktarı manipülasyonu, iade ve sipariş durumuyla ilgili testler yapılmalı. PayTR dokümanı: https://dev.paytr.com/iframe-api/iframe-api-1-adim ve https://dev.paytr.com/iframe-api/iframe-api-2-adim
