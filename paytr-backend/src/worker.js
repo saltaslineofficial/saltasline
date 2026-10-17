@@ -35,7 +35,7 @@ const corsOrigin = req => req.headers.get("Origin") === SITE ? SITE : "";
 const cleanCart = cart => {
   if (!Array.isArray(cart) || !cart.length || cart.length > 25) throw Error("Geçersiz sepet.");
   let subtotal = 0, totalItems = 0;
-  const rows = [], stored = [];
+  const rows = [], stored = [], variantQuantities = new Map();
   for (const item of cart) {
     if (!item || typeof item !== "object") throw Error("Ürün geçersiz.");
     const id = safeString(item.productId, 30);
@@ -44,7 +44,11 @@ const cleanCart = cart => {
     const size = safeString(item.size, 20), color = safeString(item.color, 40);
     if (!p || !Number.isSafeInteger(qty) || qty < 1 || qty > 20) throw Error("Ürün adedi geçersiz.");
     const variant = p.variants.find(v => v.size === size && v.color.toLocaleLowerCase("tr") === color.toLocaleLowerCase("tr"));
-    if (!variant || !Number.isSafeInteger(variant.stock) || qty > variant.stock) throw Error("Beden, renk veya stok teyit edilmedi: " + p.name);
+    if (!variant || !Number.isSafeInteger(variant.stock) || variant.stock < 1) throw Error("Beden, renk veya stok teyit edilmedi: " + p.name);
+    const variantKey = JSON.stringify([id, variant.size, variant.color]);
+    const requested = (variantQuantities.get(variantKey) || 0) + qty;
+    if (requested > variant.stock) throw Error("Stok yetersiz: " + p.name);
+    variantQuantities.set(variantKey, requested);
     if (!Number.isSafeInteger(p.priceKurus) || p.priceKurus <= 0) throw Error("Ürün fiyatı henüz belirlenmedi.");
     subtotal += p.priceKurus * qty;
     totalItems += qty;
