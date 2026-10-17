@@ -507,9 +507,13 @@ background:#b8955f;
 
 }
 
+.product .inquiry { background:#25D366; }
+.product .inquiry:hover { background:#178a43; }
+.product img { display:block; }
+@media(max-width:600px) { .products { grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; } .product img { height:240px; } .product-info { padding:12px; } .product-info h3 { font-size:15px; } .price { font-size:13px; } .buy { font-size:12px; padding:10px 12px; } }
 </style>
 
-<section>
+<section id="products">
 
 <h2 class="title">Yeni Gelen Ürünler</h2>
 
@@ -532,55 +536,50 @@ outline:none;
 </div>
 
 <div class="products">
-
-<div class="product">
-
-<img src="urun1.jpg">
-
+<article class="product">
+<img src="elbise1.jpg.jpeg" alt="Bordo Uzun Elbise" loading="lazy">
 <div class="product-info">
-
-<h3>Piliseli Elbise</h3>
-
-<div class="price">799 ₺</div>
-
-<a href="#" class="buy">Sepete Ekle</a>
-
+<h3>Bordo Uzun Elbise</h3>
+<div class="price">Fiyat bilgisi yakında</div>
+<a class="buy inquiry" href="https://wa.me/905301103944?text=Merhaba%2C%20SALTA%C5%9EL%C4%B0NE%20Bordo%20Uzun%20Elbise%20%C3%BCr%C3%BCn%C3%BC%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener noreferrer">WhatsApp ile Bilgi Al</a>
 </div>
+</article>
 
-</div>
-
-<div class="product">
-
-<img src="urun2.jpg">
-
+<article class="product">
+<img src="elbise2.jpg" alt="Siyah Puantiyeli Bluz" loading="lazy">
 <div class="product-info">
-
-<h3>Desenli Takım</h3>
-
-<div class="price">899 ₺</div>
-
-<a href="#" class="buy">Sepete Ekle</a>
-
+<h3>Siyah Puantiyeli Bluz</h3>
+<div class="price">Fiyat bilgisi yakında</div>
+<a class="buy inquiry" href="https://wa.me/905301103944?text=Merhaba%2C%20SALTA%C5%9EL%C4%B0NE%20Siyah%20Puantiyeli%20Bluz%20%C3%BCr%C3%BCn%C3%BC%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener noreferrer">WhatsApp ile Bilgi Al</a>
 </div>
+</article>
 
-</div>
-
-<div class="product">
-
-<img src="urun3.jpg">
-
+<article class="product">
+<img src="elbise3.jpg" alt="Haki Yeşil Takım" loading="lazy">
 <div class="product-info">
-
-<h3>Şık Ferace</h3>
-
-<div class="price">1099 ₺</div>
-
-<a href="#" class="buy">Sepete Ekle</a>
-
+<h3>Haki Yeşil Takım</h3>
+<div class="price">Fiyat bilgisi yakında</div>
+<a class="buy inquiry" href="https://wa.me/905301103944?text=Merhaba%2C%20SALTA%C5%9EL%C4%B0NE%20Haki%20Ye%C5%9Fil%20Tak%C4%B1m%20%C3%BCr%C3%BCn%C3%BC%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener noreferrer">WhatsApp ile Bilgi Al</a>
 </div>
+</article>
 
+<article class="product">
+<img src="elbise4.jpg" alt="Ekru Uzun Elbise" loading="lazy">
+<div class="product-info">
+<h3>Ekru Uzun Elbise</h3>
+<div class="price">Fiyat bilgisi yakında</div>
+<a class="buy inquiry" href="https://wa.me/905301103944?text=Merhaba%2C%20SALTA%C5%9EL%C4%B0NE%20Ekru%20Uzun%20Elbise%20%C3%BCr%C3%BCn%C3%BC%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener noreferrer">WhatsApp ile Bilgi Al</a>
 </div>
+</article>
 
+<article class="product">
+<img src="elbise5.jpg" alt="Pembe Gömlek" loading="lazy">
+<div class="product-info">
+<h3>Pembe Gömlek</h3>
+<div class="price">Fiyat bilgisi yakında</div>
+<a class="buy inquiry" href="https://wa.me/905301103944?text=Merhaba%2C%20SALTA%C5%9EL%C4%B0NE%20Pembe%20G%C3%B6mlek%20%C3%BCr%C3%BCn%C3%BC%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener noreferrer">WhatsApp ile Bilgi Al</a>
+</div>
+</article>
 </div>
 
 <script>
