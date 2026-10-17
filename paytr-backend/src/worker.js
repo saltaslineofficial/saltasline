@@ -27,7 +27,7 @@ const sign = async (secret, text) => {
   return base64(new Uint8Array(await crypto.subtle.sign("HMAC", key, enc.encode(text))));
 };
 const encodeBasket = rows => base64(enc.encode(JSON.stringify(rows)));
-const configured = env => env.PAYTR_ACTIVE === "1" && !!env.PAYTR_MERCHANT_ID && !!env.PAYTR_MERCHANT_KEY
+const configured = env => env.PAYTR_ACTIVE === "1" && env.TAX_VALIDATED === "1" && !!env.PAYTR_MERCHANT_ID && !!env.PAYTR_MERCHANT_KEY
   && !!env.PAYTR_MERCHANT_SALT && !!env.DB && /^\d+$/.test(String(env.SHIPPING_KURUS ?? ""))
   && Object.values(CATALOG).every(p => toMoney(p.priceKurus) !== null && p.priceKurus > 0 &&
     p.variants.length > 0);
