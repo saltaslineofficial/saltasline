@@ -160,26 +160,26 @@ margin-bottom:50px;
 
 <div class="feature">
 <div class="icon">🚚</div>
-<h3>Hızlı Kargo</h3>
-<p>Türkiye'nin her yerine güvenli teslimat.</p>
+<h3>Kargo Bilgilendirmesi</h3>
+<p>Teslimat seçenekleri ve süreleri sipariş öncesinde paylaşılır.</p>
 </div>
 
 <div class="feature">
 <div class="icon">🔒</div>
-<h3>Güvenli Ödeme</h3>
-<p>Alışverişleriniz güvenli altyapı ile korunur.</p>
+<h3>WhatsApp ile İletişim</h3>
+<p>Ürünlerin fiyatını ve stok durumunu doğrudan sorabilirsiniz.</p>
 </div>
 
 <div class="feature">
 <div class="icon">↩️</div>
-<h3>Kolay İade</h3>
-<p>Koşullara uygun ürünlerde kolay iade.</p>
+<h3>İade Bilgilendirmesi</h3>
+<p>İade koşulları ve yasal haklarınız için bize ulaşabilirsiniz.</p>
 </div>
 
 <div class="feature">
 <div class="icon">💬</div>
-<h3>7/24 Destek</h3>
-<p>WhatsApp üzerinden bize ulaşabilirsiniz.</p>
+<h3>Doğrudan İletişim</h3>
+<p>Sorularınızı WhatsApp veya e-posta üzerinden iletebilirsiniz.</p>
 </div>
 
 </div>
@@ -790,7 +790,68 @@ background:#1ea851;
 @media (max-width:420px) { #cartPanel { width:100%; right:-100%; padding:22px; } }
 </style>
 
-<a class="whatsapp" href="https://wa.me/905301103944" target="_blank">
+<!-- MÜŞTERİYE YARDIM -->
+<section class="help-section" id="faq" aria-labelledby="faqTitle">
+  <div class="help-heading">
+    <span class="help-eyebrow">MERAK EDİLENLER</span>
+    <h2 class="title" id="faqTitle">Sık Sorulan Sorular</h2>
+    <p>Ürün seçimi ve sipariş süreciyle ilgili kısa bilgiler.</p>
+  </div>
+  <div class="faq-list">
+    <details>
+      <summary>Nasıl sipariş verebilirim?</summary>
+      <p>Beğendiğiniz ürüne tıklayın, beden ve istediğiniz rengi seçin, adet belirleyip sepete ekleyin. Sepetinizi WhatsApp üzerinden bizimle paylaşabilirsiniz. Fiyat ve stok bilgisi teyit edildikten sonra sipariş süreci netleştirilir.</p>
+    </details>
+    <details>
+      <summary>Ürünlerin beden ve renk seçenekleri kesin mi?</summary>
+      <p>Hayır. Mevcut seçim alanları talep oluşturmak içindir. Beden ve renklerin stokta bulunup bulunmadığı tarafımızdan ayrıca teyit edilir.</p>
+    </details>
+    <details>
+      <summary>Ürün fiyatlarını nereden öğrenebilirim?</summary>
+      <p>Fiyatı henüz belirtilmeyen ürünler için WhatsApp üzerinden bilgi isteyebilirsiniz. Fiyatlandırma tamamlandığında ürün kartlarında da gösterilecektir.</p>
+    </details>
+    <details>
+      <summary>Teslimat ve iade hakkında nasıl bilgi alabilirim?</summary>
+      <p>Sipariş vermeden önce teslimat süresi, kargo ve iade koşulları hakkında WhatsApp veya e-posta üzerinden bilgi alabilirsiniz. Yasal bilgilendirme metinleri ayrıca yayınlanacaktır.</p>
+    </details>
+  </div>
+</section>
+<section class="contact-section" id="contact" aria-labelledby="contactTitle">
+  <div class="contact-intro">
+    <span class="help-eyebrow">SALTAŞLİNE YANINIZDA</span>
+    <h2 class="title" id="contactTitle">Bir sorunuz mu var?</h2>
+    <p>Ürün, beden, renk ve siparişlerinizle ilgili bize doğrudan ulaşabilirsiniz.</p>
+  </div>
+  <div class="contact-actions">
+    <a href="https://wa.me/905301103944?text=Merhaba%2C%20SALTA%C5%9EL%C4%B0NE%20%C3%BCr%C3%BCnleri%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener noreferrer" class="contact-action contact-whatsapp"><span aria-hidden="true">💬</span><span><strong>WhatsApp'tan Yazın</strong><small>Ürün ve sipariş soruları</small></span><span aria-hidden="true">↗</span></a>
+    <a href="mailto:saltasfurkan9@gmail.com" class="contact-action"><span aria-hidden="true">✉️</span><span><strong>E-posta Gönderin</strong><small>saltasfurkan9@gmail.com</small></span><span aria-hidden="true">↗</span></a>
+  </div>
+</section>
+<style>
+.help-section{background:#f6f1ea;padding:74px 8%}
+.help-heading,.contact-intro{text-align:center;max-width:680px;margin:0 auto 34px}
+.help-eyebrow{display:block;font-size:11px;color:#a48764;font-weight:600;letter-spacing:2.5px;margin-bottom:15px}
+.help-heading .title,.contact-intro .title{font-family:Georgia,serif;font-weight:400;font-size:clamp(30px,4vw,44px);margin-bottom:12px}
+.help-heading p,.contact-intro p{color:#6c6862;line-height:1.7}
+.faq-list{max-width:880px;margin:auto}
+.faq-list details{background:#fff;border:1px solid #e6ded2;border-radius:8px;margin:11px 0;padding:19px 24px}
+.faq-list summary{cursor:pointer;font-size:15px;font-weight:600;list-style-position:outside;padding-right:10px}
+.faq-list details p{padding:15px 0 2px;color:#625f5a;font-size:14px;line-height:1.85}
+.contact-section{background:#fff;padding:76px 8% 80px}
+.contact-actions{max-width:900px;margin:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.contact-action{display:flex;align-items:center;gap:15px;background:#f8f5f0;border:1px solid #e7dfd5;padding:22px;border-radius:10px;text-decoration:none;color:#1f1d1a;transition:background .2s,transform .2s}
+.contact-action:hover{transform:translateY(-2px);background:#f0e8dd}
+.contact-action>span:first-child{font-size:24px}
+.contact-action>span:nth-child(2){display:flex;flex:1;flex-direction:column;min-width:0;gap:4px}
+.contact-action strong{font-size:16px}
+.contact-action small{font-size:12px;color:#65605a;overflow-wrap:anywhere}
+.contact-whatsapp{background:#eef7ee;border-color:#cee1ce}
+.contact-whatsapp:hover{background:#e2f1e2}
+.footer-pending{color:#c4bbae;line-height:1.85;font-size:13px}
+@media(max-width:640px){.help-section,.contact-section{padding:55px 5%}.faq-list details{padding:16px}.contact-actions{grid-template-columns:1fr}}
+</style>
+
+<a class="whatsapp" href="https://wa.me/905301103944" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp üzerinden iletişime geçin">
 
 💬
 
@@ -817,39 +878,30 @@ Modern • Şık • Güvenilir
 
 <h3>Kurumsal</h3>
 
-<a href="#">Hakkımızda</a>
+<a href="#about">Hakkımızda</a>
 
-<a href="#">İletişim</a>
+<a href="#contact">İletişim</a>
 
-<a href="#">Sık Sorulan Sorular</a>
-
-</div>
-
-<div>
-
-<h3>Yasal</h3>
-
-<a href="#">Gizlilik Politikası</a>
-
-<a href="#">KVKK</a>
-
-<a href="#">Mesafeli Satış</a>
-
-<a href="#">İade Politikası</a>
-
-<a href="#">Teslimat ve Kargo</a>
+<a href="#faq">Sık Sorulan Sorular</a>
 
 </div>
 
 <div>
 
-<h3 id="contact">İletişim</h3>
+<h3>Yasal Bilgilendirme</h3>
+<p class="footer-pending">Gizlilik, KVKK, mesafeli satış, iade ve teslimat metinleri hazırlanıyor. Tamamlandıklarında bu alanda yayınlanacaktır.</p>
+
+</div>
+
+<div>
+
+<h3>İletişim</h3>
 
 <p>📍 İstanbul / Türkiye</p>
 
-<p>📞 0530 110 3944</p>
+<p><a href="tel:+905301103944">📞 0530 110 3944</a></p>
 
-<p>✉️ info@saltasline.com</p>
+<p><a href="mailto:saltasfurkan9@gmail.com">✉️ saltasfurkan9@gmail.com</a></p>
 
 </div>
 
