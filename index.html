@@ -542,7 +542,7 @@ outline:none;
 <div class="product-info">
 <h3>Bordo Uzun Elbise</h3>
 <div class="price">Fiyat bilgisi yakında</div>
-<button class="buy" type="button">Sepete Ekle</button>
+<button class="buy" type="button">Ürünü İncele · Beden Seç</button>
 </div>
 </article>
 
@@ -551,7 +551,7 @@ outline:none;
 <div class="product-info">
 <h3>Siyah Puantiyeli Bluz</h3>
 <div class="price">Fiyat bilgisi yakında</div>
-<button class="buy" type="button">Sepete Ekle</button>
+<button class="buy" type="button">Ürünü İncele · Beden Seç</button>
 </div>
 </article>
 
@@ -560,7 +560,7 @@ outline:none;
 <div class="product-info">
 <h3>Haki Yeşil Takım</h3>
 <div class="price">Fiyat bilgisi yakında</div>
-<button class="buy" type="button">Sepete Ekle</button>
+<button class="buy" type="button">Ürünü İncele · Beden Seç</button>
 </div>
 </article>
 
@@ -569,7 +569,7 @@ outline:none;
 <div class="product-info">
 <h3>Ekru Uzun Elbise</h3>
 <div class="price">Fiyat bilgisi yakında</div>
-<button class="buy" type="button">Sepete Ekle</button>
+<button class="buy" type="button">Ürünü İncele · Beden Seç</button>
 </div>
 </article>
 
@@ -578,7 +578,7 @@ outline:none;
 <div class="product-info">
 <h3>Pembe Gömlek</h3>
 <div class="price">Fiyat bilgisi yakında</div>
-<button class="buy" type="button">Sepete Ekle</button>
+<button class="buy" type="button">Ürünü İncele · Beden Seç</button>
 </div>
 </article>
 </div>
@@ -946,8 +946,41 @@ Kapat
 
 </div>
 </footer>
- 
-  <script>
+<div id="productModal" class="product-modal" role="dialog" aria-modal="true" aria-labelledby="modalName" hidden>
+  <div class="product-modal-box">
+    <button id="modalClose" class="modal-close" type="button" aria-label="Ürün detayını kapat">✕</button>
+    <img id="modalImage" src="" alt="">
+    <div class="product-modal-info">
+      <h2 id="modalName"></h2>
+      <p>Fiyat ve stok bilgisi satıcıdan teyit edilecektir.</p>
+      <label for="modalSize">Beden seçimi (stok teyidine tabidir)</label>
+      <select id="modalSize"><option value="">Beden seçiniz</option><option>36</option><option>38</option><option>40</option><option>42</option><option>44</option><option>46</option><option>48</option><option>50</option><option>Standart</option><option>Diğer / Emin değilim</option></select>
+      <label for="modalColor">İstediğiniz renk (stok teyidine tabidir)</label>
+      <input id="modalColor" type="text" maxlength="40" placeholder="Örn. fotoğraftaki renk">
+      <label for="modalQuantity">Adet</label>
+      <div class="modal-qty"><button id="modalMinus" type="button">−</button><output id="modalQuantity">1</output><button id="modalPlus" type="button">+</button></div>
+      <button id="modalAdd" class="modal-add" type="button">Sepete Ekle</button>
+      <p id="modalError" class="modal-error" role="status"></p>
+    </div>
+  </div>
+</div>
+<style>
+.product-modal[hidden]{display:none}
+.product-modal{position:fixed;inset:0;z-index:1000000;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;padding:18px;overflow-y:auto}
+.product-modal-box{position:relative;display:grid;grid-template-columns:1fr 1fr;max-width:850px;width:100%;max-height:92vh;overflow-y:auto;background:white;border-radius:18px}
+.product-modal-box>img{width:100%;height:100%;min-height:420px;object-fit:cover}
+.product-modal-info{padding:30px;display:flex;flex-direction:column;gap:12px}
+.product-modal-info h2{font-size:24px}
+.product-modal-info p{font-size:13px;color:#666}
+.product-modal-info label{font-weight:600;font-size:14px}
+.product-modal-info select,.product-modal-info input{width:100%;padding:12px;border:1px solid #ccc;border-radius:8px;font:inherit}
+.modal-close{position:absolute;top:12px;right:12px;z-index:1;background:white;border:0;border-radius:50%;width:36px;height:36px;cursor:pointer}
+.modal-qty{display:flex;align-items:center;gap:16px}.modal-qty button{border:1px solid #ddd;background:#faf8f5;padding:8px 16px;border-radius:8px;cursor:pointer}
+.modal-add{background:#111;color:white;border:0;padding:14px;border-radius:9px;cursor:pointer;font:inherit}
+.product-modal-info .modal-error{color:#b42318}
+@media(max-width:650px){.product-modal-box{grid-template-columns:1fr;max-width:430px}.product-modal-box>img{height:230px;min-height:0}.product-modal-info{padding:18px;gap:8px}}
+</style>
+<script>
 /* PARÇA 11: Sepet yönetimi */
 (function () {
   const cartButton = document.getElementById("cartButton");
@@ -984,7 +1017,7 @@ Kapat
       const title = document.createElement("strong");
       title.textContent = item.name;
       const detail = document.createElement("div");
-      detail.textContent = item.price === null ? "Fiyat belirlenecek · " + item.quantity + " adet" : formatPrice(item.price) + " × " + item.quantity;
+      detail.textContent = "Beden: " + (item.size || "Belirtilmedi") + " · Renk: " + (item.color || "Belirtilmedi") + " · " + (item.price === null ? "Fiyat belirlenecek · " + item.quantity + " adet" : formatPrice(item.price) + " × " + item.quantity);
       description.append(title, detail);
 
       const controls = document.createElement("div");
@@ -1008,23 +1041,70 @@ Kapat
     whatsappOrder.disabled = cart.length === 0;
   }
 
+  const modal = document.getElementById("productModal");
+  const modalImage = document.getElementById("modalImage");
+  const modalName = document.getElementById("modalName");
+  const modalSize = document.getElementById("modalSize");
+  const modalColor = document.getElementById("modalColor");
+  const modalQuantity = document.getElementById("modalQuantity");
+  const modalError = document.getElementById("modalError");
+  let selectedProduct = null;
+  let selectedQuantity = 1;
+  let previousFocus = null;
+
+  function closeProduct() {
+    modal.hidden = true;
+    document.body.style.overflow = "";
+    previousFocus?.focus();
+  }
+  function openProduct(product) {
+    selectedProduct = product;
+    previousFocus = document.activeElement;
+    modalName.textContent = product.querySelector("h3").textContent.trim();
+    modalImage.src = product.querySelector("img").getAttribute("src");
+    modalImage.alt = modalName.textContent;
+    modalSize.value = "";
+    modalColor.value = "";
+    selectedQuantity = 1;
+    modalQuantity.textContent = "1";
+    modalError.textContent = "";
+    modal.hidden = false;
+    document.body.style.overflow = "hidden";
+    modalSize.focus();
+  }
   document.querySelectorAll(".product").forEach(product => {
-    const button = product.querySelector(".buy");
-    if (!button) return;
-    button.addEventListener("click", event => {
-      event.preventDefault();
-      const name = product.querySelector("h3")?.textContent.trim();
-      const priceText = product.querySelector(".price")?.textContent || "";
-      const digits = priceText.replace(/[^\d,]/g, "").replace(",", ".");
-      const parsedPrice = Number(digits);
-      const price = digits && Number.isFinite(parsedPrice) && parsedPrice > 0 ? parsedPrice : null;
-      if (!name) return;
-      const existing = cart.find(item => item.name === name && item.price === price);
-      if (existing) existing.quantity += 1;
-      else cart.push({ name, price, quantity: 1 });
-      renderCart();
-      cartPanel.classList.add("active");
-    });
+    product.querySelector(".buy")?.addEventListener("click", () => openProduct(product));
+    product.querySelector("img")?.addEventListener("click", () => openProduct(product));
+    product.querySelector("img").style.cursor = "pointer";
+  });
+  document.getElementById("modalClose").addEventListener("click", closeProduct);
+  modal.addEventListener("click", event => { if (event.target === modal) closeProduct(); });
+  document.addEventListener("keydown", event => { if (event.key === "Escape" && !modal.hidden) closeProduct(); });
+  document.getElementById("modalMinus").addEventListener("click", () => {
+    selectedQuantity = Math.max(1, selectedQuantity - 1);
+    modalQuantity.textContent = String(selectedQuantity);
+  });
+  document.getElementById("modalPlus").addEventListener("click", () => {
+    selectedQuantity = Math.min(99, selectedQuantity + 1);
+    modalQuantity.textContent = String(selectedQuantity);
+  });
+  document.getElementById("modalAdd").addEventListener("click", () => {
+    if (!selectedProduct) return;
+    if (!modalSize.value) { modalError.textContent = "Lütfen beden seçiniz."; modalSize.focus(); return; }
+    if (!modalColor.value.trim()) { modalError.textContent = "Lütfen istediğiniz rengi yazınız."; modalColor.focus(); return; }
+    const name = modalName.textContent;
+    const size = modalSize.value;
+    const color = modalColor.value.trim();
+    const priceText = selectedProduct.querySelector(".price")?.textContent || "";
+    const digits = priceText.replace(/[^\\d,]/g, "").replace(",", ".");
+    const parsedPrice = Number(digits);
+    const price = digits && Number.isFinite(parsedPrice) && parsedPrice > 0 ? parsedPrice : null;
+    const existing = cart.find(item => item.name === name && item.price === price && item.size === size && item.color === color);
+    if (existing) existing.quantity += selectedQuantity;
+    else cart.push({ name, size, color, price, quantity: selectedQuantity });
+    closeProduct();
+    renderCart();
+    cartPanel.classList.add("active");
   });
 
   cartItems.addEventListener("click", event => {
@@ -1049,7 +1129,7 @@ Kapat
     cart.forEach(item => {
       const subtotal = item.price === null ? null : item.price * item.quantity;
       if (subtotal !== null) total += subtotal;
-      lines.push(item.name + " — " + item.quantity + " adet — " + (subtotal === null ? "Fiyat bilgisi istiyorum" : formatPrice(subtotal)));
+      lines.push(item.name + " — Beden: " + (item.size || "Belirtilmedi") + " — Renk: " + (item.color || "Belirtilmedi") + " — " + item.quantity + " adet — " + (subtotal === null ? "Fiyat bilgisi istiyorum" : formatPrice(subtotal)));
     });
     lines.push("", cart.some(item => item.price === null) ? "Fiyat bilgisi ve stok durumunu öğrenmek istiyorum." : "Toplam: " + formatPrice(total));
     window.open("https://wa.me/905301103944?text=" + encodeURIComponent(lines.join("\n")), "_blank", "noopener,noreferrer");
