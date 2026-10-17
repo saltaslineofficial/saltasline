@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="tr"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Ödeme | SALTAŞLİNE</title>
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="paytr-theme.css">
+<script src="theme.js"></script>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f7f3ed;color:#252522;font:15px/1.65 system-ui,-apple-system,"Segoe UI",Arial,sans-serif}a{color:#815e35}
+header{background:#1e231f;color:white;padding:19px max(5%,calc((100% - 1100px)/2));display:flex;align-items:center;justify-content:space-between;gap:15px}
+header a{color:#fff;text-decoration:none}.logo{font-weight:700;letter-spacing:2px;font-size:23px}
+main{max-width:1080px;margin:auto;padding:42px 22px 80px}
+.eyebrow{font-size:11px;letter-spacing:2px;color:#97724b;font-weight:700}
+h1{font:normal clamp(36px,5vw,52px)/1.15 Georgia,serif;margin:14px 0 30px}
+.layout{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(290px,.8fr);gap:24px;align-items:start}
+.card{background:#fff;border:1px solid #e4ddd4;border-radius:13px;padding:26px;box-shadow:0 7px 35px rgba(0,0,0,.03)}
+h2{font:normal 27px/1.25 Georgia,serif;margin:0 0 18px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.field{display:flex;flex-direction:column;gap:6px;margin-bottom:15px}.field.full{grid-column:1/-1}
+label{font-size:13px;font-weight:600}input,textarea{font:inherit;border:1px solid #ccc7c0;border-radius:7px;padding:12px 13px;background:#fff;max-width:100%}textarea{resize:vertical;min-height:95px}
+.item{display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid #eee9e2}.item img{height:78px;width:62px;object-fit:cover;border-radius:6px;background:#eee}.item div{flex:1;font-size:14px}.item small{display:block;color:#6c6962}.total{display:flex;justify-content:space-between;font-weight:700;margin-top:18px;padding-top:18px;border-top:1px solid #ddd5cc}
+.terms{display:flex;align-items:start;gap:10px;padding:18px 0}.terms input{margin-top:5px}
+.button{display:block;border:0;background:#1e231f;color:#fff;border-radius:7px;padding:15px 18px;width:100%;font:600 15px system-ui;cursor:pointer}
+.button:disabled{background:#aaa9a4;cursor:not-allowed}.notice{padding:13px 15px;background:#fbf2e3;color:#6e542e;border-radius:8px;font-size:13px;margin:17px 0}.error{color:#a51d1d;font-size:13px;min-height:20px}.successbox{background:#f1f7f1;border:1px solid #d2e5d1;padding:15px;border-radius:9px;margin:17px 0}
+#paymentSection[hidden]{display:none}iframe{border:0;width:100%;min-height:700px;background:#fff;border-radius:9px}
+footer{text-align:center;padding:20px;color:#6a655d;font-size:13px}
+@media(max-width:720px){.layout{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.card{padding:20px}}
+</style></head><body class="checkout-page">
+<header><a class="logo" href="index.html">SALTAŞLİNE</a><a href="index.html#products">← Alışverişe dön</a> <button class="theme-toggle" data-theme-toggle type="button" aria-label="Karanlık moda geç" aria-pressed="false" title="Karanlık moda geç"><span class="theme-icon" aria-hidden="true">☾</span><span class="theme-label">Karanlık mod</span></button></header>
+<main>
+<span class="eyebrow">GÜVENLİ ALIŞVERİŞ HAZIRLIĞI</span>
+<h1>Ödeme ve teslimat</h1>
+<div class="layout">
+  <section class="card" aria-labelledby="buyerHeading">
+    <h2 id="buyerHeading">Teslimat bilgileriniz</h2>
+    <div class="notice" id="setupNotice">PayTR entegrasyonu henüz etkinleştirilmedi. Gerçek tahsilat başlamadan önce fiyatlar, stoklar, kargo ve güvenli ödeme servisi tamamlanmalıdır.</div>
+    <form id="checkoutForm" novalidate>
+      <div class="form-grid">
+        <div class="field full"><label for="name">Ad soyad</label><input id="name" name="name" autocomplete="name" maxlength="60" required></div>
+        <div class="field"><label for="email">E-posta</label><input id="email" type="email" name="email" autocomplete="email" maxlength="100" required></div>
+        <div class="field"><label for="phone">Telefon</label><input id="phone" type="tel" name="phone" autocomplete="tel" maxlength="20" required></div>
+        <div class="field full"><label for="address">Teslimat adresi (il/ilçe dâhil)</label><textarea id="address" name="address" autocomplete="street-address" maxlength="400" required></textarea></div>
+      </div>
+      <label class="terms"><input id="acceptTerms" type="checkbox" required><span><a href="mesafeli-satis.html" target="_blank" rel="noopener noreferrer">Mesafeli satış ön bilgilendirmesini</a>, <a href="iade.html" target="_blank" rel="noopener noreferrer">cayma ve iade koşullarını</a> ve <a href="gizlilik.html" target="_blank" rel="noopener noreferrer">gizlilik metnini</a> okudum. Siparişin fiyat, kargo ve diğer bedellerini ödeme öncesinde kontrol edeceğim.</span></label>
+      <p id="error" class="error" role="alert"></p>
+      <button class="button" id="payButton" type="submit" disabled>Ödeme sistemi hazırlanıyor</button>
+      <div class="notice">Kart numarası ve CVV bilgisi SALTAŞLİNE formunda istenmez; aktif olduğunda PayTR'ın güvenli ödeme alanında girilir.</div>
+    </form>
+    <div id="paymentSection" hidden>
+      <h2>PayTR güvenli ödeme alanı</h2>
+      <div class="successbox">Kart bilgilerinizi aşağıdaki PayTR ekranında güvenle girebilirsiniz. Siparişin ödeme sonucu ayrıca doğrulanacaktır.</div>
+      <iframe id="paytriframe" title="PayTR güvenli ödeme formu" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    </div>
+  </section>
+  <aside class="card" aria-labelledby="basketHeading">
+    <h2 id="basketHeading">Sipariş özeti</h2>
+    <div id="orderItems"><p>Sepetinizden ürün aktarılmadı.</p></div>
+    <div class="total"><span>Toplam</span><span id="total">Fiyat bekleniyor</span></div>
+    <p style="font-size:12px;color:#77716b">Kargo bedeli ve nihai toplam, ödeme başlatılmadan önce sunucu tarafından doğrulanmalıdır.</p>
+    <a href="index.html#products">← Ürünlere dön</a>
+  </aside>
+</div></main><footer>SALTAŞLİNE · Ödeme işlemleri etkinleştirilmeden tahsilat yapılamaz.</footer>
+<script>
+"use strict";
+// Cloudflare Worker dağıtılınca onun HTTPS adresi burada tanımlanır, örn: https://xxxx.workers.dev
+// Boşken ödeme kapalıdır. API anahtarları BURAYA ASLA yazılmamalıdır.
+const PAYMENT_API_BASE = "";
+const storageKey = "SALTASLINE_CHECKOUT_V1";
+const button = document.getElementById("payButton");
+const notice = document.getElementById("setupNotice");
+const error = document.getElementById("error");
+const paymentSection = document.getElementById("paymentSection");
+let items = [];
+try {
+  const parsed = JSON.parse(sessionStorage.getItem(storageKey) || "[]");
+  if(Array.isArray(parsed)) items = parsed.filter(i => i && typeof i.productId==="string" && Number.isInteger(i.quantity) && i.quantity>0 && i.quantity<=20).slice(0,25);
+} catch {}
+const orderItems = document.getElementById("orderItems");
+orderItems.replaceChildren();
+let total = 0, complete = items.length>0;
+const asPrice = n => new Intl.NumberFormat("tr-TR",{style:"currency",currency:"TRY"}).format(n);
+for(const item of items){
+  const row=document.createElement("div");row.className="item";
+  const image=document.createElement("img");image.src=item.image||"";image.alt=String(item.name||"Ürün");
+  const detail=document.createElement("div");const title=document.createElement("strong");title.textContent=String(item.name||"Ürün");
+  const details=document.createElement("small");details.textContent="Beden: "+item.size+" · Renk: "+item.color+" · "+item.quantity+" adet";
+  detail.append(title,details);row.append(image,detail);orderItems.append(row);
+  if(!Number.isFinite(item.price)||item.price<=0)complete=false;else total+=item.price*item.quantity;
+}
+if(items.length===0)orderItems.textContent="Sepet boş. Önce ürün seçiniz.";
+document.getElementById("total").textContent=complete?asPrice(total)+" + kargo (teyit edilecek)":"Fiyatlar bekleniyor";
+let ready=false, confirmedTotalKurus=null;
+const requestItems=()=>items.map(i=>({productId:i.productId,size:i.size,color:i.color,quantity:i.quantity}));
+async function loadStatus(){
+  if(!PAYMENT_API_BASE || !complete || !items.length) return;
+  try{
+    const statusResponse=await fetch(new URL("/api/payment/config",PAYMENT_API_BASE),{mode:"cors",cache:"no-store"});
+    const statusData=await statusResponse.json();
+    if(!statusResponse.ok || statusData.ready!==true) return;
+    const quoteResponse=await fetch(new URL("/api/payment/quote",PAYMENT_API_BASE),{
+      method:"POST",mode:"cors",headers:{"Content-Type":"application/json"},body:JSON.stringify({items:requestItems()})});
+    const quote=await quoteResponse.json();
+    if(!quoteResponse.ok)throw new Error(quote.error||"Fiyat doğrulanamadı.");
+    if(!Number.isSafeInteger(quote.totalKurus) || !Number.isSafeInteger(quote.shippingKurus))
+      throw new Error("Sunucu fiyatı geçersiz.");
+    confirmedTotalKurus=quote.totalKurus;ready=true;
+    document.getElementById("total").textContent=asPrice(confirmedTotalKurus/100)+" (kargo dahil)";
+    button.disabled=false;button.textContent="PayTR ile güvenli ödeme";
+    notice.textContent="Toplam, kargo ücreti dahil "+asPrice(confirmedTotalKurus/100)+". Ödeme öncesinde bu tutarı ve satış koşullarını kontrol ediniz.";
+  }catch(e){notice.textContent=e.message||"Ödeme servisine ulaşılamıyor. Lütfen daha sonra deneyin.";}
+}
+loadStatus();
+document.getElementById("checkoutForm").addEventListener("submit",async event=>{
+  event.preventDefault();error.textContent="";
+  if(!ready||!complete||confirmedTotalKurus===null){error.textContent="Ödeme sistemi henüz hazır değil.";return;}
+  const form=event.currentTarget;
+  if(!form.reportValidity()){error.textContent="Lütfen teslimat bilgilerini tamamlayın ve koşulları onaylayın.";return;}
+  button.disabled=true;button.textContent="Ödeme hazırlanıyor…";
+  try{
+    const buyer={name:form.elements.namedItem("name").value.trim(),email:form.elements.namedItem("email").value.trim(),phone:form.elements.namedItem("phone").value.trim(),address:form.elements.namedItem("address").value.trim()};
+    const payload={buyer,acceptTerms:document.getElementById("acceptTerms").checked,items:requestItems()};
+    const response=await fetch(new URL("/api/payment/start",PAYMENT_API_BASE),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload),mode:"cors"});
+    const json=await response.json();
+    if(!response.ok)throw new Error(json.error || "İşlem başlatılamadı.");
+    if(!/^https:\/\/www\.paytr\.com\/odeme\/guvenli\/[a-zA-Z0-9_-]+$/.test(json.iframeUrl||""))throw new Error("Geçersiz ödeme bağlantısı.");
+    if(json.amountKurus!==confirmedTotalKurus)throw new Error("Ödeme tutarı değişti; lütfen sayfayı yenileyip tekrar kontrol edin.");
+    const iframe=document.getElementById("paytriframe");
+    iframe.src=json.iframeUrl;
+    paymentSection.hidden=false;form.hidden=true;paymentSection.scrollIntoView({behavior:"smooth"});
+    const script=document.createElement("script");script.src="https://www.paytr.com/js/iframeResizer.min.js";
+    script.onload=()=>{if(typeof window.iFrameResize==="function")window.iFrameResize({checkOrigin:true},"#paytriframe");};
+    document.body.appendChild(script);
+    sessionStorage.removeItem(storageKey);
+  }catch(e){error.textContent=e.message || "Ödeme başlatılamadı.";button.disabled=false;button.textContent="PayTR ile güvenli ödeme";}
+});
+</script></body></html>
