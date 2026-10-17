@@ -506,6 +506,7 @@ transition:.3s;
 background:#b8955f;
 
 }
+.buy { border:0; cursor:pointer; font-family:inherit; font-size:14px; }
 
 .product .inquiry { background:#25D366; }
 .product .inquiry:hover { background:#178a43; }
@@ -541,7 +542,7 @@ outline:none;
 <div class="product-info">
 <h3>Bordo Uzun Elbise</h3>
 <div class="price">Fiyat bilgisi yakında</div>
-<a class="buy inquiry" href="https://wa.me/905301103944?text=Merhaba%2C%20SALTA%C5%9EL%C4%B0NE%20Bordo%20Uzun%20Elbise%20%C3%BCr%C3%BCn%C3%BC%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener noreferrer">WhatsApp ile Bilgi Al</a>
+<button class="buy" type="button">Sepete Ekle</button>
 </div>
 </article>
 
@@ -550,7 +551,7 @@ outline:none;
 <div class="product-info">
 <h3>Siyah Puantiyeli Bluz</h3>
 <div class="price">Fiyat bilgisi yakında</div>
-<a class="buy inquiry" href="https://wa.me/905301103944?text=Merhaba%2C%20SALTA%C5%9EL%C4%B0NE%20Siyah%20Puantiyeli%20Bluz%20%C3%BCr%C3%BCn%C3%BC%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener noreferrer">WhatsApp ile Bilgi Al</a>
+<button class="buy" type="button">Sepete Ekle</button>
 </div>
 </article>
 
@@ -559,7 +560,7 @@ outline:none;
 <div class="product-info">
 <h3>Haki Yeşil Takım</h3>
 <div class="price">Fiyat bilgisi yakında</div>
-<a class="buy inquiry" href="https://wa.me/905301103944?text=Merhaba%2C%20SALTA%C5%9EL%C4%B0NE%20Haki%20Ye%C5%9Fil%20Tak%C4%B1m%20%C3%BCr%C3%BCn%C3%BC%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener noreferrer">WhatsApp ile Bilgi Al</a>
+<button class="buy" type="button">Sepete Ekle</button>
 </div>
 </article>
 
@@ -568,7 +569,7 @@ outline:none;
 <div class="product-info">
 <h3>Ekru Uzun Elbise</h3>
 <div class="price">Fiyat bilgisi yakında</div>
-<a class="buy inquiry" href="https://wa.me/905301103944?text=Merhaba%2C%20SALTA%C5%9EL%C4%B0NE%20Ekru%20Uzun%20Elbise%20%C3%BCr%C3%BCn%C3%BC%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener noreferrer">WhatsApp ile Bilgi Al</a>
+<button class="buy" type="button">Sepete Ekle</button>
 </div>
 </article>
 
@@ -577,7 +578,7 @@ outline:none;
 <div class="product-info">
 <h3>Pembe Gömlek</h3>
 <div class="price">Fiyat bilgisi yakında</div>
-<a class="buy inquiry" href="https://wa.me/905301103944?text=Merhaba%2C%20SALTA%C5%9EL%C4%B0NE%20Pembe%20G%C3%B6mlek%20%C3%BCr%C3%BCn%C3%BC%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener noreferrer">WhatsApp ile Bilgi Al</a>
+<button class="buy" type="button">Sepete Ekle</button>
 </div>
 </article>
 </div>
@@ -936,7 +937,7 @@ Modern • Şık • Güvenilir
 
 <div id="cartTotal">Toplam: <strong>0 ₺</strong></div>
 <button id="clearCart" type="button">🗑️ Sepeti Temizle</button>
-<button id="whatsappOrder" class="whatsapp-order" type="button">📦 Siparişi WhatsApp ile Gönder</button>
+<button id="whatsappOrder" class="whatsapp-order" type="button">💬 Sepeti WhatsApp ile Paylaş</button>
 <button id="closeCart">
 
 Kapat
@@ -974,7 +975,7 @@ Kapat
     }
 
     cart.forEach((item, index) => {
-      total += item.price * item.quantity;
+      if (item.price !== null) total += item.price * item.quantity;
       count += item.quantity;
 
       const row = document.createElement("div");
@@ -983,7 +984,7 @@ Kapat
       const title = document.createElement("strong");
       title.textContent = item.name;
       const detail = document.createElement("div");
-      detail.textContent = formatPrice(item.price) + " × " + item.quantity;
+      detail.textContent = item.price === null ? "Fiyat belirlenecek · " + item.quantity + " adet" : formatPrice(item.price) + " × " + item.quantity;
       description.append(title, detail);
 
       const controls = document.createElement("div");
@@ -1002,7 +1003,7 @@ Kapat
     });
 
     cartCount.textContent = String(count);
-    cartTotal.textContent = "Toplam: " + formatPrice(total);
+    cartTotal.textContent = cart.some(item => item.price === null) ? "Fiyatlar henüz belirlenmedi" : "Toplam: " + formatPrice(total);
     clearCart.disabled = cart.length === 0;
     whatsappOrder.disabled = cart.length === 0;
   }
@@ -1014,8 +1015,10 @@ Kapat
       event.preventDefault();
       const name = product.querySelector("h3")?.textContent.trim();
       const priceText = product.querySelector(".price")?.textContent || "";
-      const price = Number(priceText.replace(/[^\d,]/g, "").replace(",", "."));
-      if (!name || !Number.isFinite(price) || price <= 0) return;
+      const digits = priceText.replace(/[^\d,]/g, "").replace(",", ".");
+      const parsedPrice = Number(digits);
+      const price = digits && Number.isFinite(parsedPrice) && parsedPrice > 0 ? parsedPrice : null;
+      if (!name) return;
       const existing = cart.find(item => item.name === name && item.price === price);
       if (existing) existing.quantity += 1;
       else cart.push({ name, price, quantity: 1 });
@@ -1041,14 +1044,14 @@ Kapat
   clearCart.addEventListener("click", () => { cart.length = 0; renderCart(); });
   whatsappOrder.addEventListener("click", () => {
     if (cart.length === 0) return;
-    const lines = ["🛍️ SALTAŞLİNE Siparişim:", ""];
+    const lines = ["🛍️ SALTAŞLİNE Sepetim / Ürün Bilgi Talebim:", ""];
     let total = 0;
     cart.forEach(item => {
-      const subtotal = item.price * item.quantity;
-      total += subtotal;
-      lines.push(item.name + " — " + item.quantity + " adet — " + formatPrice(subtotal));
+      const subtotal = item.price === null ? null : item.price * item.quantity;
+      if (subtotal !== null) total += subtotal;
+      lines.push(item.name + " — " + item.quantity + " adet — " + (subtotal === null ? "Fiyat bilgisi istiyorum" : formatPrice(subtotal)));
     });
-    lines.push("", "Toplam: " + formatPrice(total));
+    lines.push("", cart.some(item => item.price === null) ? "Fiyat bilgisi ve stok durumunu öğrenmek istiyorum." : "Toplam: " + formatPrice(total));
     window.open("https://wa.me/905301103944?text=" + encodeURIComponent(lines.join("\n")), "_blank", "noopener,noreferrer");
   });
 
