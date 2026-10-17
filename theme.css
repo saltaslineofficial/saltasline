@@ -1,0 +1,140 @@
+/* SALTAŞLİNE — ortak beyaz / karanlık görünüm.
+   Anahtar: html[data-theme="dark"]. Varsayılan görünüm beyazdır. */
+.theme-toggle{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  flex-shrink:0;min-height:41px;padding:8px 13px;
+  border:1px solid #d7cfc5;border-radius:9px;background:#fbf8f4;color:#252722;
+  font:600 12px/1.35 Poppins,system-ui,sans-serif;cursor:pointer;
+  transition:background .2s,color .2s,border-color .2s,transform .2s;
+}
+.theme-toggle:hover{background:#efe8df;transform:translateY(-1px)}
+.theme-toggle:focus-visible{outline:3px solid #b99b78;outline-offset:3px}
+.theme-icon{font:normal 19px/1 system-ui;display:inline-block;min-width:20px;text-align:center}
+.top .theme-toggle{background:#2b302c;border-color:#737770;color:#fff}
+.top .theme-toggle:hover{background:#414941}
+@media(max-width:700px){
+  .site-header .logo{order:1}
+  .site-header .theme-toggle{order:2}
+  .site-header .site-nav{order:3}
+}
+@media(max-width:400px){
+  .site-header .theme-toggle{min-height:37px;padding:7px 10px;font-size:11px}
+  .site-header .theme-label{display:none}
+}
+html[data-theme="dark"]{color-scheme:dark}
+html[data-theme="dark"] body{background:#111612;color:#f1eee6}
+html[data-theme="dark"] .theme-toggle{background:#28302a;color:#f4efe6;border-color:#5d675d}
+html[data-theme="dark"] .theme-toggle:hover{background:#384139}
+html[data-theme="dark"] .site-header{background:rgba(19,25,21,.97);border-color:#364138;box-shadow:0 4px 22px rgba(0,0,0,.24)}
+html[data-theme="dark"] .site-header .logo,
+html[data-theme="dark"] .site-nav a{color:#f0eee8}
+html[data-theme="dark"] .site-nav a:hover{color:#e2bf93}
+html[data-theme="dark"] .logo small{color:#cfab80}
+html[data-theme="dark"] .site-header #cartButton{background:#e0bf93;color:#191e1a}
+html[data-theme="dark"] .site-header #cartButton:hover{background:#f2d9b7}
+html[data-theme="dark"] .site-header #cartCount{background:#222920;color:#f0eadf}
+html[data-theme="dark"] .hero{background:#121b15}
+html[data-theme="dark"] .hero-visual{background:linear-gradient(135deg,#55584f,#343f38)}
+html[data-theme="dark"] .hero-visual-label{color:#f7e0c2}
+html[data-theme="dark"] .hero-visual-stamp{background:#1b251e;color:#f0e0cd}
+html[data-theme="dark"] .hero-benefits{background:#1e2921;border-color:#3d4b40}
+html[data-theme="dark"] .hero-benefits span{color:#d8d4cc}
+html[data-theme="dark"] .hero-benefits span+span{border-color:#435046}
+html[data-theme="dark"] .title{color:#f4f0e7}
+html[data-theme="dark"] .feature,
+html[data-theme="dark"] .product,
+html[data-theme="dark"] .about{background:#1e2720;color:#f3f0e9;box-shadow:0 7px 25px rgba(0,0,0,.18);border:1px solid #354139}
+html[data-theme="dark"] .feature p{color:#c7c6bf}
+html[data-theme="dark"] .price{color:#edc89b}
+html[data-theme="dark"] .buy{background:#d7ba91;color:#1a201b}
+html[data-theme="dark"] .buy:hover{background:#efce9f;color:#101612}
+html[data-theme="dark"] #searchBox{background:#1e2922;color:#f5f2ea;border-color:#556154 !important}
+html[data-theme="dark"] #searchBox::placeholder{color:#b6b9b0}
+html[data-theme="dark"] .about-story{background:#1a221c}
+html[data-theme="dark"] .about-story::before{border-color:rgba(232,196,149,.16)}
+html[data-theme="dark"] .about-story-content h2,
+html[data-theme="dark"] .about-story-content .about-lead{color:#f1ede4}
+html[data-theme="dark"] .about-story-content p{color:#c8c8bf}
+html[data-theme="dark"] .about-overline,
+html[data-theme="dark"] .about-slogan{color:#d0af89}
+html[data-theme="dark"] .about-values{border-color:#485248}
+html[data-theme="dark"] .about-values strong{color:#eaece3}
+html[data-theme="dark"] .about-values small{color:#b8bcb2}
+html[data-theme="dark"] .about-gallery-primary,
+html[data-theme="dark"] .about-gallery-secondary{background:#323d33}
+html[data-theme="dark"] .about-gallery-seal{border-color:#1a221c}
+html[data-theme="dark"] .about-main-cta{background:#dfbf93;color:#18211b}
+html[data-theme="dark"] .about-main-cta:hover{background:#eed1a9}
+html[data-theme="dark"] .about-text-cta{color:#e5d6c2}
+html[data-theme="dark"] .help-section{background:#161d18}
+html[data-theme="dark"] .help-heading p,
+html[data-theme="dark"] .contact-intro p{color:#b9c0b6}
+html[data-theme="dark"] .help-eyebrow{color:#d6ae7d}
+html[data-theme="dark"] .faq-list details{background:#242e26;border-color:#465447;color:#f0eee7}
+html[data-theme="dark"] .faq-list details p{color:#c8cdc4}
+html[data-theme="dark"] .contact-section{background:#111713}
+html[data-theme="dark"] .contact-action{background:#222c25;color:#f3f2eb;border-color:#3d4d40}
+html[data-theme="dark"] .contact-action:hover{background:#344236}
+html[data-theme="dark"] .contact-whatsapp{background:#1d3927;border-color:#39684d}
+html[data-theme="dark"] .contact-whatsapp:hover{background:#295035}
+html[data-theme="dark"] .contact-action small{color:#c6cec5}
+html[data-theme="dark"] footer{background:#0c110e;color:#eeeae2}
+html[data-theme="dark"] .footer-grid a{color:#d9d5cf}
+html[data-theme="dark"] .footer-bottom{border-color:#343f37}
+html[data-theme="dark"] #cartPanel{background:#1b241e;color:#f1efe9;box-shadow:-5px 0 24px rgba(0,0,0,.43)}
+html[data-theme="dark"] .cart-item{border-color:#475347}
+html[data-theme="dark"] .cart-product-description{color:#e9ebe3}
+html[data-theme="dark"] .cart-quantity{color:#f6f1e6}
+html[data-theme="dark"] #cartTotal{color:#f1eee7}
+html[data-theme="dark"] #closeCart{background:#d5b38a;color:#161d17}
+html[data-theme="dark"] .cart-payment-disclaimer{color:#c2c8bc}
+html[data-theme="dark"] .product-modal-box{background:#1e2921;color:#f4f0e6}
+html[data-theme="dark"] .product-modal-info p{color:#d0d3cb}
+html[data-theme="dark"] .product-modal-info input,
+html[data-theme="dark"] .product-modal-info select{background:#2a382e;border-color:#59685c;color:#fff}
+html[data-theme="dark"] .modal-close{background:#39473c;color:#f9f2e8}
+html[data-theme="dark"] .modal-qty button{background:#303d33;border-color:#667266;color:#fff}
+html[data-theme="dark"] #modalQuantity{background:#303d33;border-color:#667266;color:#fff}
+html[data-theme="dark"] .modal-add{background:#d7b990;color:#172019}
+html[data-theme="dark"] .product-modal-info .modal-error{color:#ffb6a7}
+html[data-theme="dark"] .top{background:#0c110e}
+html[data-theme="dark"] .topnav a,
+html[data-theme="dark"] .top .brand{color:#fff}
+html[data-theme="dark"] .intro{background:linear-gradient(135deg,#2b372d,#17221b)}
+html[data-theme="dark"] .intro h1{color:#f2eee5}
+html[data-theme="dark"] .intro p{color:#c9c8bd}
+html[data-theme="dark"] .eyebrow{color:#dfbd91}
+html[data-theme="dark"] .section{background:#222b24;color:#eaece5;border-color:#455146}
+html[data-theme="dark"] .section h2{color:#f3eee4}
+html[data-theme="dark"] .notice{background:#342f24;color:#f6debd;border-color:#dbb27d}
+html[data-theme="dark"] .section a,
+html[data-theme="dark"] .container a{color:#e3bd89}
+html[data-theme="dark"] .muted,
+html[data-theme="dark"] .source{color:#c6c4b9}
+html[data-theme="dark"] .footer{background:#0c110e;color:#e8e7dc}
+html[data-theme="dark"] .footer a{color:#e5cfad}
+@media(prefers-reduced-motion:reduce){.theme-toggle{transition:none}}
+
+/* PayTR hazırlık dalındaki ödeme ve sonuç sayfaları */
+html[data-theme="dark"] .checkout-page,
+html[data-theme="dark"] .payment-result-page{background:#111612;color:#f1eee8}
+html[data-theme="dark"] .checkout-page header,
+html[data-theme="dark"] .payment-result-page .bar{background:#0d1510;color:#f3efe5}
+html[data-theme="dark"] .checkout-page .card,
+html[data-theme="dark"] .payment-result-page main{background:#1d2820;color:#f2ede6;border-color:#495549}
+html[data-theme="dark"] .checkout-page .eyebrow{color:#e0bd8d}
+html[data-theme="dark"] .checkout-page .field input,
+html[data-theme="dark"] .checkout-page .field textarea{background:#263329;color:#f5eee4;border-color:#637366}
+html[data-theme="dark"] .checkout-page .item,
+html[data-theme="dark"] .checkout-page .total,
+html[data-theme="dark"] .payment-result-page .line{border-color:#4a5a4c}
+html[data-theme="dark"] .checkout-page .notice{background:#342f24;color:#f4dfc2}
+html[data-theme="dark"] .checkout-page .button{background:#dabc92;color:#182118}
+html[data-theme="dark"] .checkout-page .button:disabled{background:#586458;color:#e7eee6}
+html[data-theme="dark"] .checkout-page .successbox{background:#213b29;border-color:#5e805f;color:#eff6ed}
+html[data-theme="dark"] .checkout-page a,
+html[data-theme="dark"] .payment-result-page a{color:#e6c294}
+html[data-theme="dark"] .checkout-page header a{color:#f1efe8}
+html[data-theme="dark"] .checkout-page footer,
+html[data-theme="dark"] .payment-result-page p,
+html[data-theme="dark"] .payment-result-page small{color:#c5c8bd}
