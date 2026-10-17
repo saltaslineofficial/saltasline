@@ -1,13 +1,13 @@
 # SALTAŞLİNE – PayTR iFrame ödeme altyapısı (taslak / canlıda KAPALI)
 
 Bu klasör, GitHub Pages'teki statik SALTAŞLİNE sepetini PayTR iFrame API'ye bağlayacak **Cloudflare Worker + D1** sunucu hazırlığıdır.
-Canlı tahsilat hazır değildir; ödeme anahtarları veya gerçek fiyatlar GitHub'a yazılmamıştır.
+Canlı tahsilat hazır değildir; ödeme anahtarları GitHub'a yazılmamıştır. Kullanıcının belirttiği satış fiyatları yalnızca herkese açık ürün kataloğu bilgisi olarak eklenmiştir.
 
 ## Güvenlik tasarımı
 
 - Kart numarası, CVV ve kartın son kullanma tarihi SALTAŞLİNE sunucularına **gönderilmez**. Form PayTR'ın kendi iFrame'i ile sunulur.
-- Web sayfasından gelen **fiyat/toplam değerlerine güvenilmez**; `src/catalog.js` içindeki KDV dahil kuruş fiyatları ve varyantlar esas alınır.
-- Fiyatlar `null`, varyantlar `[]`: bilerek kapalı, stok ve fiyatı doğrulanmamış ürünler tahsilata geçemez.
+- Web sayfasından gelen **fiyat/toplam değerlerine güvenilmez**; `src/catalog.js` içindeki kuruş fiyatları ve doğrulanmış varyantlar esas alınır. Fiyatların vergiler dahil nihai tüketici fiyatı olduğu ayrıca teyit edilmelidir.
+- Satış fiyatları girildi (Bordo 249999 kr, Siyah Bluz 299999 kr, Haki Takım 349999 kr, Ekru 299999 kr, Pembe Gömlek kampanyalı 149999 kr). Varyantlar hâlâ `[]`; gerçek beden/renk/stok teyidi olmadan ödeme açılamaz.
 - Kargo fiyatı sunucuda `SHIPPING_KURUS` ile ayrı belirlenir; bilinmiyorsa ödeme kapalıdır.
 - `PAYTR_ACTIVE=0` ve `PAYTR_TEST_MODE=1` güvenli ilk ayarlardır. Canlı geçiş ancak test ve işletme onayından sonra yapılır.
 - `merchant_id`, `merchant_key`, `merchant_salt` **asla HTML, JavaScript dosyası veya GitHub commit'ine yazılmamalı**. Worker secret olarak saklanmalı.
@@ -22,7 +22,7 @@ Canlı tahsilat hazır değildir; ödeme anahtarları veya gerçek fiyatlar GitH
 3. `npm install`; `npx wrangler d1 create saltasline-paytr-orders` komutu ile DB oluşturulur ve dönen UUID `wrangler.toml` dosyasına (örneği `wrangler.toml.example`) yazılır.
 4. `npx wrangler d1 execute saltasline-paytr-orders --remote --file=./schema.sql` ile tablolar kurulur.
 5. Worker secrets olarak `npx wrangler secret put PAYTR_MERCHANT_ID`, `npx wrangler secret put PAYTR_MERCHANT_KEY`, `npx wrangler secret put PAYTR_MERCHANT_SALT` çalıştırılır. **Anahtarları sohbet üzerinden göndermeyin.**
-6. Satışa açılacak ürünlerin **doğru KDV dahil fiyatlarını** kuruş olarak, teyit edilmiş beden/renk/stok kombinasyonlarını `src/catalog.js` içine girin. Sipariş sırasında gerçek stokların eşzamanlı korunması için stok rezervasyon tasarımı tamamlanmalıdır.
+6. Ürün fiyatları satıcının belirttiği tutarlarla dolduruldu; bunların KDV dahil nihai satış fiyatları olduğunu teyit edin. Ardından gerçek beden/renk/stok kombinasyonlarını `src/catalog.js` içine girin. Sipariş sırasında gerçek stokların eşzamanlı korunması için stok rezervasyon tasarımı tamamlanmalıdır.
 7. `SHIPPING_KURUS` değeri gerçek kargo ücretine göre belirlenmeli; ürün toplamına eklenirken ön bilgilendirmeyle tutarlı olmalı. Ücret ücretsiz ise bilinçli olarak "0" ayarlanmalı.
 8. `npx wrangler deploy` ile Worker yayınlanır. PayTR Mağaza Paneli'nde **Bildirim URL**: `https://WORKER_ADRESI/api/paytr/callback`. HTTPS üzerinden dışarıdan POST alabilmeli.
 9. GitHub Pages'teki `odeme.html` ve `odeme-sonuc.html` içinde `PAYMENT_API_BASE` değişkeni gerçek Worker HTTPS kök adresiyle güncellenmeli.
@@ -41,6 +41,6 @@ Canlı tahsilat hazır değildir; ödeme anahtarları veya gerçek fiyatlar GitH
 
 Site statik GitHub Pages'te kalır. Cloudflare Worker yalnızca güvenli sunucu işlemleri içindir.
 Buradaki `wrangler.toml.example` bir şablondur; `wrangler.toml` gizli veriler içermemelidir.
-Bu dal ve taslak PR, müşteri ödeme ortamına **merge edilmemelidir**: Yetkili hesap, fiyat, kargo, stok, depolama ve gerçek testler eksik.
+Bu dal ve taslak PR, müşteri ödeme ortamına **merge edilmemelidir**: Yetkili hesap, fiyatların vergi dâhil niteliğinin teyidi, kargo, stok, depolama ve gerçek testler eksik.
 
 Kaynak: PayTR resmî iFrame 1-2. adım API belgeleri.
