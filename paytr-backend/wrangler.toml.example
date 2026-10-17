@@ -1,0 +1,16 @@
+name = "saltasline-paytr"
+main = "src/worker.js"
+compatibility_date = "2026-09-01"
+
+# Kopyalayıp wrangler.toml yapın; D1 create sonrasında verilen UUID'yi aşağıya yazın.
+# Gizli anahtarları bu dosyaya veya GitHub'a KOYMAYIN.
+[vars]
+PAYTR_ACTIVE = "0"
+PAYTR_TEST_MODE = "1"
+# Kargo bedeli, ürün fiyatları netleşince KURUŞ cinsinden belirlenmelidir.
+# SHIPPING_KURUS = "0"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "saltasline-paytr-orders"
+database_id = "D1_VERITABANI_UUID_BURAYA"
