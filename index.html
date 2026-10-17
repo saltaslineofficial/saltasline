@@ -54,116 +54,45 @@ background:#faf8f5;
 color:#222;
 }
 
-header{
-
-position:fixed;
-top:0;
-left:0;
-width:100%;
-background:#fff;
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:18px 8%;
-box-shadow:0 2px 12px rgba(0,0,0,.08);
-z-index:9999;
-
-}
-
-.logo{
-
-display:flex;
-align-items:center;
-gap:12px;
-
-}
-
-.logo img{
-
-width:55px;
-
-}
-
-.logo h2{
-
-font-size:28px;
-font-weight:700;
-letter-spacing:2px;
-
-}
-
-nav a{
-
-text-decoration:none;
-color:#222;
-margin-left:25px;
-font-weight:500;
-transition:.3s;
-
-}
-
-nav a:hover{
-
-color:#b8955f;
-
-}
-
-.hero{
-
-margin-top:90px;
-height:90vh;
-background:linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),url('hero.jpg');
-background-size:cover;
-background-position:center;
-
-display:flex;
-align-items:center;
-justify-content:center;
-
-text-align:center;
-padding:20px;
-
-}
-
-.hero h1{
-
-color:#fff;
-font-size:55px;
-margin-bottom:20px;
-
-}
-
-.hero p{
-
-color:#fff;
-font-size:20px;
-margin-bottom:30px;
-
-}
-
-.btn{
-
-display:inline-block;
-
-padding:15px 35px;
-
-background:#b8955f;
-
-color:white;
-
-text-decoration:none;
-
-border-radius:50px;
-
-transition:.3s;
-
-}
-
-.btn:hover{
-
-background:#000;
-
-}
+/* SALTAŞLİNE — editoryal üst bölüm */
+html{scroll-behavior:smooth;scroll-padding-top:110px}
+.site-header{position:sticky;top:0;left:0;width:100%;background:rgba(255,255,255,.97);display:flex;align-items:center;justify-content:space-between;gap:20px;padding:17px 6%;border-bottom:1px solid #ede9e3;box-shadow:0 5px 24px rgba(0,0,0,.04);z-index:9999;backdrop-filter:blur(12px)}
+.logo{display:flex;flex-direction:column;gap:2px;flex-shrink:0;text-decoration:none;color:#171717}
+.logo h2{font-size:clamp(21px,2.2vw,28px);font-weight:700;letter-spacing:2px;line-height:1.12}
+.logo small{font-size:9px;letter-spacing:3.2px;color:#927b61;font-weight:600}
+.site-nav{display:flex;align-items:center;justify-content:flex-end;gap:clamp(14px,2.5vw,32px)}
+.site-nav a{margin:0;font-size:13px;font-weight:500;color:#2b2927;text-decoration:none;transition:color .2s ease;white-space:nowrap}
+.site-nav a:hover{color:#ad8658}
+.site-header #cartButton{display:inline-flex;align-items:center;gap:3px;background:#171717;color:white;border:0;border-radius:4px;padding:11px 14px;font:600 12px Poppins,sans-serif;cursor:pointer;transition:background .2s}
+.site-header #cartButton:hover{background:#9e7850}
+.site-header #cartCount{background:#fff;color:#171717;border-radius:40px;padding:1px 7px;margin-left:4px}
+.hero{position:relative;isolation:isolate;margin:0;min-height:630px;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);align-items:stretch;background:#1e211f;padding:0;overflow:hidden}
+.hero-copy{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:0;padding:80px clamp(32px,7vw,110px);color:#fff;max-width:740px}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:13px;font-size:11px;font-weight:500;letter-spacing:3px;color:#d5bda0;text-transform:uppercase;margin-bottom:28px}
+.hero-eyebrow::before{content:"";width:32px;height:1px;background:#c7a77e}
+.hero h1{font-family:Georgia,"Times New Roman",serif;color:#fff;font-weight:400;font-size:clamp(47px,5.2vw,81px);line-height:1.08;letter-spacing:-1.8px;margin:0 0 23px;text-wrap:balance}
+.hero h1 em{font-weight:400;color:#d7b58b;font-style:italic}
+.hero p{color:#e1e0da;font-size:clamp(14px,1.3vw,17px);line-height:1.9;font-weight:300;max-width:440px;margin:0 0 32px}
+.hero-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.hero-actions .btn{display:inline-flex;align-items:center;justify-content:center;gap:14px;padding:15px 25px;border-radius:3px;background:#d4b390;color:#1b1a17;font-weight:600;font-size:12px;letter-spacing:.3px;transition:transform .2s,background .2s}
+.hero-actions .btn:hover{transform:translateY(-2px);background:#f0d4b4}
+.hero-actions .btn-outline{background:transparent;color:white;border:1px solid rgba(255,255,255,.45);font-weight:400}
+.hero-actions .btn-outline:hover{background:rgba(255,255,255,.08)}
+.hero-signature{margin-top:52px;font-size:10px;letter-spacing:2.6px;color:#b6b9b4}
+.hero-visual{position:relative;min-height:630px;display:grid;grid-template-columns:1.25fr .85fr;gap:13px;padding:36px 36px 36px 0;background:linear-gradient(135deg,#d3c9b9,#efe7db)}
+.hero-photo{overflow:hidden;position:relative;background:#e8dfd3;min-width:0}
+.hero-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform .55s ease}
+.hero-photo:hover img{transform:scale(1.035)}
+.hero-photo-main{margin-top:0;margin-bottom:55px}
+.hero-photo-second{margin-top:70px;margin-bottom:0}
+.hero-visual-stamp{position:absolute;bottom:18px;left:22px;background:#fff;padding:13px 18px;box-shadow:0 9px 28px rgba(0,0,0,.09);font-size:10px;font-weight:600;letter-spacing:2px;color:#4b453e}
+.hero-visual-label{position:absolute;top:15px;right:42px;font-size:10px;letter-spacing:2px;color:#6d5d4b;font-weight:600}
+.hero-benefits{display:flex;align-items:center;justify-content:center;gap:0;padding:18px 6%;background:#f4eee6;border-bottom:1px solid #e6ded2}
+.hero-benefits span{flex:1;text-align:center;font-size:11px;letter-spacing:.8px;font-weight:500;color:#5a5046}
+.hero-benefits span+span{border-left:1px solid #d8ccbd}
+@media(max-width:1000px){.site-header{padding:14px 4%}.site-nav{gap:14px}.site-nav a{font-size:12px}.hero-copy{padding:55px 35px}.hero-visual{padding:28px 25px 28px 0;min-height:520px}.hero{min-height:520px}}
+@media(max-width:700px){html{scroll-padding-top:125px}.site-header{flex-wrap:wrap;gap:12px;padding:13px 5%}.site-nav{width:100%;justify-content:space-between;gap:9px}.site-nav a{font-size:11px}.site-header #cartButton{padding:7px 11px;font-size:11px}.logo h2{font-size:22px}.hero{grid-template-columns:1fr;min-height:0}.hero-copy{padding:56px 7% 44px}.hero h1{font-size:clamp(45px,10vw,65px)}.hero p{font-size:14px}.hero-signature{margin-top:30px}.hero-visual{min-height:360px;height:360px;padding:18px 18px 18px 18px;gap:9px}.hero-photo-main{margin-bottom:32px}.hero-photo-second{margin-top:35px}.hero-visual-label{right:25px;top:4px;font-size:8px}.hero-visual-stamp{bottom:8px;left:28px;font-size:9px}.hero-benefits{padding:16px 3%;gap:5px}.hero-benefits span{font-size:9px;letter-spacing:0}}
+@media(max-width:360px){.site-nav a{font-size:10px}.site-nav{gap:5px}.site-header #cartButton{padding:7px}.hero-actions .btn{font-size:11px;padding:13px 19px}}
 
 section{
 
@@ -187,44 +116,40 @@ margin-bottom:50px;
 
 <body>
 
-<header>
-
-<div class="logo">
-<h2>SALTAŞLİNE</h2>
-</div>
-
-<nav>
-  <div id="cartButton">
-
-🛒 <span id="cartCount">0</span>
-
-</div>
-
-<a href="#">Ana Sayfa</a>
-
-<a href="#">Ürünler</a>
-
-<a href="#">Hakkımızda</a>
-
-<a href="#">İletişim</a>
-
-</nav>
-
+<header class="site-header">
+  <a class="logo" href="#home" aria-label="SALTAŞLİNE ana sayfa">
+    <h2>SALTAŞLİNE</h2>
+    <small>KADIN GİYİM</small>
+  </a>
+  <nav class="site-nav" aria-label="Ana menü">
+    <a href="#home">Ana Sayfa</a>
+    <a href="#products">Ürünler</a>
+    <a href="#about">Hakkımızda</a>
+    <a href="#contact">İletişim</a>
+    <button id="cartButton" type="button" aria-label="Sepeti aç">🛒 <span id="cartCount">0</span></button>
+  </nav>
 </header>
-
-<section class="hero">
-
-<div>
-
-<h1>Yeni Sezon Kadın Giyim</h1>
-
-<p>Şıklığın ve Zarafetin Yeni Adresi</p>
-
-<a class="btn" href="#">Alışverişe Başla</a>
-
-</div>
-
+<section class="hero" id="home" aria-label="SALTAŞLİNE koleksiyonu">
+  <div class="hero-copy">
+    <span class="hero-eyebrow">SALTAŞLİNE · İLK VE TEK</span>
+    <h1>Stiline <em>zarif</em><br>bir dokunuş.</h1>
+    <p>Günlük şıklığı ve zamansız parçaları bir araya getiren kadın giyim koleksiyonumuzu keşfedin.</p>
+    <div class="hero-actions">
+      <a class="btn" href="#products">Ürünleri Keşfet <span aria-hidden="true">↗</span></a>
+      <a class="btn btn-outline" href="https://wa.me/905301103944" target="_blank" rel="noopener noreferrer">Bize Ulaşın</a>
+    </div>
+    <span class="hero-signature">SALTAŞLİNE — KENDİ STİLİNİ KEŞFET</span>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-photo hero-photo-main"><img src="elbise4.jpg" alt="SALTAŞLİNE kadın giyim koleksiyonundan ekru elbise" fetchpriority="high"></div>
+    <div class="hero-photo hero-photo-second"><img src="elbise1.jpg.jpeg" alt="SALTAŞLİNE kadın giyim koleksiyonundan bordo elbise"></div>
+    <span class="hero-visual-label">KOLEKSİYON / 2026</span>
+    <span class="hero-visual-stamp">ÖZENLE SEÇİLEN PARÇALAR</span>
+  </div>
 </section>
+<div class="hero-benefits" aria-label="Mağaza bilgileri">
+  <span>KADIN GİYİM</span><span>ZAMANSIZ STİLLER</span><span>WHATSAPP İLE İLETİŞİM</span>
+</div>
 <!-- GÜVEN ALANI -->
 
 <section>
@@ -918,7 +843,7 @@ Modern • Şık • Güvenilir
 
 <div>
 
-<h3>İletişim</h3>
+<h3 id="contact">İletişim</h3>
 
 <p>📍 İstanbul / Türkiye</p>
 
