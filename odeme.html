@@ -85,33 +85,41 @@ for(const item of items){
 }
 if(items.length===0)orderItems.textContent="Sepet boş. Önce ürün seçiniz.";
 document.getElementById("total").textContent=complete?asPrice(total)+" + kargo (teyit edilecek)":"Fiyatlar bekleniyor";
-let ready=false;
+let ready=false, confirmedTotalKurus=null;
+const requestItems=()=>items.map(i=>({productId:i.productId,size:i.size,color:i.color,quantity:i.quantity}));
 async function loadStatus(){
   if(!PAYMENT_API_BASE || !complete || !items.length) return;
   try{
-    const url=new URL("/api/payment/config",PAYMENT_API_BASE);
-    const r=await fetch(url,{mode:"cors",cache:"no-store"});
-    const json=await r.json();
-    if(r.ok && json.ready===true){
-      ready=true;button.disabled=false;button.textContent="PayTR ile güvenli ödeme";
-      notice.textContent="Fiyat, stok ve kargo bedeli sunucuda ödeme öncesinde yeniden kontrol edilir.";
-    }
-  }catch{notice.textContent="Ödeme servisine ulaşılamıyor. Lütfen daha sonra deneyin.";}
+    const statusResponse=await fetch(new URL("/api/payment/config",PAYMENT_API_BASE),{mode:"cors",cache:"no-store"});
+    const statusData=await statusResponse.json();
+    if(!statusResponse.ok || statusData.ready!==true) return;
+    const quoteResponse=await fetch(new URL("/api/payment/quote",PAYMENT_API_BASE),{
+      method:"POST",mode:"cors",headers:{"Content-Type":"application/json"},body:JSON.stringify({items:requestItems()})});
+    const quote=await quoteResponse.json();
+    if(!quoteResponse.ok)throw new Error(quote.error||"Fiyat doğrulanamadı.");
+    if(!Number.isSafeInteger(quote.totalKurus) || !Number.isSafeInteger(quote.shippingKurus))
+      throw new Error("Sunucu fiyatı geçersiz.");
+    confirmedTotalKurus=quote.totalKurus;ready=true;
+    document.getElementById("total").textContent=asPrice(confirmedTotalKurus/100)+" (kargo dahil)";
+    button.disabled=false;button.textContent="PayTR ile güvenli ödeme";
+    notice.textContent="Toplam, kargo ücreti dahil "+asPrice(confirmedTotalKurus/100)+". Ödeme öncesinde bu tutarı ve satış koşullarını kontrol ediniz.";
+  }catch(e){notice.textContent=e.message||"Ödeme servisine ulaşılamıyor. Lütfen daha sonra deneyin.";}
 }
 loadStatus();
 document.getElementById("checkoutForm").addEventListener("submit",async event=>{
   event.preventDefault();error.textContent="";
-  if(!ready||!complete){error.textContent="Ödeme sistemi henüz hazır değil.";return;}
+  if(!ready||!complete||confirmedTotalKurus===null){error.textContent="Ödeme sistemi henüz hazır değil.";return;}
   const form=event.currentTarget;
   if(!form.reportValidity()){error.textContent="Lütfen teslimat bilgilerini tamamlayın ve koşulları onaylayın.";return;}
   button.disabled=true;button.textContent="Ödeme hazırlanıyor…";
   try{
-    const buyer={name:form.name.value.trim(),email:form.email.value.trim(),phone:form.phone.value.trim(),address:form.address.value.trim()};
-    const payload={buyer,acceptTerms:document.getElementById("acceptTerms").checked,items:items.map(i=>({productId:i.productId,size:i.size,color:i.color,quantity:i.quantity}))};
+    const buyer={name:form.elements.namedItem("name").value.trim(),email:form.elements.namedItem("email").value.trim(),phone:form.elements.namedItem("phone").value.trim(),address:form.elements.namedItem("address").value.trim()};
+    const payload={buyer,acceptTerms:document.getElementById("acceptTerms").checked,items:requestItems()};
     const response=await fetch(new URL("/api/payment/start",PAYMENT_API_BASE),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload),mode:"cors"});
     const json=await response.json();
     if(!response.ok)throw new Error(json.error || "İşlem başlatılamadı.");
     if(!/^https:\/\/www\.paytr\.com\/odeme\/guvenli\/[a-zA-Z0-9_-]+$/.test(json.iframeUrl||""))throw new Error("Geçersiz ödeme bağlantısı.");
+    if(json.amountKurus!==confirmedTotalKurus)throw new Error("Ödeme tutarı değişti; lütfen sayfayı yenileyip tekrar kontrol edin.");
     const iframe=document.getElementById("paytriframe");
     iframe.src=json.iframeUrl;
     paymentSection.hidden=false;form.hidden=true;paymentSection.scrollIntoView({behavior:"smooth"});
