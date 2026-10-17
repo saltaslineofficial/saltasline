@@ -797,7 +797,18 @@ background:#1ea851;
 .cart-controls { align-items:center; }
 .cart-quantity { min-width:26px; text-align:center; font-size:17px; font-weight:700; color:#111; font-variant-numeric:tabular-nums; }
 #modalQuantity { display:inline-flex; align-items:center; justify-content:center; min-width:40px; min-height:38px; background:#fff; color:#111; border:1px solid #ddd; border-radius:8px; font-size:20px; font-weight:700; font-variant-numeric:tabular-nums; }
-#cartTotal { padding:16px 0; font-size:18px; font-weight:600; }
+#cartTotal { padding:16px 0; font-size:14px; font-weight:400; }
+.cart-totals { margin:15px 0 6px;border-top:1px solid #e7e0d6;border-bottom:1px solid #e7e0d6; }
+.cart-total-row {display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin:12px 0;color:#4c4a46;line-height:1.5}
+.cart-total-row strong {font-weight:600;text-align:right;color:#262621;font-variant-numeric:tabular-nums;white-space:nowrap}
+.cart-grand-total {border-top:1px solid #e6dfd7;padding-top:13px;margin-top:13px;font-size:17px;font-weight:700;color:#1b1c19}
+.cart-grand-total strong {font-weight:750}
+.cart-tax-note{font-size:11px;line-height:1.65;color:#756c61;margin:7px 0 2px}
+html[data-theme="dark"] .cart-totals,
+html[data-theme="dark"] .cart-grand-total{border-color:#475648}
+html[data-theme="dark"] .cart-total-row{color:#e3e6dc}
+html[data-theme="dark"] .cart-total-row strong{color:#f5ede0}
+html[data-theme="dark"] .cart-tax-note{color:#c6c9bd}
 .cart-payment-disclaimer{font-size:11px;color:#716e67;line-height:1.65;margin-top:11px;text-align:center}
 .checkout-paytr{width:100%;border:0;background:#1c211d;color:white;padding:15px 13px;margin-top:12px;border-radius:10px;cursor:pointer;font:600 14px Poppins,sans-serif}
 .checkout-paytr:disabled{background:#aaa;cursor:not-allowed;opacity:.8}
@@ -826,8 +837,8 @@ background:#1ea851;
       <p>Ürün fotoğrafına veya “Ürünü İncele” düğmesine tıklayarak fiyatını görebilirsiniz. Sepette ürünlerin toplamı gösterilir; kargo bedeli ve beden-renk stoğu sipariş öncesinde teyit edilir.</p>
     </details>
     <details>
-      <summary>Teslimat ve iade hakkında nasıl bilgi alabilirim?</summary>
-      <p>Sipariş öncesi kargo ve iade koşulları için bizimle iletişime geçebilirsiniz. Ayrıca <a href="teslimat-kargo.html">Teslimat ve Kargo</a>, <a href="iade.html">İptal, İade ve Cayma Hakkı</a> ve <a href="mesafeli-satis.html">Mesafeli Satış</a> sayfalarını inceleyebilirsiniz.</p>
+      <summary>Kargo ücretiniz ne kadar? İade koşulları neler?</summary>
+      <p>Standart kargo bedelimiz sipariş başına 130 TL'dir. KDV durumu ve vergiler dahil nihai tutar sipariş öncesinde teyit edilir. İade koşulları için bizimle iletişime geçebilirsiniz. Ayrıca <a href="teslimat-kargo.html">Teslimat ve Kargo</a>, <a href="iade.html">İptal, İade ve Cayma Hakkı</a> ve <a href="mesafeli-satis.html">Mesafeli Satış</a> sayfalarını inceleyebilirsiniz.</p>
     </details>
     <details>
       <summary>Online kartla ödeme yapabilir miyim?</summary>
@@ -943,7 +954,12 @@ Modern • Şık • Güvenilir
 
 </div>
 
-<div id="cartTotal">Toplam: <strong>0 ₺</strong></div>
+<div id="cartTotal" class="cart-totals" aria-live="polite">
+  <div class="cart-total-row"><span>Ürünler toplamı</span><strong id="cartSubtotal">0,00 ₺</strong></div>
+  <div class="cart-total-row"><span>Kargo (sipariş başına)</span><strong id="cartShipping">0,00 ₺</strong></div>
+  <div class="cart-total-row cart-grand-total"><span>Genel toplam</span><strong id="cartGrandTotal">0,00 ₺</strong></div>
+  <p class="cart-tax-note">KDV henüz ayrıca hesaplanmıyor. Vergiler dahil kesin tutar sipariş onayından önce bildirilecektir.</p>
+</div>
 <button id="clearCart" type="button">🗑️ Sepeti Temizle</button>
 <button id="whatsappOrder" class="whatsapp-order" type="button">💬 Sepeti WhatsApp ile Paylaş</button>
 <button id="startCheckout" class="checkout-paytr" type="button" disabled>PayTR kartla ödeme (kurulumda)</button>
@@ -1002,11 +1018,15 @@ html[data-theme="dark"] .modal-price.is-campaign{background:#432a2e;color:#ffbec
   const cartPanel = document.getElementById("cartPanel");
   const closeCart = document.getElementById("closeCart");
   const cartItems = document.getElementById("cartItems");
-  const cartTotal = document.getElementById("cartTotal");
+  const cartSubtotal = document.getElementById("cartSubtotal");
+  const cartShipping = document.getElementById("cartShipping");
+  const cartGrandTotal = document.getElementById("cartGrandTotal");
   const cartCount = document.getElementById("cartCount");
   const clearCart = document.getElementById("clearCart");
   const whatsappOrder = document.getElementById("whatsappOrder");
   const cart = [];
+  const shippingKurus = 13000; // Tek sepet/sipariş için, ürün adedinden bağımsız.
+  const isVatConfirmed = false; // Vergi oranı ve fiyatların KDV durumu henüz netleşmedi.
   const checkoutButton = document.getElementById("startCheckout");
   // Worker sunucusu kurulup gerçek fiyatlar onaylanınca burada HTTPS adresi tanımlanır.
   const PAYMENT_API_BASE = "";
@@ -1088,7 +1108,12 @@ html[data-theme="dark"] .modal-price.is-campaign{background:#432a2e;color:#ffbec
     });
 
     cartCount.textContent = String(count);
-    cartTotal.textContent = cart.some(item => item.price === null) ? "Fiyatlar henüz belirlenmedi" : "Toplam (kargo hariç): " + formatPrice(total / 100);
+    const hasProducts = cart.length > 0;
+    const hasUnknownPrices = cart.some(item => item.price === null);
+    const appliedShippingKurus = hasProducts ? shippingKurus : 0;
+    cartSubtotal.textContent = hasUnknownPrices ? "Fiyat bekleniyor" : formatPrice(total / 100);
+    cartShipping.textContent = formatPrice(appliedShippingKurus / 100);
+    cartGrandTotal.textContent = hasUnknownPrices ? "Fiyat bekleniyor" : formatPrice((total + appliedShippingKurus) / 100);
     clearCart.disabled = cart.length === 0;
     whatsappOrder.disabled = cart.length === 0;
     checkoutButton.disabled = !checkoutReady || cart.length===0 || cart.some(item=>!Number.isFinite(item.price)||item.price<=0);
@@ -1190,7 +1215,14 @@ html[data-theme="dark"] .modal-price.is-campaign{background:#432a2e;color:#ffbec
       if (subtotal !== null) total += subtotal;
       lines.push(item.name + " — Beden: " + (item.size || "Belirtilmedi") + " — Renk: " + (item.color || "Belirtilmedi") + " — " + item.quantity + " adet — " + (subtotal === null ? "Fiyat bilgisi istiyorum" : formatPrice(subtotal / 100)));
     });
-    lines.push("", cart.some(item => item.price === null) ? "Fiyat bilgisi ve stok durumunu öğrenmek istiyorum." : "Ürün toplamı (kargo hariç): " + formatPrice(total / 100));
+    if (cart.some(item => item.price === null)) {
+      lines.push("", "Ürün fiyatlarını teyit edelim.", "Kargo (sipariş başına): " + formatPrice(shippingKurus / 100));
+    } else {
+      lines.push("", "Ürünler toplamı: " + formatPrice(total / 100));
+      lines.push("Kargo (sipariş başına): " + formatPrice(shippingKurus / 100));
+      lines.push("Genel toplam (KDV teyidi bekliyor): " + formatPrice((total + shippingKurus) / 100));
+    }
+    if (!isVatConfirmed) lines.push("KDV hesaplaması henüz tamamlanmadı. Vergiler dahil kesin toplam sipariş onayından önce bildirilecektir.");
     window.open("https://wa.me/905301103944?text=" + encodeURIComponent(lines.join("\n")), "_blank", "noopener,noreferrer");
   });
 
