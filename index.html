@@ -439,6 +439,8 @@ background:#b8955f;
 .product { position:relative; }
 .product-promo { position:absolute; z-index:2; top:12px; left:12px; background:#9c2836; color:#fff; padding:7px 11px; border-radius:4px; font-size:11px; font-weight:700; letter-spacing:1px; pointer-events:none; box-shadow:0 4px 10px rgba(0,0,0,.12); }
 .product .price[hidden] { display:none!important; }
+.shipping-included{position:absolute;z-index:2;top:12px;right:12px;background:#173d31;color:#fff;padding:7px 10px;border-radius:5px;font-size:10px;font-weight:700;letter-spacing:.4px;pointer-events:none;box-shadow:0 4px 10px rgba(0,0,0,.12)}
+@media(max-width:600px){.shipping-included{top:8px;right:6px;padding:5px 7px;font-size:9px}}
 .product .inquiry { background:#25D366; }
 .product .inquiry:hover { background:#178a43; }
 .product img { display:block; }
@@ -469,47 +471,52 @@ outline:none;
 
 <div class="products">
 <article class="product" data-product-id="elbise1">
+<span class="shipping-included">KARGO DAHİL</span>
 <img src="elbise1.jpg.jpeg" alt="Bordo Uzun Elbise" loading="lazy">
 <div class="product-info">
 <h3>Bordo Uzun Elbise</h3>
-<div class="price" data-price-kurus="249999" hidden>2.499,99 ₺</div>
+<div class="price" data-price-kurus="287999" hidden>2.879,99 ₺</div>
 <button class="buy" type="button">Ürünü İncele · Beden Seç</button>
 </div>
 </article>
 
 <article class="product" data-product-id="elbise2">
+<span class="shipping-included">KARGO DAHİL</span>
 <img src="elbise2.jpg" alt="Siyah Puantiyeli Bluz" loading="lazy">
 <div class="product-info">
 <h3>Siyah Puantiyeli Bluz</h3>
-<div class="price" data-price-kurus="299999" hidden>2.999,99 ₺</div>
+<div class="price" data-price-kurus="342999" hidden>3.429,99 ₺</div>
 <button class="buy" type="button">Ürünü İncele · Beden Seç</button>
 </div>
 </article>
 
 <article class="product" data-product-id="elbise3">
+<span class="shipping-included">KARGO DAHİL</span>
 <img src="elbise3.jpg" alt="Haki Yeşil Takım" loading="lazy">
 <div class="product-info">
 <h3>Haki Yeşil Takım</h3>
-<div class="price" data-price-kurus="349999" hidden>3.499,99 ₺</div>
+<div class="price" data-price-kurus="397999" hidden>3.979,99 ₺</div>
 <button class="buy" type="button">Ürünü İncele · Beden Seç</button>
 </div>
 </article>
 
 <article class="product" data-product-id="elbise4">
+<span class="shipping-included">KARGO DAHİL</span>
 <img src="elbise4.jpg" alt="Ekru Uzun Elbise" loading="lazy">
 <div class="product-info">
 <h3>Ekru Uzun Elbise</h3>
-<div class="price" data-price-kurus="299999" hidden>2.999,99 ₺</div>
+<div class="price" data-price-kurus="342999" hidden>3.429,99 ₺</div>
 <button class="buy" type="button">Ürünü İncele · Beden Seç</button>
 </div>
 </article>
 
 <article class="product" data-product-id="elbise5" data-campaign="true">
 <span class="product-promo">KAMPANYA</span>
+<span class="shipping-included">KARGO DAHİL</span>
 <img src="elbise5.jpg" alt="Pembe Gömlek" loading="lazy">
 <div class="product-info">
 <h3>Pembe Gömlek</h3>
-<div class="price" data-price-kurus="149999" hidden>1.499,99 ₺</div>
+<div class="price" data-price-kurus="177999" hidden>1.779,99 ₺</div>
 <button class="buy" type="button">Ürünü İncele · Beden Seç</button>
 </div>
 </article>
@@ -834,11 +841,11 @@ html[data-theme="dark"] .cart-tax-note{color:#c6c9bd}
     </details>
     <details>
       <summary>Ürün fiyatlarını nereden öğrenebilirim?</summary>
-      <p>Ürün fotoğrafına veya “Ürünü İncele” düğmesine tıklayarak %10 KDV dahil giyim fiyatını görebilirsiniz. Sepette ürün bedeli, ürün KDV'si ve sabit 130 TL kargo ayrı gösterilir; beden-renk stoğu sipariş öncesinde teyit edilir.</p>
+      <p>Ürün detayına tıklayarak KDV ve kargo dahil son fiyatı görebilirsiniz. Sepette sonradan kargo eklenmez; beden ve renk stokları sipariş öncesi teyit edilir.</p>
     </details>
     <details>
       <summary>Kargo ücretiniz ne kadar? İade koşulları neler?</summary>
-      <p>Standart kargo bedelimiz sipariş başına 130 TL'dir. Giyim ürünleri %10 KDV ile hesaplanır; kargonun faturadaki KDV uygulaması sipariş kesinleşmeden önce teyit edilir. İade koşulları için bizimle iletişime geçebilirsiniz. Ayrıca <a href="teslimat-kargo.html">Teslimat ve Kargo</a>, <a href="iade.html">İptal, İade ve Cayma Hakkı</a> ve <a href="mesafeli-satis.html">Mesafeli Satış</a> sayfalarını inceleyebilirsiniz.</p>
+      <p>Tüm ürün fiyatlarına kargo dahildir; ayrıca teslimat ücreti alınmaz. İade koşulları için bizimle iletişime geçebilirsiniz. Ayrıca <a href="teslimat-kargo.html">Teslimat ve Kargo</a>, <a href="iade.html">İptal, İade ve Cayma Hakkı</a> ve <a href="mesafeli-satis.html">Mesafeli Satış</a> sayfalarını inceleyebilirsiniz.</p>
     </details>
     <details>
       <summary>Online kartla ödeme yapabilir miyim?</summary>
@@ -955,11 +962,10 @@ Modern • Şık • Güvenilir
 </div>
 
 <div id="cartTotal" class="cart-totals" aria-live="polite">
-  <div class="cart-total-row"><span>Ürünler (KDV hariç)</span><strong id="cartSubtotal">0,00 ₺</strong></div>
-  <div class="cart-total-row"><span>Ürün KDV (%10)</span><strong id="cartVat">0,00 ₺</strong></div>
-  <div class="cart-total-row"><span>Kargo (sipariş başına)</span><strong id="cartShipping">0,00 ₺</strong></div>
+  <div class="cart-total-row"><span>Ürünler (KDV + kargo dahil)</span><strong id="cartSubtotal">0,00 ₺</strong></div>
+  <div class="cart-total-row"><span>Fiyata dahil KDV (%10)</span><strong id="cartVat">0,00 ₺</strong></div>
   <div class="cart-total-row cart-grand-total"><span>Genel toplam</span><strong id="cartGrandTotal">0,00 ₺</strong></div>
-  <p class="cart-tax-note">Giyim ürünleri için %10 KDV hesaplanmıştır. 130 TL kargo tutarı sabit kabul edilmiştir; kargo bedelinin fatura/KDV uygulaması teyit aşamasındadır. Tahsilat henüz aktif değildir.</p>
+  <p class="cart-tax-note">KDV ve kargo satış fiyatlarına dahildir; sepette ek ücret çıkmaz. Stok teyidi ve PayTR onayı bekleniyor.</p>
 </div>
 <button id="clearCart" type="button">🗑️ Sepeti Temizle</button>
 <button id="whatsappOrder" class="whatsapp-order" type="button">💬 Sepeti WhatsApp ile Paylaş</button>
@@ -981,7 +987,7 @@ Kapat
       <h2 id="modalName"></h2>
       <div id="modalPrice" class="modal-price" aria-live="polite"></div>
       <small id="modalPriceBreakdown" class="modal-price-breakdown"></small>
-      <p>Beden ve renk stoğu sipariş öncesinde teyit edilir. Sipariş başına 130,00 TL kargo bedeli sepete eklenir.</p>
+      <p>KDV ve kargo satış fiyatına dahildir. Sepette ek kargo bedeli yoktur; beden ve renk stoğu teyit edilir.</p>
       <label for="modalSize">Beden seçimi (stok teyidine tabidir)</label>
       <select id="modalSize"><option value="">Beden seçiniz</option><option>36</option><option>38</option><option>40</option><option>42</option><option>44</option><option>46</option><option>48</option><option>50</option><option>Standart</option><option>Diğer / Emin değilim</option></select>
       <label for="modalColor">İstediğiniz renk (stok teyidine tabidir)</label>
@@ -1024,13 +1030,11 @@ html[data-theme="dark"] .modal-price-breakdown{color:#c9d1c5}
   const cartItems = document.getElementById("cartItems");
   const cartSubtotal = document.getElementById("cartSubtotal");
   const cartVat = document.getElementById("cartVat");
-  const cartShipping = document.getElementById("cartShipping");
   const cartGrandTotal = document.getElementById("cartGrandTotal");
   const cartCount = document.getElementById("cartCount");
   const clearCart = document.getElementById("clearCart");
   const whatsappOrder = document.getElementById("whatsappOrder");
   const cart = [];
-  const shippingKurus = 13000; // Tek sepet/sipariş için, ürün adedinden bağımsız.
   const clothingVatRate = 10; // II sayılı liste kapsamındaki giyim ürünleri için %10; vergi durumu canlı tahsilattan önce teyit edilmeli.
   const checkoutButton = document.getElementById("startCheckout");
   // Worker sunucusu kurulup gerçek fiyatlar onaylanınca burada HTTPS adresi tanımlanır.
@@ -1055,7 +1059,8 @@ html[data-theme="dark"] .modal-price-breakdown{color:#c9d1c5}
   const formatPrice = amount => new Intl.NumberFormat("tr-TR", {
     style: "currency", currency: "TRY", minimumFractionDigits: 2, maximumFractionDigits: 2
   }).format(amount);
-  const vatPerUnitKurus = baseKurus => Math.round(baseKurus * clothingVatRate / 100);
+  // KDV tutarı, müşteriye gösterilen KDV ve teslimat dahil son fiyattan iç yüzdeyle ayrılır.
+  const vatPerUnitKurus = grossKurus => Math.round(grossKurus * clothingVatRate / (100 + clothingVatRate));
 
   function renderCart() {
     cartItems.replaceChildren();
@@ -1071,9 +1076,9 @@ html[data-theme="dark"] .modal-price-breakdown{color:#c9d1c5}
 
     cart.forEach((item, index) => {
       if (item.price !== null) {
-        const baseKurus = Math.round(item.price * 100);
-        total += baseKurus * item.quantity;
-        vatTotal += vatPerUnitKurus(baseKurus) * item.quantity;
+        const grossKurus = Math.round(item.price * 100);
+        total += grossKurus * item.quantity;
+        vatTotal += vatPerUnitKurus(grossKurus) * item.quantity;
       }
       count += item.quantity;
 
@@ -1091,7 +1096,7 @@ html[data-theme="dark"] .modal-price-breakdown{color:#c9d1c5}
       const title = document.createElement("strong");
       title.textContent = item.name;
       const detail = document.createElement("div");
-      detail.textContent = "Beden: " + (item.size || "Belirtilmedi") + " · Renk: " + (item.color || "Belirtilmedi") + " · " + (item.price === null ? "Fiyat belirlenecek · " + item.quantity + " adet" : formatPrice((Math.round(item.price * 100) + vatPerUnitKurus(Math.round(item.price * 100))) / 100) + " (KDV dahil) × " + item.quantity);
+      detail.textContent = "Beden: " + (item.size || "Belirtilmedi") + " · Renk: " + (item.color || "Belirtilmedi") + " · " + (item.price === null ? "Fiyat belirlenecek · " + item.quantity + " adet" : formatPrice(item.price) + " (KDV + kargo dahil) × " + item.quantity);
       description.append(title, detail);
       productSummary.append(thumbnail, description);
 
@@ -1119,13 +1124,10 @@ html[data-theme="dark"] .modal-price-breakdown{color:#c9d1c5}
     });
 
     cartCount.textContent = String(count);
-    const hasProducts = cart.length > 0;
     const hasUnknownPrices = cart.some(item => item.price === null);
-    const appliedShippingKurus = hasProducts ? shippingKurus : 0;
     cartSubtotal.textContent = hasUnknownPrices ? "Fiyat bekleniyor" : formatPrice(total / 100);
     cartVat.textContent = hasUnknownPrices ? "Fiyat bekleniyor" : formatPrice(vatTotal / 100);
-    cartShipping.textContent = formatPrice(appliedShippingKurus / 100);
-    cartGrandTotal.textContent = hasUnknownPrices ? "Fiyat bekleniyor" : formatPrice((total + vatTotal + appliedShippingKurus) / 100);
+    cartGrandTotal.textContent = hasUnknownPrices ? "Fiyat bekleniyor" : formatPrice(total / 100);
     clearCart.disabled = cart.length === 0;
     whatsappOrder.disabled = cart.length === 0;
     checkoutButton.disabled = !checkoutReady || cart.length===0 || cart.some(item=>!Number.isFinite(item.price)||item.price<=0);
@@ -1155,13 +1157,12 @@ html[data-theme="dark"] .modal-price-breakdown{color:#c9d1c5}
     modalName.textContent = product.querySelector("h3").textContent.trim();
     const priceElement = product.querySelector(".price");
     const isCampaign = product.dataset.campaign === "true";
-    const baseKurus = Number(priceElement?.dataset.priceKurus);
-    const validBase = Number.isSafeInteger(baseKurus) && baseKurus > 0;
-    const vatKurus = validBase ? vatPerUnitKurus(baseKurus) : 0;
-    modalPrice.textContent = (isCampaign ? "Kampanyalı fiyat (KDV dahil): " : "Satış fiyatı (KDV dahil): ") +
-      (validBase ? formatPrice((baseKurus + vatKurus) / 100) : "Fiyat teyidi bekleniyor");
-    modalPriceBreakdown.textContent = validBase
-      ? "KDV hariç: " + formatPrice(baseKurus / 100) + " · Ürün KDV (%10): " + formatPrice(vatKurus / 100)
+    const grossKurus = Number(priceElement?.dataset.priceKurus);
+    const validPrice = Number.isSafeInteger(grossKurus) && grossKurus > 0;
+    modalPrice.textContent = (isCampaign ? "Kampanyalı son fiyat: " : "Son satış fiyatı: ") +
+      (validPrice ? formatPrice(grossKurus / 100) : "Fiyat teyidi bekleniyor");
+    modalPriceBreakdown.textContent = validPrice
+      ? "KDV (%10) ve kargo dahildir · Sepette ek ücret yok."
       : "Fiyat teyidi bekleniyor.";
     modalPrice.classList.toggle("is-campaign", isCampaign);
     modalImage.src = product.querySelector("img").getAttribute("src");
@@ -1233,19 +1234,17 @@ html[data-theme="dark"] .modal-price-breakdown{color:#c9d1c5}
     let vatTotal = 0;
     cart.forEach(item => {
       const subtotal = item.price === null ? null : Math.round(item.price * 100) * item.quantity;
-      const itemVatKurus = subtotal === null ? null : vatPerUnitKurus(Math.round(item.price * 100)) * item.quantity;
-      if (subtotal !== null) { total += subtotal; vatTotal += itemVatKurus; }
-      lines.push(item.name + " — Beden: " + (item.size || "Belirtilmedi") + " — Renk: " + (item.color || "Belirtilmedi") + " — " + item.quantity + " adet — " + (subtotal === null ? "Fiyat bilgisi istiyorum" : formatPrice((subtotal + itemVatKurus) / 100) + " (KDV dahil)"));
+      const includedVatKurus = subtotal === null ? 0 : vatPerUnitKurus(Math.round(item.price * 100)) * item.quantity;
+      if (subtotal !== null) { total += subtotal; vatTotal += includedVatKurus; }
+      lines.push(item.name + " — Beden: " + (item.size || "Belirtilmedi") + " — Renk: " + (item.color || "Belirtilmedi") + " — " + item.quantity + " adet — " + (subtotal === null ? "Fiyat bilgisi istiyorum" : formatPrice(subtotal / 100) + " (KDV + kargo dahil)"));
     });
     if (cart.some(item => item.price === null)) {
-      lines.push("", "Ürün fiyatlarını teyit edelim.", "Kargo (sipariş başına): " + formatPrice(shippingKurus / 100));
+      lines.push("", "Lütfen ürün fiyatlarını teyit edelim.");
     } else {
-      lines.push("", "Ürünler (KDV hariç): " + formatPrice(total / 100));
-      lines.push("Ürün KDV (%10): " + formatPrice(vatTotal / 100));
-      lines.push("Kargo (sipariş başına): " + formatPrice(shippingKurus / 100));
-      lines.push("Sepet toplamı: " + formatPrice((total + vatTotal + shippingKurus) / 100));
+      lines.push("", "Sepet toplamı (KDV ve kargo dahil): " + formatPrice(total / 100));
+      lines.push("Fiyata dahil KDV (%10): " + formatPrice(vatTotal / 100));
     }
-    lines.push("Giyim KDV %10 esas alınmıştır. 130 TL kargonun fatura/KDV uygulaması ve stoklar satış kesinleşmeden önce teyit edilir.");
+    lines.push("Kargo için ayrıca ücret alınmaz. Beden/renk stokları sipariş kesinleşmeden önce teyit edilir.");
     window.open("https://wa.me/905301103944?text=" + encodeURIComponent(lines.join("\n")), "_blank", "noopener,noreferrer");
   });
 
