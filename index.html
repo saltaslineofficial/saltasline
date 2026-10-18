@@ -953,10 +953,11 @@ Modern • Şık • Güvenilir
 </div>
 
 <div id="cartTotal" class="cart-totals" aria-live="polite">
-  <div class="cart-total-row"><span>Ürünler toplamı</span><strong id="cartSubtotal">0,00 ₺</strong></div>
+  <div class="cart-total-row"><span>Ürünler (KDV hariç)</span><strong id="cartSubtotal">0,00 ₺</strong></div>
+  <div class="cart-total-row"><span>Ürün KDV (%10)</span><strong id="cartVat">0,00 ₺</strong></div>
   <div class="cart-total-row"><span>Kargo (sipariş başına)</span><strong id="cartShipping">0,00 ₺</strong></div>
   <div class="cart-total-row cart-grand-total"><span>Genel toplam</span><strong id="cartGrandTotal">0,00 ₺</strong></div>
-  <p class="cart-tax-note">KDV henüz ayrıca hesaplanmıyor. Vergiler dahil kesin tutar sipariş onayından önce bildirilecektir.</p>
+  <p class="cart-tax-note">Giyim ürünleri için %10 KDV hesaplanmıştır. 130 TL kargo tutarı sabit kabul edilmiştir; kargo bedelinin fatura/KDV uygulaması teyit aşamasındadır. Tahsilat henüz aktif değildir.</p>
 </div>
 <button id="clearCart" type="button">🗑️ Sepeti Temizle</button>
 <button id="whatsappOrder" class="whatsapp-order" type="button">💬 Sepeti WhatsApp ile Paylaş</button>
@@ -976,7 +977,8 @@ Kapat
     <div class="product-modal-info">
       <h2 id="modalName"></h2>
       <div id="modalPrice" class="modal-price" aria-live="polite"></div>
-      <p>Beden ve renk stok durumu sipariş öncesinde teyit edilir. Kargo bedeli ayrıca bildirilir.</p>
+      <small id="modalPriceBreakdown" class="modal-price-breakdown"></small>
+      <p>Beden ve renk stoğu sipariş öncesinde teyit edilir. Sipariş başına 130,00 TL kargo bedeli sepete eklenir.</p>
       <label for="modalSize">Beden seçimi (stok teyidine tabidir)</label>
       <select id="modalSize"><option value="">Beden seçiniz</option><option>36</option><option>38</option><option>40</option><option>42</option><option>44</option><option>46</option><option>48</option><option>50</option><option>Standart</option><option>Diğer / Emin değilim</option></select>
       <label for="modalColor">İstediğiniz renk (stok teyidine tabidir)</label>
@@ -1006,6 +1008,8 @@ Kapat
 .modal-price.is-campaign{background:#fff1ee;color:#a62535;border-color:#f0c3c3}
 html[data-theme="dark"] .modal-price{background:#334035;color:#efddb9;border-color:#687463}
 html[data-theme="dark"] .modal-price.is-campaign{background:#432a2e;color:#ffbec6;border-color:#865359}
+.modal-price-breakdown{display:block;font-size:12px;line-height:1.5;color:#6b645b}
+html[data-theme="dark"] .modal-price-breakdown{color:#c9d1c5}
 @media(max-width:650px){.product-modal-box{grid-template-columns:1fr;max-width:430px}.product-modal-box>img{height:230px;min-height:0}.product-modal-info{padding:18px;gap:8px}}
 </style>
 <script>
@@ -1016,6 +1020,7 @@ html[data-theme="dark"] .modal-price.is-campaign{background:#432a2e;color:#ffbec
   const closeCart = document.getElementById("closeCart");
   const cartItems = document.getElementById("cartItems");
   const cartSubtotal = document.getElementById("cartSubtotal");
+  const cartVat = document.getElementById("cartVat");
   const cartShipping = document.getElementById("cartShipping");
   const cartGrandTotal = document.getElementById("cartGrandTotal");
   const cartCount = document.getElementById("cartCount");
@@ -1023,14 +1028,16 @@ html[data-theme="dark"] .modal-price.is-campaign{background:#432a2e;color:#ffbec
   const whatsappOrder = document.getElementById("whatsappOrder");
   const cart = [];
   const shippingKurus = 13000; // Tek sepet/sipariş için, ürün adedinden bağımsız.
-  const isVatConfirmed = false; // Vergi oranı ve fiyatların KDV durumu henüz netleşmedi.
+  const clothingVatRate = 10; // II sayılı liste kapsamındaki giyim ürünleri için %10; vergi durumu canlı tahsilattan önce teyit edilmeli.
   const formatPrice = amount => new Intl.NumberFormat("tr-TR", {
     style: "currency", currency: "TRY", minimumFractionDigits: 2, maximumFractionDigits: 2
   }).format(amount);
+  const vatPerUnitKurus = baseKurus => Math.round(baseKurus * clothingVatRate / 100);
 
   function renderCart() {
     cartItems.replaceChildren();
     let total = 0;
+    let vatTotal = 0;
     let count = 0;
 
     if (cart.length === 0) {
@@ -1040,7 +1047,11 @@ html[data-theme="dark"] .modal-price.is-campaign{background:#432a2e;color:#ffbec
     }
 
     cart.forEach((item, index) => {
-      if (item.price !== null) total += Math.round(item.price * 100) * item.quantity;
+      if (item.price !== null) {
+        const baseKurus = Math.round(item.price * 100);
+        total += baseKurus * item.quantity;
+        vatTotal += vatPerUnitKurus(baseKurus) * item.quantity;
+      }
       count += item.quantity;
 
       const row = document.createElement("div");
@@ -1057,7 +1068,7 @@ html[data-theme="dark"] .modal-price.is-campaign{background:#432a2e;color:#ffbec
       const title = document.createElement("strong");
       title.textContent = item.name;
       const detail = document.createElement("div");
-      detail.textContent = "Beden: " + (item.size || "Belirtilmedi") + " · Renk: " + (item.color || "Belirtilmedi") + " · " + (item.price === null ? "Fiyat belirlenecek · " + item.quantity + " adet" : formatPrice(item.price) + " × " + item.quantity);
+      detail.textContent = "Beden: " + (item.size || "Belirtilmedi") + " · Renk: " + (item.color || "Belirtilmedi") + " · " + (item.price === null ? "Fiyat belirlenecek · " + item.quantity + " adet" : formatPrice((Math.round(item.price * 100) + vatPerUnitKurus(Math.round(item.price * 100))) / 100) + " (KDV dahil) × " + item.quantity);
       description.append(title, detail);
       productSummary.append(thumbnail, description);
 
@@ -1089,8 +1100,9 @@ html[data-theme="dark"] .modal-price.is-campaign{background:#432a2e;color:#ffbec
     const hasUnknownPrices = cart.some(item => item.price === null);
     const appliedShippingKurus = hasProducts ? shippingKurus : 0;
     cartSubtotal.textContent = hasUnknownPrices ? "Fiyat bekleniyor" : formatPrice(total / 100);
+    cartVat.textContent = hasUnknownPrices ? "Fiyat bekleniyor" : formatPrice(vatTotal / 100);
     cartShipping.textContent = formatPrice(appliedShippingKurus / 100);
-    cartGrandTotal.textContent = hasUnknownPrices ? "Fiyat bekleniyor" : formatPrice((total + appliedShippingKurus) / 100);
+    cartGrandTotal.textContent = hasUnknownPrices ? "Fiyat bekleniyor" : formatPrice((total + vatTotal + appliedShippingKurus) / 100);
     clearCart.disabled = cart.length === 0;
     whatsappOrder.disabled = cart.length === 0;
   }
@@ -1099,6 +1111,7 @@ html[data-theme="dark"] .modal-price.is-campaign{background:#432a2e;color:#ffbec
   const modalImage = document.getElementById("modalImage");
   const modalName = document.getElementById("modalName");
   const modalPrice = document.getElementById("modalPrice");
+  const modalPriceBreakdown = document.getElementById("modalPriceBreakdown");
   const modalSize = document.getElementById("modalSize");
   const modalColor = document.getElementById("modalColor");
   const modalQuantity = document.getElementById("modalQuantity");
@@ -1118,7 +1131,14 @@ html[data-theme="dark"] .modal-price.is-campaign{background:#432a2e;color:#ffbec
     modalName.textContent = product.querySelector("h3").textContent.trim();
     const priceElement = product.querySelector(".price");
     const isCampaign = product.dataset.campaign === "true";
-    modalPrice.textContent = (isCampaign ? "Kampanyalı fiyat: " : "Satış fiyatı: ") + (priceElement?.textContent.trim() || "Fiyat teyidi bekleniyor");
+    const baseKurus = Number(priceElement?.dataset.priceKurus);
+    const validBase = Number.isSafeInteger(baseKurus) && baseKurus > 0;
+    const vatKurus = validBase ? vatPerUnitKurus(baseKurus) : 0;
+    modalPrice.textContent = (isCampaign ? "Kampanyalı fiyat (KDV dahil): " : "Satış fiyatı (KDV dahil): ") +
+      (validBase ? formatPrice((baseKurus + vatKurus) / 100) : "Fiyat teyidi bekleniyor");
+    modalPriceBreakdown.textContent = validBase
+      ? "KDV hariç: " + formatPrice(baseKurus / 100) + " · Ürün KDV (%10): " + formatPrice(vatKurus / 100)
+      : "Fiyat teyidi bekleniyor.";
     modalPrice.classList.toggle("is-campaign", isCampaign);
     modalImage.src = product.querySelector("img").getAttribute("src");
     modalImage.alt = modalName.textContent;
@@ -1185,19 +1205,22 @@ html[data-theme="dark"] .modal-price.is-campaign{background:#432a2e;color:#ffbec
     if (cart.length === 0) return;
     const lines = ["🛍️ SALTAŞLİNE Sepetim / Ürün Bilgi Talebim:", ""];
     let total = 0;
+    let vatTotal = 0;
     cart.forEach(item => {
       const subtotal = item.price === null ? null : Math.round(item.price * 100) * item.quantity;
-      if (subtotal !== null) total += subtotal;
-      lines.push(item.name + " — Beden: " + (item.size || "Belirtilmedi") + " — Renk: " + (item.color || "Belirtilmedi") + " — " + item.quantity + " adet — " + (subtotal === null ? "Fiyat bilgisi istiyorum" : formatPrice(subtotal / 100)));
+      const itemVatKurus = subtotal === null ? null : vatPerUnitKurus(Math.round(item.price * 100)) * item.quantity;
+      if (subtotal !== null) { total += subtotal; vatTotal += itemVatKurus; }
+      lines.push(item.name + " — Beden: " + (item.size || "Belirtilmedi") + " — Renk: " + (item.color || "Belirtilmedi") + " — " + item.quantity + " adet — " + (subtotal === null ? "Fiyat bilgisi istiyorum" : formatPrice((subtotal + itemVatKurus) / 100) + " (KDV dahil)"));
     });
     if (cart.some(item => item.price === null)) {
       lines.push("", "Ürün fiyatlarını teyit edelim.", "Kargo (sipariş başına): " + formatPrice(shippingKurus / 100));
     } else {
-      lines.push("", "Ürünler toplamı: " + formatPrice(total / 100));
+      lines.push("", "Ürünler (KDV hariç): " + formatPrice(total / 100));
+      lines.push("Ürün KDV (%10): " + formatPrice(vatTotal / 100));
       lines.push("Kargo (sipariş başına): " + formatPrice(shippingKurus / 100));
-      lines.push("Genel toplam (KDV teyidi bekliyor): " + formatPrice((total + shippingKurus) / 100));
+      lines.push("Sepet toplamı: " + formatPrice((total + vatTotal + shippingKurus) / 100));
     }
-    if (!isVatConfirmed) lines.push("KDV hesaplaması henüz tamamlanmadı. Vergiler dahil kesin toplam sipariş onayından önce bildirilecektir.");
+    lines.push("Giyim KDV %10 esas alınmıştır. 130 TL kargonun fatura/KDV uygulaması ve stoklar satış kesinleşmeden önce teyit edilir.");
     window.open("https://wa.me/905301103944?text=" + encodeURIComponent(lines.join("\n")), "_blank", "noopener,noreferrer");
   });
 
