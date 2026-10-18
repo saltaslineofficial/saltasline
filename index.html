@@ -1714,6 +1714,50 @@ html[data-theme="dark"] .modal-price.is-campaign{background:#432a2e;color:#ffbec
 html[data-theme="dark"] .modal-price-breakdown{color:#c9d1c5}
 @media(max-width:650px){.product-modal-box{grid-template-columns:1fr;max-width:430px}.product-modal-box>img{height:230px;min-height:0}.product-modal-info{padding:18px;gap:8px}}
 </style>
+<style id="sl-photo-fit-adjustments">
+/* SALTAŞLİNE: palazzo takım / pembe gömlek fotoğraf kadrajı */
+.about-story .about-gallery{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:14px;height:405px}
+.about-story .about-gallery-primary{margin-bottom:15px;border-radius:8px;box-shadow:0 13px 26px rgba(36,30,22,.13)}
+.about-story .about-gallery-secondary{margin-top:25px;border-radius:8px;box-shadow:0 13px 26px rgba(36,30,22,.13)}
+.about-story .about-gallery-primary img{object-fit:cover;object-position:52% 62%}
+.about-story .about-gallery-secondary img{object-fit:cover;object-position:53% 58%}
+.about-story .about-gallery-seal{z-index:3;bottom:-4px}
+@media(max-width:600px){
+ .about-story .about-gallery{height:295px;grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);gap:10px}
+ .about-story .about-gallery-primary{margin-bottom:10px}
+ .about-story .about-gallery-secondary{margin-top:16px}
+ .about-story .about-gallery-seal{width:86px;height:86px;bottom:-4px}
+ .about-story .about-gallery-seal strong{font-size:26px}
+ .about-story .about-gallery-seal span{font-size:7px}
+ .about-story .about-gallery-seal small{font-size:6px}
+}
+/* Stil Seçkisi: kıyafet tam kadrajda, yanlardaki boşlukta yumuşak fotoğraf fonu */
+.sl-lookbook .sl-look-card:nth-child(2),.sl-lookbook .sl-look-card:nth-child(3){background:#444b41}
+.sl-lookbook .sl-look-card:nth-child(2)::before,.sl-lookbook .sl-look-card:nth-child(3)::before{
+ content:"";position:absolute;inset:-18px;z-index:0;display:block;
+ background-repeat:no-repeat;background-position:center;background-size:cover;
+ filter:blur(17px) brightness(.66);transform:scale(1.05);pointer-events:none
+}
+.sl-lookbook .sl-look-card:nth-child(2)::before{background-image:url("elbise3.jpg")}
+.sl-lookbook .sl-look-card:nth-child(3)::before{background-image:url("elbise5.jpg")}
+.sl-lookbook .sl-look-card:nth-child(2)>img,.sl-lookbook .sl-look-card:nth-child(3)>img{
+ position:relative;z-index:1;object-fit:contain;object-position:center 44%;transform:none
+}
+.sl-lookbook .sl-look-card:nth-child(2):hover>img,.sl-lookbook .sl-look-card:nth-child(3):hover>img{transform:none}
+.sl-lookbook .sl-look-card:nth-child(2)::after,.sl-lookbook .sl-look-card:nth-child(3)::after{
+ z-index:2;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.05) 65%,rgba(0,0,0,.86) 100%)
+}
+.sl-lookbook .sl-look-card:nth-child(2) .sl-look-card-info,.sl-lookbook .sl-look-card:nth-child(3) .sl-look-card-info{z-index:3}
+.sl-lookbook .sl-look-card:nth-child(3) .sl-look-campaign{z-index:4}
+/* Ürün detay penceresi: kıyafeti kesmeden tam göster */
+.product-modal[data-product-id="elbise3"] .product-modal-box>img,
+.product-modal[data-product-id="elbise5"] .product-modal-box>img{object-fit:contain;object-position:center;background:#ede9e2}
+@media(max-width:650px){
+ .product-modal[data-product-id="elbise3"] .product-modal-box>img,
+ .product-modal[data-product-id="elbise5"] .product-modal-box>img{height:310px;min-height:0}
+}
+
+</style>
 <script>
 /* PARÇA 11: Sepet yönetimi */
 (function () {
@@ -1846,6 +1890,7 @@ html[data-theme="dark"] .modal-price-breakdown{color:#c9d1c5}
   }
   function openProduct(product) {
     selectedProduct = product;
+    modal.dataset.productId = product.dataset.productId || "";
     previousFocus = document.activeElement;
     modalName.textContent = product.querySelector("h3").textContent.trim();
     const priceElement = product.querySelector(".price");
