@@ -382,6 +382,74 @@ html[data-theme="dark"] .product-modal-info .fb-detail-extra summary{color:#f1e5
 }
 
 </style>
+<style id="fb-final-polish">
+
+/* FUBERİ — vitrin son rötuşları, mobil gezinme ve performans */
+.site-header .fb-menu-toggle{display:none;align-items:center;justify-content:center;gap:7px;min-width:40px;min-height:40px;padding:8px 11px;background:transparent;border:1px solid #d8c8b3;border-radius:6px;color:#33352f;font:600 12px Poppins,Arial,sans-serif;cursor:pointer}
+.site-header .fb-menu-toggle:focus-visible{outline:3px solid #b28b5c;outline-offset:2px}
+.sl-products-section #productGrid{display:flex;flex-wrap:wrap;justify-content:center;align-items:stretch;gap:20px}
+.sl-products-section #productGrid>.product{flex:0 1 calc((100% - 40px)/3);min-width:0;display:flex;flex-direction:column;position:relative}
+.sl-products-section #productGrid>.product .product-info{display:flex;flex-direction:column;flex:1;gap:9px;padding:20px 18px 22px}
+.sl-products-section #productGrid>.product .product-info h3{margin:0;min-height:0;line-height:1.55;letter-spacing:.1px;font-size:14px}
+.sl-products-section #productGrid>.product .product-info .buy{margin-top:auto;min-height:43px;letter-spacing:.25px;box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
+.sl-products-section #productGrid>.product .product-info:before{content:"";width:36px;height:2px;background:#c49a62;margin:0 0 2px}
+.sl-products-section #productGrid>.product:hover{border-color:#c9ad86}
+.sl-products-section #productGrid>.product:focus-within{outline:2px solid #c09a65;outline-offset:2px}
+.fb-categories,.sl-products-section,.fb-feature,.sl-lookbook,.why-saltasline,.fb-order-guide,.about-story,.help-section,.contact-section{scroll-margin-top:110px}
+.sl-products-section{padding-top:82px;padding-bottom:88px}
+.fb-categories{padding-bottom:82px}
+.fb-feature{padding-top:76px;padding-bottom:76px}
+.sl-lookbook{padding-top:84px;padding-bottom:84px}
+.fb-order-guide{padding-top:84px;padding-bottom:84px}
+.sl-shopping-tools{align-items:center}
+.sl-search input{min-width:0}
+.sl-category-filters{max-width:100%}
+.sl-filter:focus-visible,.sl-search:focus-within{outline:2px solid #ba925c;outline-offset:3px}
+html[data-theme="dark"] .site-header .fb-menu-toggle{color:#e9dcc7;border-color:#697263}
+html[data-theme="dark"] .sl-products-section #productGrid>.product .product-info:before{background:#d4af7e}
+@media(max-width:980px){
+  .sl-products-section #productGrid>.product{flex-basis:calc((100% - 18px)/2)}
+  .sl-products-section #productGrid{gap:18px}
+}
+@media(max-width:700px){
+  html{scroll-padding-top:84px}
+  .site-header{gap:8px;padding:11px 4%;align-items:center}
+  .site-header .logo{order:1;flex:1 1 auto;min-width:0}
+  .site-header .logo h2{font-size:clamp(20px,5.5vw,27px);letter-spacing:2px}
+  .site-header .logo small{font-size:8px;letter-spacing:2px}
+  .site-header .theme-toggle{order:2;min-height:39px;padding:7px 9px;gap:0}
+  .site-header .theme-toggle .theme-label{display:none}
+  .site-header .fb-menu-toggle{display:inline-flex;order:3}
+  .site-header .site-nav{order:4;display:none;width:100%;flex:0 0 100%;flex-direction:column;align-items:stretch;gap:0;padding:9px 0 3px;border-top:1px solid #e4d8c8}
+  .site-header .site-nav.fb-menu-open{display:flex}
+  .site-header .site-nav a{display:block;padding:12px 8px;font-size:13px;border-bottom:1px solid rgba(150,131,104,.16)}
+  .site-header #cartButton{order:5;flex:0 0 auto;padding:9px 11px;min-height:39px}
+  .sl-products-section #productGrid{gap:12px}
+  .sl-products-section #productGrid>.product{flex:0 1 calc((100% - 12px)/2)}
+  .sl-products-section #productGrid>.product .product-info{padding:13px 10px 15px;gap:8px}
+  .sl-products-section #productGrid>.product .product-info h3{font-size:12px;line-height:1.5}
+  .sl-products-section #productGrid>.product .product-info .buy{font-size:10px;padding:10px 7px;line-height:1.4}
+  .sl-products-section #productGrid>.product .product-info:before{width:28px}
+  .sl-shopping-tools{gap:12px}
+  .sl-category-filters{scrollbar-width:thin;overscroll-behavior-x:contain}
+  .sl-filter{flex:0 0 auto}
+  .fb-categories{padding-top:64px;padding-bottom:64px}
+  .sl-products-section{padding-top:68px;padding-bottom:70px}
+  .fb-feature{padding-top:48px;padding-bottom:48px}
+  .sl-lookbook{padding-top:68px;padding-bottom:68px}
+  .fb-order-guide{padding-top:68px;padding-bottom:68px}
+  .fb-categories,.sl-products-section,.fb-feature,.sl-lookbook,.why-saltasline,.fb-order-guide,.about-story,.help-section,.contact-section{scroll-margin-top:84px}
+}
+@media(max-width:370px){
+  .site-header .fb-menu-toggle{font-size:0;gap:0;padding:8px}
+  .site-header .fb-menu-toggle svg{width:19px;height:19px}
+  .sl-products-section #productGrid>.product .product-info .buy{font-size:9px}
+}
+@media(prefers-reduced-motion:reduce){
+  .sl-products-section #productGrid>.product{transition:none}
+}
+
+</style>
 </head>
 
 <body>
@@ -397,15 +465,35 @@ html[data-theme="dark"] .product-modal-info .fb-detail-extra summary{color:#f1e5
     <h2>FUBERİ</h2>
     <small>KADIN GİYİM</small>
   </a>
-  <nav class="site-nav" aria-label="Ana menü">
+  <button class="fb-menu-toggle" id="fbMenuToggle" type="button" aria-controls="fbMainNav" aria-expanded="false" aria-label="Menüyü aç"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span>Menü</span></button>
+  <nav class="site-nav" id="fbMainNav" aria-label="Ana menü">
     <a href="#home">Ana Sayfa</a>
+    <a href="#koleksiyonlar">Koleksiyonlar</a>
     <a href="#products">Ürünler</a>
     <a href="#about">Hakkımızda</a>
     <a href="#contact">İletişim</a>
-    <button id="cartButton" type="button" aria-label="Sepeti aç">🛒 <span id="cartCount">0</span></button>
   </nav>
+  <button id="cartButton" type="button" aria-label="Sepeti aç">🛒 <span id="cartCount">0</span></button>
   <button class="theme-toggle" data-theme-toggle type="button" aria-label="Karanlık moda geç" aria-pressed="false" title="Karanlık moda geç"><span class="theme-icon" aria-hidden="true">☾</span><span class="theme-label">Karanlık mod</span></button>
 </header>
+<script>
+/* FUBERİ mobil menü — sepet ve tema anahtarı her zaman erişilebilir */
+(function(){
+  "use strict";
+  const toggle=document.getElementById("fbMenuToggle");
+  const nav=document.getElementById("fbMainNav");
+  if(!toggle||!nav)return;
+  function closeMenu(){nav.classList.remove("fb-menu-open");toggle.setAttribute("aria-expanded","false");toggle.setAttribute("aria-label","Menüyü aç");}
+  toggle.addEventListener("click",()=>{
+    const open=nav.classList.toggle("fb-menu-open");
+    toggle.setAttribute("aria-expanded",String(open));
+    toggle.setAttribute("aria-label",open?"Menüyü kapat":"Menüyü aç");
+  });
+  nav.querySelectorAll("a").forEach(a=>a.addEventListener("click",closeMenu));
+  document.addEventListener("keydown",e=>{if(e.key==="Escape")closeMenu()});
+  window.addEventListener("resize",()=>{if(window.innerWidth>700)closeMenu()});
+})();
+</script>
 <section class="hero" id="home" aria-label="FUBERİ koleksiyonu">
   <div class="hero-copy">
     <span class="hero-eyebrow">FUBERİ · İLK VE TEK</span>
@@ -418,8 +506,8 @@ html[data-theme="dark"] .product-modal-info .fb-detail-extra summary{color:#f1e5
     <span class="hero-signature">FUBERİ — KENDİ STİLİNİ KEŞFET</span>
   </div>
   <div class="hero-visual">
-    <div class="hero-photo hero-photo-main"><img src="elbise4.jpg" alt="FUBERİ kadın giyim koleksiyonundan ekru elbise" fetchpriority="high"></div>
-    <div class="hero-photo hero-photo-second"><img src="elbise1.jpg.jpeg" alt="FUBERİ kadın giyim koleksiyonundan bordo elbise"></div>
+    <div class="hero-photo hero-photo-main"><img src="elbise4.jpg" alt="FUBERİ kadın giyim koleksiyonundan ekru elbise" fetchpriority="high" decoding="async"></div>
+    <div class="hero-photo hero-photo-second"><img src="elbise1.jpg.jpeg" alt="FUBERİ kadın giyim koleksiyonundan bordo elbise" decoding="async" loading="lazy" fetchpriority="low"></div>
     <span class="hero-visual-label">KOLEKSİYON / 2026</span>
     <span class="hero-visual-stamp">ÖZENLE SEÇİLEN PARÇALAR</span>
   </div>
@@ -432,19 +520,19 @@ html[data-theme="dark"] .product-modal-info .fb-detail-extra summary{color:#f1e5
   <div class="fb-heading"><div><span class="fb-kicker">FUBERİ / KOLEKSİYONU KEŞFET</span><h2 id="fb-cat-title">Tarzını <em>seç.</em></h2></div><p>Elbiselerden günlük parçalara, özenle seçilen modellere göz atın.</p></div>
   <div class="fb-categories-grid">
     <a class="fb-category-card" href="#products" data-jump-category="elbise" style="--fb-photo:url('elbise4.jpg')" aria-label="Elbiseler koleksiyonunu incele">
-      <img src="elbise4.jpg" alt="FUBERİ elbiseler koleksiyonundan ürün" loading="lazy">
+      <img src="elbise4.jpg" alt="FUBERİ elbiseler koleksiyonundan ürün" loading="lazy" fetchpriority="low" decoding="async">
       <span class="fb-cat-info"><span class="fb-cat-label">02 MODEL</span><strong>Elbiseler</strong><span class="fb-cat-action">KOLEKSİYONU GÖR <span aria-hidden="true">↗</span></span></span>
     </a>
     <a class="fb-category-card" href="#products" data-jump-category="takim" style="--fb-photo:url('elbise3.jpg')" aria-label="Takımlar koleksiyonunu incele">
-      <img src="elbise3.jpg" alt="FUBERİ takımlar koleksiyonundan ürün" loading="lazy">
+      <img src="elbise3.jpg" alt="FUBERİ takımlar koleksiyonundan ürün" loading="lazy" fetchpriority="low" decoding="async">
       <span class="fb-cat-info"><span class="fb-cat-label">01 MODEL</span><strong>Takımlar</strong><span class="fb-cat-action">KOLEKSİYONU GÖR <span aria-hidden="true">↗</span></span></span>
     </a>
     <a class="fb-category-card" href="#products" data-jump-category="bluz" style="--fb-photo:url('elbise2.jpg')" aria-label="Bluzlar koleksiyonunu incele">
-      <img src="elbise2.jpg" alt="FUBERİ bluzlar koleksiyonundan ürün" loading="lazy">
+      <img src="elbise2.jpg" alt="FUBERİ bluzlar koleksiyonundan ürün" loading="lazy" fetchpriority="low" decoding="async">
       <span class="fb-cat-info"><span class="fb-cat-label">01 MODEL</span><strong>Bluzlar</strong><span class="fb-cat-action">KOLEKSİYONU GÖR <span aria-hidden="true">↗</span></span></span>
     </a>
     <a class="fb-category-card" href="#products" data-jump-category="gomlek" style="--fb-photo:url('elbise5.jpg')" aria-label="Gömlekler koleksiyonunu incele">
-      <img src="elbise5.jpg" alt="FUBERİ gömlekler koleksiyonundan ürün" loading="lazy">
+      <img src="elbise5.jpg" alt="FUBERİ gömlekler koleksiyonundan ürün" loading="lazy" fetchpriority="low" decoding="async">
       <span class="fb-cat-info"><span class="fb-cat-label">01 MODEL</span><strong>Gömlekler</strong><span class="fb-cat-action">KOLEKSİYONU GÖR <span aria-hidden="true">↗</span></span></span>
     </a>
   </div>
@@ -894,7 +982,7 @@ background:#b8955f;
   <div class="products" id="productGrid">
 <article class="product" data-category="elbise" data-product-id="elbise1">
 <span class="shipping-included">KARGO DAHİL</span>
-<img src="elbise1.jpg.jpeg" alt="Bordo Uzun Elbise" loading="lazy">
+<img src="elbise1.jpg.jpeg" alt="Bordo Uzun Elbise" loading="lazy" fetchpriority="low" decoding="async">
 <div class="product-info">
 <h3>Bordo Uzun Elbise</h3>
 <div class="price" data-price-kurus="287999" hidden>2.879,99 ₺</div>
@@ -904,7 +992,7 @@ background:#b8955f;
 
 <article class="product" data-category="bluz" data-product-id="elbise2">
 <span class="shipping-included">KARGO DAHİL</span>
-<div class="sl-product-photo-frame"><img src="elbise2.jpg" alt="Siyah Puantiyeli Bluz" loading="lazy"></div>
+<div class="sl-product-photo-frame"><img src="elbise2.jpg" alt="Siyah Puantiyeli Bluz" loading="lazy" fetchpriority="low" decoding="async"></div>
 <div class="product-info">
 <h3>Siyah Puantiyeli Bluz</h3>
 <div class="price" data-price-kurus="342999" hidden>3.429,99 ₺</div>
@@ -914,7 +1002,7 @@ background:#b8955f;
 
 <article class="product" data-category="takim" data-product-id="elbise3">
 <span class="shipping-included">KARGO DAHİL</span>
-<div class="sl-product-photo-frame"><img src="elbise3.jpg" alt="Haki Yeşil Takım" loading="lazy"></div>
+<div class="sl-product-photo-frame"><img src="elbise3.jpg" alt="Haki Yeşil Takım" loading="lazy" fetchpriority="low" decoding="async"></div>
 <div class="product-info">
 <h3>Haki Yeşil Takım</h3>
 <div class="price" data-price-kurus="397999" hidden>3.979,99 ₺</div>
@@ -924,7 +1012,7 @@ background:#b8955f;
 
 <article class="product" data-category="elbise" data-product-id="elbise4">
 <span class="shipping-included">KARGO DAHİL</span>
-<img src="elbise4.jpg" alt="Ekru Uzun Elbise" loading="lazy">
+<img src="elbise4.jpg" alt="Ekru Uzun Elbise" loading="lazy" fetchpriority="low" decoding="async">
 <div class="product-info">
 <h3>Ekru Uzun Elbise</h3>
 <div class="price" data-price-kurus="342999" hidden>3.429,99 ₺</div>
@@ -935,7 +1023,7 @@ background:#b8955f;
 <article class="product" data-category="gomlek" data-product-id="elbise5" data-campaign="true">
 <span class="product-promo">KAMPANYA</span>
 <span class="shipping-included">KARGO DAHİL</span>
-<div class="sl-product-photo-frame"><img src="elbise5.jpg" alt="Pembe Gömlek" loading="lazy"></div>
+<div class="sl-product-photo-frame"><img src="elbise5.jpg" alt="Pembe Gömlek" loading="lazy" fetchpriority="low" decoding="async"></div>
 <div class="product-info">
 <h3>Pembe Gömlek</h3>
 <div class="price" data-price-kurus="177999" hidden>1.779,99 ₺</div>
@@ -996,7 +1084,7 @@ background:#b8955f;
 
 <section class="fb-feature" id="ozel-secim" aria-labelledby="fb-feature-title">
   <div class="fb-feature-shell">
-    <div class="fb-feature-photo"><img src="elbise5.jpg" alt="FUBERİ pembe gömlek, tam görünüm" loading="lazy"><span>FUBERİ / STİL EDİTİ</span></div>
+    <div class="fb-feature-photo"><img src="elbise5.jpg" alt="FUBERİ pembe gömlek, tam görünüm" loading="lazy" fetchpriority="low" decoding="async"><span>FUBERİ / STİL EDİTİ</span></div>
     <div class="fb-feature-copy"><span class="fb-kicker">ÖZEL SEÇİM / GÜNLÜK ŞIKLIK</span><span class="fb-feature-line" aria-hidden="true"></span>
       <h2 id="fb-feature-title">Günlük stile <em>zarif</em> bir dokunuş.</h2>
       <p>Yumuşak pembe tonuyla kombinlere eşlik eden gömleği keşfedin. Beden ve renk seçenekleri sipariş öncesinde teyit edilir.</p>
@@ -1021,7 +1109,7 @@ background:#b8955f;
     </div>
     <div class="sl-lookbook-track" id="lookbookTrack">
       <article class="sl-look-card">
-        <img src="elbise4.jpg" alt="FUBERİ Ekru Uzun Elbise" loading="lazy">
+        <img src="elbise4.jpg" alt="FUBERİ Ekru Uzun Elbise" loading="lazy" fetchpriority="low" decoding="async">
         <div class="sl-look-card-info">
           <span>LOOK 01 / ZAMANSIZ ZARAFET</span>
           <h3>Ekru Uzun Elbise</h3>
@@ -1029,7 +1117,7 @@ background:#b8955f;
         </div>
       </article>
       <article class="sl-look-card">
-        <img src="elbise3.jpg" alt="FUBERİ Haki Yeşil Takım" loading="lazy">
+        <img src="elbise3.jpg" alt="FUBERİ Haki Yeşil Takım" loading="lazy" fetchpriority="low" decoding="async">
         <div class="sl-look-card-info">
           <span>LOOK 02 / ŞEHRİN RİTMİ</span>
           <h3>Haki Yeşil Takım</h3>
@@ -1037,7 +1125,7 @@ background:#b8955f;
         </div>
       </article>
       <article class="sl-look-card">
-        <img src="elbise5.jpg" alt="FUBERİ Pembe Gömlek" loading="lazy">
+        <img src="elbise5.jpg" alt="FUBERİ Pembe Gömlek" loading="lazy" fetchpriority="low" decoding="async">
         <span class="sl-look-campaign">KAMPANYALI SEÇİM</span>
         <div class="sl-look-card-info">
           <span>LOOK 03 / GÜNLÜK ŞIKLIK</span>
@@ -1181,10 +1269,10 @@ background:#b8955f;
   <div class="about-layout">
     <div class="about-gallery" aria-label="FUBERİ ürünlerinden seçmeler">
       <div class="about-gallery-primary">
-        <img src="elbise3.jpg" alt="FUBERİ koleksiyonundan haki yeşil takım" loading="lazy">
+        <img src="elbise3.jpg" alt="FUBERİ koleksiyonundan haki yeşil takım" loading="lazy" fetchpriority="low" decoding="async">
       </div>
       <div class="about-gallery-secondary">
-        <img src="elbise5.jpg" alt="FUBERİ koleksiyonundan pembe gömlek" loading="lazy">
+        <img src="elbise5.jpg" alt="FUBERİ koleksiyonundan pembe gömlek" loading="lazy" fetchpriority="low" decoding="async">
       </div>
       <div class="about-gallery-seal" aria-label="FUBERİ, İlk ve Tek">
         <span>İLK VE TEK</span><strong>F</strong><small>FUBERİ</small>
