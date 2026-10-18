@@ -7,10 +7,10 @@ compatibility_date = "2026-09-01"
 [vars]
 PAYTR_ACTIVE = "0"
 PAYTR_TEST_MODE = "1"
-TAX_VALIDATED = "0" # %10 giyim KDV eklenmiştir, kargonun fatura/KDV durumu teyit edilmeden 1 yapılmamalıdır.
-# Standart kargo bedeli sipariş başına 130,00 TL = 13000 kuruş.
-# Giyim ürünlerine %10 KDV sunucuda eklenir. 130 TL kargonun KDV durumu muhasebeciyle teyit edilmelidir.
-SHIPPING_KURUS = "13000"
+TAX_VALIDATED = "0" # KDV ve kargo fiyatın içindedir; muhasebe/fatura teyidi olmadan 1 yapılmaz.
+# Kargo ücreti ürün fiyatlarının içindedir; sepet ve PayTR için ek ücret kesinlikle sıfırdır.
+# Bu değeri sıfırdan farklı yapmak ödeme servisinin yapılandırma kontrolünü başarısız yapar.
+SHIPPING_KURUS = "0"
 
 [[d1_databases]]
 binding = "DB"
