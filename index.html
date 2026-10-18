@@ -727,151 +727,296 @@ color:#aaa;
 
 }
 
-/* SALTAŞLİNE footer yenileme — sade, premium, mobil uyumlu */
-footer.site-footer{
-  background:#0d110f;
-  color:#f5f1e9;
-  padding:72px clamp(22px,7vw,120px) 0;
+/* SALTAŞLİNE — siyah/altın premium footer ve uyumlu CTA */
+footer.site-footer {
+  --footer-gold:#cfac76;
+  --footer-gold-bright:#ecc995;
+  --footer-light:#f2eee8;
+  --footer-muted:#c9c8c2;
+  position:relative;
+  overflow:hidden;
+  background:radial-gradient(ellipse at 49% 0,rgba(184,136,72,.055),transparent 63%),#0c0f0d;
+  color:var(--footer-light);
+  border-top:1px solid rgba(206,169,105,.18);
+  padding:76px clamp(22px,4.5vw,90px) 0;
   margin-top:70px;
-  border-top:1px solid #39443b;
 }
 .site-footer .footer-grid{
   display:grid;
-  grid-template-columns:minmax(235px,1.32fr) minmax(125px,.66fr) minmax(215px,1.16fr) minmax(205px,1fr);
-  gap:clamp(24px,3.25vw,56px);
-  max-width:1320px;
+  grid-template-columns:minmax(0,1.62fr) minmax(0,1fr) minmax(0,1.42fr) minmax(0,1.32fr);
+  gap:clamp(18px,2.2vw,37px);
+  max-width:1440px;
   margin:0 auto;
   align-items:start;
 }
-.site-footer .footer-brand{min-width:0;max-width:340px}
+.site-footer .footer-brand{min-width:0;padding:65px 8px 0 0}
 .site-footer .footer-grid .footer-brand-name{
   display:inline-block;
+  max-width:100%;
   width:auto;
-  margin:0;
   padding:0;
-  font-family:Poppins,Arial,sans-serif;
-  font-size:clamp(25px,2.35vw,35px);
-  font-weight:700;
-  letter-spacing:1.6px;
-  line-height:1.28;
-  color:#f6f3eb;
-  background:transparent;
-  text-decoration:none;
+  margin:0;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(29px,3vw,46px);
+  font-weight:400;
+  letter-spacing:clamp(1px,.26vw,4px);
+  line-height:1.22;
   white-space:nowrap;
+  text-decoration:none;
   text-shadow:none;
+  background:linear-gradient(175deg,#f6ead1 10%,#d1a765 58%,#f1d5a5 100%);
+  background-clip:text;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
 }
-.site-footer .footer-grid .footer-brand-name:hover{color:#f3d2a2}
-.site-footer .footer-brand-rule{
-  display:block;
-  width:60px;
-  height:2px;
-  margin:22px 0 18px;
-  background:#c4a274;
-}
+.site-footer .footer-grid .footer-brand-name:hover{filter:brightness(1.14)}
 .site-footer .footer-brand-motto{
-  margin:0 0 12px;
-  font-size:11px;
-  font-weight:700;
-  letter-spacing:3.3px;
-  color:#cfb18c;
+  display:flex;
+  align-items:center;
+  gap:15px;
+  margin:20px 0 24px;
+  max-width:315px;
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:5px;
+  white-space:nowrap;
+  color:var(--footer-light);
 }
+.site-footer .footer-brand-motto:before,.site-footer .footer-brand-motto:after{
+  content:"";height:1px;background:linear-gradient(90deg,transparent,var(--footer-gold));
+  flex:1;min-width:20px;
+}
+.site-footer .footer-brand-motto:after{transform:rotate(180deg)}
 .site-footer .footer-brand-description{
   margin:0;
-  max-width:290px;
+  max-width:315px;
   font-size:13px;
+  color:#d9d6d0;
   line-height:1.9;
-  color:#c9cec7;
 }
+.site-footer .footer-brand-description span{color:var(--footer-gold);margin:0 2px}
 .site-footer .footer-grid .footer-brand-collection{
   display:inline-flex;
   align-items:center;
-  gap:12px;
-  margin:20px 0 0;
-  color:#f2d7b4;
-  background:none;
-  font-size:12px;
+  justify-content:center;
+  gap:15px;
+  min-height:43px;
+  width:auto;
+  max-width:100%;
+  padding:11px 17px;
+  margin:27px 0 0;
+  border:1px solid rgba(213,173,114,.53);
+  border-radius:2px;
+  background:rgba(213,173,114,.07);
+  color:var(--footer-gold-bright);
+  font-size:11px;
+  letter-spacing:.65px;
   font-weight:600;
   text-decoration:none;
-  border-bottom:1px solid rgba(242,215,180,.5);
-  padding-bottom:5px;
-  transition:color .2s,border-color .2s;
+  transition:background .2s,color .2s,border-color .2s,transform .2s;
 }
 .site-footer .footer-grid .footer-brand-collection:hover{
-  color:#fff;
-  border-color:#fff;
+  background:var(--footer-gold-bright);
+  color:#171511;
+  border-color:var(--footer-gold-bright);
+  transform:translateY(-2px);
 }
-.site-footer .footer-column{min-width:0}
+.site-footer .footer-column{
+  min-width:0;
+  border-left:1px solid rgba(213,166,101,.35);
+  padding-left:clamp(16px,2vw,30px);
+  min-height:340px;
+}
 .site-footer .footer-column h3{
-  margin:5px 0 21px;
-  color:#cfb18c;
-  font-size:14px;
-  font-weight:600;
-  line-height:1.4;
-  letter-spacing:.35px;
+  position:relative;
+  margin:5px 0 32px;
+  padding:0 0 19px;
+  color:#ecc99b;
+  font:normal clamp(19px,1.65vw,25px)/1.35 Georgia,"Times New Roman",serif;
+  letter-spacing:.15px;
 }
-.site-footer .footer-grid .footer-column a{
-  display:block;
-  width:fit-content;
-  max-width:100%;
-  margin:0 0 12px;
-  font-size:13px;
-  font-weight:400;
-  line-height:1.65;
-  color:#d6ddd4;
-  text-decoration:none;
-  overflow-wrap:anywhere;
-  transition:color .18s;
+.site-footer .footer-column h3:after{
+  content:"";
+  position:absolute;
+  left:0;bottom:0;
+  width:46px;height:2px;
+  background:linear-gradient(90deg,var(--footer-gold-bright),#c18b4a);
 }
-.site-footer .footer-grid .footer-column a:hover{
-  color:#fff;
-  text-decoration:underline;
-  text-decoration-color:#b99a6f;
-  text-underline-offset:5px;
-}
-.site-footer .footer-contact-location{
-  font-size:13px;
-  line-height:1.65;
-  color:#d6ddd4;
-  margin:0 0 12px;
-}
-.site-footer .footer-contact span{color:#cfb18c;margin-right:8px}
-.site-footer .footer-bottom{
+.site-footer .footer-grid .footer-links .footer-link{
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  flex-wrap:wrap;
-  gap:12px 22px;
-  max-width:1320px;
-  margin:58px auto 0;
-  padding:21px 0 26px;
-  border-top:1px solid #354037;
-  font-size:12px;
-  color:#abb6ad;
-  text-align:left;
+  justify-content:space-between;
+  gap:12px;
+  width:100%;
+  max-width:100%;
+  min-height:49px;
+  margin:0;
+  padding:11px 2px 11px 0;
+  border-bottom:1px solid rgba(221,204,172,.16);
+  color:var(--footer-light);
+  text-decoration:none;
+  font-size:13px;
+  line-height:1.5;
+  font-weight:400;
+  overflow-wrap:anywhere;
+  transition:color .2s,padding .2s,border-color .2s;
+}
+.site-footer .footer-grid .footer-links .footer-link:last-child{border-bottom:none}
+.site-footer .footer-grid .footer-links .footer-link .footer-arrow{
+  color:var(--footer-gold-bright);
+  font-size:25px;
+  font-family:Georgia,serif;
+  line-height:1;
+  flex:none;
+  transition:transform .2s;
+}
+.site-footer .footer-grid .footer-links .footer-link:hover{
+  color:var(--footer-gold-bright);
+  padding-left:5px;
+  border-color:rgba(221,185,130,.55);
+}
+.site-footer .footer-grid .footer-links .footer-link:hover .footer-arrow{transform:translateX(4px)}
+.site-footer .footer-contact .footer-contact-row{
+  display:flex;
+  align-items:center;
+  gap:13px;
+  max-width:100%;
+  min-height:48px;
+  margin:0 0 22px;
+  color:var(--footer-light);
+  text-decoration:none;
   line-height:1.6;
+  font-size:13px;
 }
-.site-footer .footer-bottom-signature{color:#cfb18c}
+.site-footer .footer-contact .footer-contact-row span:last-child{
+  min-width:0;
+  overflow-wrap:anywhere;
+}
+.site-footer .footer-contact-icon{
+  flex:0 0 43px;
+  width:43px;
+  height:43px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid rgba(210,164,99,.38);
+  border-radius:50%;
+  background:radial-gradient(circle at 28% 18%,rgba(208,161,99,.18),rgba(185,138,75,.055));
+  color:var(--footer-gold-bright);
+  transition:background .2s,transform .2s,border-color .2s;
+}
+.site-footer .footer-contact-icon svg{width:20px;height:20px;display:block}
+.site-footer .footer-grid .footer-contact .footer-contact-link{
+  display:flex;
+  width:100%;
+  max-width:100%;
+  margin:0 0 22px;
+  color:var(--footer-light);
+  text-decoration:none;
+}
+.site-footer .footer-grid .footer-contact .footer-contact-link:hover{color:var(--footer-gold-bright)}
+.site-footer .footer-contact-link:hover .footer-contact-icon{
+  transform:translateY(-1px);
+  background:rgba(208,161,99,.22);
+  border-color:var(--footer-gold-bright);
+}
+.site-footer .footer-bottom{
+  display:block;
+  max-width:1440px;
+  border:0;
+  margin:50px auto 0;
+  padding:0 0 36px;
+  text-align:center;
+  color:#c9c6be;
+}
+.site-footer .footer-ornament{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  margin-bottom:30px;
+  color:var(--footer-gold-bright);
+}
+.site-footer .footer-ornament-line{
+  flex:1;
+  min-width:0;
+  height:1px;
+  background:linear-gradient(90deg,rgba(205,159,91,.12),rgba(205,159,91,.85));
+}
+.site-footer .footer-ornament-line:last-child{transform:rotate(180deg)}
+.site-footer .footer-ornament-flower{display:block;flex:none;width:46px;height:28px}
+.site-footer .footer-bottom p{
+  margin:0;
+  font:normal 12px/1.7 Georgia,"Times New Roman",serif;
+  letter-spacing:1.05px;
+  color:#d7d2c8;
+}
+.site-footer .footer-bottom p span{padding:0 7px;color:var(--footer-gold)}
 .site-footer .footer-grid a:focus-visible{
-  outline:2px solid #e8c496;
-  outline-offset:5px;
-  border-radius:2px;
+  outline:2px solid #f4d4a0;
+  outline-offset:4px;
 }
-html[data-theme="dark"] footer.site-footer{background:#0a0e0c;color:#f6f3eb}
-@media(max-width:1100px){
+html[data-theme="dark"] footer.site-footer{
+  background:radial-gradient(ellipse at 49% 0,rgba(184,136,72,.055),transparent 63%),#090c0a;
+  color:#f2eee8;
+}
+html[data-theme="dark"] .site-footer .footer-grid a{color:inherit}
+html[data-theme="dark"] .site-footer .footer-grid .footer-links .footer-link:hover{color:#ecc995}
+html[data-theme="dark"] .site-footer .footer-grid .footer-brand-collection{color:#ecc995}
+html[data-theme="dark"] .site-footer .footer-grid .footer-brand-collection:hover{color:#171511}
+/* Ana çağrı düğmeleri için aynı siyah-altın görsel dil */
+.hero-actions .btn:not(.btn-outline),.about-ctas .about-main-cta{
+  background:linear-gradient(120deg,#ead1a9,#c59a65);
+  color:#1b1b17;
+  border:1px solid #cca873;
+  border-radius:3px;
+  box-shadow:0 6px 22px rgba(0,0,0,.10);
+  transition:transform .2s,box-shadow .2s,background .2s;
+}
+.hero-actions .btn:not(.btn-outline):hover,.about-ctas .about-main-cta:hover{
+  background:linear-gradient(120deg,#f5e1bc,#dbb47a);
+  color:#171511;
+  box-shadow:0 9px 24px rgba(0,0,0,.17);
+  transform:translateY(-2px);
+}
+.hero-actions .btn-outline{border-color:rgba(234,200,147,.7);color:#f7e9d3}
+.hero-actions .btn-outline:hover{border-color:#f1d2a0;background:rgba(231,200,148,.12)}
+.about-ctas .about-text-cta{border-bottom-color:#bc915c;transition:color .2s,border-color .2s}
+.about-ctas .about-text-cta:hover{color:#ab7d40;border-bottom-color:#ab7d40}
+html[data-theme="dark"] .about-ctas .about-text-cta:hover{color:#f0c88d}
+@media(max-width:1180px){
   .site-footer .footer-grid{
     grid-template-columns:repeat(2,minmax(0,1fr));
-    column-gap:40px;
+    column-gap:30px;
     row-gap:46px;
   }
+  .site-footer .footer-column{min-height:0}
+  .site-footer .footer-brand{padding-top:10px}
 }
-@media(max-width:620px){
-  footer.site-footer{padding:50px 6% 0}
-  .site-footer .footer-grid{grid-template-columns:1fr;row-gap:33px}
-  .site-footer .footer-brand{max-width:100%;padding-bottom:6px}
-  .site-footer .footer-grid .footer-brand-name{font-size:29px;letter-spacing:1px}
-  .site-footer .footer-brand-rule{margin:17px 0 15px}
-  .site-footer .footer-column h3{margin:0 0 13px}
-  .site-footer .footer-bottom{margin-top:35px;padding:20px 0 23px}
+@media(max-width:650px){
+  footer.site-footer{padding:54px 6% 0}
+  .site-footer .footer-grid{grid-template-columns:minmax(0,1fr);gap:32px}
+  .site-footer .footer-brand{padding:0 0 9px}
+  .site-footer .footer-grid .footer-brand-name{font-size:clamp(28px,8vw,39px);letter-spacing:1.2px}
+  .site-footer .footer-brand-motto{max-width:280px;gap:10px;margin:17px 0 21px}
+  .site-footer .footer-column{
+    border-left:0;
+    border-top:1px solid rgba(205,159,91,.29);
+    padding:24px 0 0;
+  }
+  .site-footer .footer-column h3{margin:0 0 16px;padding-bottom:14px}
+  .site-footer .footer-grid .footer-links .footer-link{min-height:47px;font-size:14px}
+  .site-footer .footer-contact .footer-contact-row,
+  .site-footer .footer-grid .footer-contact .footer-contact-link{margin-bottom:15px}
+  .site-footer .footer-bottom{margin-top:25px;padding-bottom:25px}
+  .site-footer .footer-ornament{margin-bottom:19px;gap:11px}
+  .site-footer .footer-bottom p{font-size:11px;letter-spacing:.25px}
+}
+@media(prefers-reduced-motion:reduce){
+  .site-footer .footer-grid a,
+  .site-footer .footer-contact-icon,
+  .site-footer .footer-arrow,
+  .hero-actions .btn,
+  .about-ctas a{transition:none!important;transform:none!important}
 }
 
 .cart-item{
@@ -1042,40 +1187,63 @@ html[data-theme="dark"] .cart-tax-note{color:#c6c9bd}
 <footer class="site-footer" aria-label="SALTAŞLİNE site alt bilgileri">
   <div class="footer-grid">
     <div class="footer-brand">
-      <a class="footer-brand-name" href="#home" aria-label="SALTAŞLİNE — ana sayfaya dön">SALTAŞLİNE</a>
-      <span class="footer-brand-rule" aria-hidden="true"></span>
-      <p class="footer-brand-motto">İLK VE TEK</p>
-      <p class="footer-brand-description">Premium kadın giyim.<br>Modern, şık ve güvenilir alışveriş.</p>
+      <a class="footer-brand-name" href="#home" aria-label="SALTAŞLİNE ana sayfa">SALTAŞLİNE</a>
+      <div class="footer-brand-motto"><span>İLK VE TEK</span></div>
+      <p class="footer-brand-description">Premium kadın giyim <span aria-hidden="true">•</span> Modern <span aria-hidden="true">•</span> Şık <span aria-hidden="true">•</span> Güvenilir</p>
       <a class="footer-brand-collection" href="#products">Koleksiyonu keşfet <span aria-hidden="true">↗</span></a>
     </div>
 
-    <nav class="footer-column" aria-label="Kurumsal">
+    <nav class="footer-column footer-links" aria-label="Kurumsal">
       <h3>Kurumsal</h3>
-      <a href="#about">Hakkımızda</a>
-      <a href="#contact">İletişim</a>
-      <a href="#faq">Sık Sorulan Sorular</a>
+      <a class="footer-link" href="#about"><span>Hakkımızda</span><span class="footer-arrow" aria-hidden="true">›</span></a>
+      <a class="footer-link" href="#contact"><span>İletişim</span><span class="footer-arrow" aria-hidden="true">›</span></a>
+      <a class="footer-link" href="#faq"><span>Sık Sorulan Sorular</span><span class="footer-arrow" aria-hidden="true">›</span></a>
     </nav>
 
-    <nav class="footer-column" aria-label="Yasal bilgilendirme">
+    <nav class="footer-column footer-links" aria-label="Yasal bilgilendirme">
       <h3>Yasal Bilgilendirme</h3>
-      <a href="gizlilik.html">Gizlilik Politikası</a>
-      <a href="kvkk.html">KVKK Aydınlatma Metni</a>
-      <a href="mesafeli-satis.html">Mesafeli Satış ve Ön Bilgilendirme</a>
-      <a href="iade.html">İptal, İade ve Cayma Hakkı</a>
-      <a href="teslimat-kargo.html">Teslimat ve Kargo</a>
+      <a class="footer-link" href="gizlilik.html"><span>Gizlilik Politikası</span><span class="footer-arrow" aria-hidden="true">›</span></a>
+      <a class="footer-link" href="kvkk.html"><span>KVKK Aydınlatma Metni</span><span class="footer-arrow" aria-hidden="true">›</span></a>
+      <a class="footer-link" href="mesafeli-satis.html"><span>Mesafeli Satış &amp; Ön Bilgilendirme</span><span class="footer-arrow" aria-hidden="true">›</span></a>
+      <a class="footer-link" href="iade.html"><span>İptal, İade &amp; Cayma Hakkı</span><span class="footer-arrow" aria-hidden="true">›</span></a>
+      <a class="footer-link" href="teslimat-kargo.html"><span>Teslimat &amp; Kargo</span><span class="footer-arrow" aria-hidden="true">›</span></a>
     </nav>
 
     <div class="footer-column footer-contact">
       <h3>İletişim</h3>
-      <p class="footer-contact-location"><span aria-hidden="true">⌖</span> İstanbul / Türkiye</p>
-      <a href="tel:+905301103944"><span aria-hidden="true">✆</span> 0530 110 3944</a>
-      <a href="mailto:saltasfurkan9@gmail.com"><span aria-hidden="true">✉</span> saltasfurkan9@gmail.com</a>
+      <div class="footer-contact-row">
+        <span class="footer-contact-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+        </span>
+        <span>İstanbul / Türkiye</span>
+      </div>
+      <a class="footer-contact-row footer-contact-link" href="tel:+905301103944">
+        <span class="footer-contact-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.8v3a2.2 2.2 0 0 1-2.4 2.2A19.5 19.5 0 0 1 2 4.4 2.2 2.2 0 0 1 4.2 2h3a2 2 0 0 1 2 1.7l.5 3a2 2 0 0 1-.6 1.7L7 10.4a15.5 15.5 0 0 0 6.6 6.6l2.1-2.1a2 2 0 0 1 1.7-.6l3 .5a2 2 0 0 1 1.6 1.9Z"/></svg>
+        </span>
+        <span>0530 110 3944</span>
+      </a>
+      <a class="footer-contact-row footer-contact-link" href="mailto:saltasfurkan9@gmail.com">
+        <span class="footer-contact-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4.5" width="20" height="15" rx="2.2"/><path d="m3 6 9 7 9-7"/></svg>
+        </span>
+        <span>saltasfurkan9@gmail.com</span>
+      </a>
     </div>
   </div>
 
   <div class="footer-bottom">
-    <span>© 2026 SALTAŞLİNE · Tüm hakları saklıdır.</span>
-    <span class="footer-bottom-signature">Kadın giyimde zarif seçimler.</span>
+    <div class="footer-ornament" aria-hidden="true">
+      <span class="footer-ornament-line"></span>
+      <svg class="footer-ornament-flower" viewBox="0 0 56 30" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M28 26c-5-4-7-10 0-22 7 12 5 18 0 22Z"/>
+        <path d="M26 26C17 26 10 19 9 10c11 1 18 7 19 16"/>
+        <path d="M30 26c9 0 16-7 17-16-11 1-18 7-19 16"/>
+        <path d="M16 25c8 3 16 4 24 0"/>
+      </svg>
+      <span class="footer-ornament-line"></span>
+    </div>
+    <p>© 2026 SALTAŞLİNE <span aria-hidden="true">|</span> Tüm Hakları Saklıdır.</p>
   </div>
 <div id="cartPanel">
 
