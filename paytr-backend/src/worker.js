@@ -12,9 +12,9 @@ const safeString = (value, max) => typeof value === "string" ? value.trim().slic
 const validEmail = x => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(x) && /^[\x00-\x7F]+$/.test(x);
 const digits = x => /^[0-9]+$/.test(x);
 const toMoney = value => (Number.isSafeInteger(value) && value >= 0 ? value : null);
-// Giyim ürünlerinin KDV hariç fiyatlarıyla çalışılır. KDV her bir birim için kuruşa yuvarlanır.
+// Katalog fiyatları KDV ve teslimat dahil ürün son fiyatlarıdır. KDV yalnızca içeriden ayrılır.
 const CLOTHING_VAT_RATE_PERCENT = 10;
-const productVatKurus = netPriceKurus => Math.round(netPriceKurus * CLOTHING_VAT_RATE_PERCENT / 100);
+const productVatKurus = grossPriceKurus => Math.round(grossPriceKurus * CLOTHING_VAT_RATE_PERCENT / (100 + CLOTHING_VAT_RATE_PERCENT));
 const base64 = bytes => btoa(String.fromCharCode(...bytes));
 const secureCompareSignature = async (secret, plainText, encodedSignature) => {
   if (!encodedSignature || !/^[A-Za-z0-9+/]+={0,2}$/.test(encodedSignature)) return false;
@@ -31,7 +31,7 @@ const sign = async (secret, text) => {
 };
 const encodeBasket = rows => base64(enc.encode(JSON.stringify(rows)));
 const configured = env => env.PAYTR_ACTIVE === "1" && env.TAX_VALIDATED === "1" && !!env.PAYTR_MERCHANT_ID && !!env.PAYTR_MERCHANT_KEY
-  && !!env.PAYTR_MERCHANT_SALT && !!env.DB && /^\d+$/.test(String(env.SHIPPING_KURUS ?? ""))
+  && !!env.PAYTR_MERCHANT_SALT && !!env.DB && String(env.SHIPPING_KURUS ?? "") === "0"
   && Object.values(CATALOG).every(p => toMoney(p.priceKurus) !== null && p.priceKurus > 0 &&
     p.variants.length > 0);
 const corsOrigin = req => req.headers.get("Origin") === SITE ? SITE : "";
@@ -54,12 +54,13 @@ const cleanCart = cart => {
     variantQuantities.set(variantKey, requested);
     if (!Number.isSafeInteger(p.priceKurus) || p.priceKurus <= 0) throw Error("Ürün fiyatı henüz belirlenmedi.");
     const unitVatKurus = productVatKurus(p.priceKurus);
-    subtotal += p.priceKurus * qty;
-    vatTotal += unitVatKurus * qty;
+    subtotal += p.priceKurus * qty; // Satış toplamı zaten KDV ve kargo dahil.
+    vatTotal += unitVatKurus * qty; // Bilgi amaçlı; üstüne eklenmez.
     totalItems += qty;
-    rows.push([p.name + " / " + size + " / " + variant.color, ((p.priceKurus + unitVatKurus) / 100).toFixed(2), qty]);
+    rows.push([p.name + " / " + size + " / " + variant.color, (p.priceKurus / 100).toFixed(2), qty]);
     stored.push({ productId:id, name:p.name, size, color:variant.color, quantity:qty,
-      netPriceKurus:p.priceKurus, vatRatePercent:CLOTHING_VAT_RATE_PERCENT, vatKurus:unitVatKurus });
+      grossPriceKurus:p.priceKurus, includedVatKurus:unitVatKurus,
+      vatRatePercent:CLOTHING_VAT_RATE_PERCENT, deliveryIncluded:true });
   }
   if (totalItems > 40 || !Number.isSafeInteger(subtotal) || !Number.isSafeInteger(vatTotal)) throw Error("Sepet limiti aşıldı.");
   return { subtotal, vatTotal, rows, stored };
@@ -76,10 +77,10 @@ const quote = async (req, env, origin) => {
   const body=await req.json().catch(()=>null);
   let basket;
   try {basket=cleanCart(body?.items);}catch(e){return reply({error:e.message},400,origin);}
-  const shippingKurus=Number(env.SHIPPING_KURUS);
-  const totalKurus=basket.subtotal+basket.vatTotal+shippingKurus;
+  const shippingKurus=0; // Kargo ürün fiyatına dahildir.
+  const totalKurus=basket.subtotal; // KDV de ürün fiyatına dahildir.
   if (!Number.isSafeInteger(totalKurus)||totalKurus<100) return reply({error:"Toplam tutar geçersiz."},400,origin);
-  return reply({ subtotalKurus:basket.subtotal,vatKurus:basket.vatTotal,vatRatePercent:CLOTHING_VAT_RATE_PERCENT,shippingKurus,totalKurus,currency:"TRY" },200,origin);
+  return reply({ subtotalKurus:basket.subtotal,vatKurus:basket.vatTotal,vatIncluded:true,shippingIncluded:true,vatRatePercent:CLOTHING_VAT_RATE_PERCENT,shippingKurus,totalKurus,currency:"TRY" },200,origin);
 };
 const start = async (req, env, origin) => {
   if (!configured(env)) return reply({error:"Ödeme sistemi henüz aktif değil."},503,origin);
@@ -93,11 +94,9 @@ const start = async (req, env, origin) => {
     return reply({ error:"Teslimat ve iletişim bilgilerini kontrol ediniz." },400,origin);
   let basket;
   try { basket=cleanCart(body.items); } catch(e) { return reply({error:e.message},400,origin); }
-  const shipping = Number(env.SHIPPING_KURUS);
-  if (!Number.isSafeInteger(shipping) || shipping<0) return reply({error:"Kargo bedeli ayarlanmamış."},503,origin);
-  const amount = basket.subtotal + basket.vatTotal + shipping;
+  const shipping = 0; // Fiyatlara dahil; ikinci defa kargo ekleme.
+  const amount = basket.subtotal; // KDV de dahil.
   if (!Number.isSafeInteger(amount) || amount<100) return reply({error:"Ödeme toplamı hatalı."},400,origin);
-  if (shipping > 0) basket.rows.push(["Kargo", (shipping/100).toFixed(2), 1]);
   const userIp=req.headers.get("CF-Connecting-IP") || "";
   if (!userIp || userIp.length>39 || !/^[0-9a-fA-F:.]+$/.test(userIp))
     return reply({error:"Müşteri IP adresi doğrulanamadı."},400,origin);
