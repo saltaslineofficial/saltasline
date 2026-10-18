@@ -1,6 +1,7 @@
 // Fiyat ve stok bilgilerini müşteri tarafındaki HTML'den değil, buradan doğrulayın.
-// Fiyatlar 17 Ekim 2026'da belirtilen satış fiyatlarıdır, kuruş cinsindendir.
-// Bu fiyatların KDV dahil nihai müşteri fiyatı olduğu işletme tarafından ayrıca teyit edilmelidir.
+// Fiyatlar 17 Ekim 2026'da belirtilen KDV hariç tutarlardır, kuruş cinsindendir.
+// Kullanıcı 18 Ekim 2026'da fiyatların KDV HARİÇ olduğunu teyit etti.
+// Worker'da giyim için %10 KDV her ürün birimine ayrıca eklenir. 130 TL kargonun vergi/fatura ayrıntısı teyit bekliyor.
 // Varyant stokları henüz bilinmiyor; boş bırakılmıştır. PAYTR_ACTIVE=0 ile tahsilat kapalı kalır.
 // Varyant örneği (sadece gerçek stok doğrulanınca): { size: "40", color: "Bordo", stock: 2 }
 export const CATALOG = Object.freeze({
