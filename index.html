@@ -281,6 +281,105 @@ html[data-theme="dark"] .sl-products-section .product .sl-product-photo-frame::a
   .sl-products-section .product .sl-product-photo-frame{height:235px}
 }
 </style>
+<style id="fb-editorial-style">
+
+/* FUBERİ editorial modules 2026. Only existing FUBERİ product photos. */
+.fb-categories,.fb-feature,.fb-order-guide{box-sizing:border-box}
+.fb-categories *,.fb-feature *,.fb-order-guide *{box-sizing:border-box}
+.fb-categories,.fb-order-guide{padding:85px clamp(20px,6vw,92px);background:#f8f5ef;color:#252923}
+.fb-kicker{font:700 10px Poppins,Arial,sans-serif;letter-spacing:2.2px;color:#af8855}
+.fb-heading{max-width:1320px;margin:0 auto 31px;display:flex;gap:28px;align-items:end;justify-content:space-between}
+.fb-heading h2{font:400 clamp(36px,4.7vw,57px)/1.12 Georgia,serif;letter-spacing:-1px;margin:10px 0 0;color:inherit}
+.fb-heading h2 em,.fb-feature-copy h2 em{color:#bb9767;font-weight:400}
+.fb-heading>p{max-width:380px;font-size:13px;line-height:1.8;color:#797269;margin:0}
+.fb-categories-grid{max-width:1320px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px;margin:auto}
+.fb-category-card{position:relative;isolation:isolate;display:block;height:415px;background:#5b514b;overflow:hidden;text-decoration:none;color:#fff;border-radius:5px;box-shadow:0 12px 26px rgba(24,24,20,.10);outline-offset:4px}
+.fb-category-card::before{content:"";position:absolute;inset:-25px;background-image:var(--fb-photo);background-size:cover;background-position:center;filter:blur(20px) brightness(.67);z-index:0;transform:scale(1.08)}
+.fb-category-card>img{position:relative;z-index:1;display:block;width:100%;height:100%;object-fit:contain;object-position:center}
+.fb-category-card::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(180deg,transparent 31%,rgba(0,0,0,.07) 50%,rgba(0,0,0,.83) 100%)}
+.fb-cat-info{position:absolute;z-index:3;bottom:20px;left:20px;right:20px;display:flex;flex-direction:column;gap:8px}
+.fb-cat-label{font:700 10px Poppins,Arial,sans-serif;letter-spacing:1.6px;color:#e6c594}
+.fb-cat-info strong{font:400 clamp(24px,2.7vw,34px)/1.16 Georgia,serif;color:#fff}
+.fb-cat-action{display:flex;justify-content:space-between;align-items:center;margin-top:7px;border-top:1px solid rgba(245,225,190,.5);padding-top:12px;font-size:10px;letter-spacing:1px;color:#f5e5ce}
+.fb-cat-action span{font-size:18px}
+.fb-category-card:hover,.fb-category-card:focus-visible{box-shadow:0 20px 40px rgba(24,24,20,.20)}
+.fb-cat-foot{max-width:1320px;margin:26px auto 0;padding-top:18px;display:flex;justify-content:space-between;gap:15px;border-top:1px solid #ded2c3;color:#8a7d6b;font:600 10px Poppins,Arial,sans-serif;letter-spacing:1.3px}
+.fb-cat-foot a{text-decoration:none;color:#665137;border-bottom:1px solid #b58e61;padding-bottom:3px}
+.fb-feature{background:#272c27;padding:70px clamp(20px,6vw,92px)}
+.fb-feature-shell{max-width:1320px;margin:auto;display:grid;grid-template-columns:1fr 1fr;background:#e9e1d6;min-height:460px;border-radius:5px;overflow:hidden}
+.fb-feature-photo{position:relative;min-height:460px;background:radial-gradient(ellipse at center,#f1e4dc,#dac7c1);overflow:hidden}
+.fb-feature-photo img{display:block;width:100%;height:100%;max-height:560px;object-fit:contain;object-position:center}
+.fb-feature-photo>span{position:absolute;bottom:22px;left:20px;background:rgba(30,31,27,.79);padding:10px 13px;color:#f0d6af;font-size:10px;letter-spacing:1.8px}
+.fb-feature-copy{padding:clamp(35px,5vw,75px);display:flex;flex-direction:column;align-items:start;justify-content:center;color:#222821}
+.fb-feature-line{height:1px;width:58px;margin:22px 0 5px;background:#a78255}
+.fb-feature-copy h2{font:400 clamp(37px,4.5vw,59px)/1.12 Georgia,serif;letter-spacing:-.8px;margin:12px 0 17px;color:inherit}
+.fb-feature-copy p{font-size:14px;line-height:1.9;color:#655d55;max-width:445px}
+.fb-feature-actions{display:flex;flex-wrap:wrap;gap:22px;align-items:center;margin:18px 0 34px}
+.fb-feature-actions button{border:0;border-radius:3px;padding:14px 18px;background:#242b25;color:#f5dfbd;font:600 12px Poppins,Arial,sans-serif;cursor:pointer;display:flex;align-items:center;gap:24px}
+.fb-feature-actions button:hover{background:#927047}
+.fb-feature-actions>a{font-size:12px;color:#64503c;font-weight:600;text-decoration:none;border-bottom:1px solid #b39675;padding-bottom:5px}
+.fb-feature-copy small{font-size:10px;letter-spacing:1.4px;font-weight:600;color:#987d58}
+.fb-guide-shell{max-width:1320px;margin:auto}
+.fb-guide-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.fb-guide-step{padding:30px 28px 32px;min-height:290px;background:#fffdfa;border:1px solid #e0d5c5;border-radius:5px}
+.fb-guide-icon{display:flex;width:62px;height:62px;border:1px solid #c4a47e;color:#a68052;border-radius:50%;align-items:center;justify-content:center;margin-bottom:24px}
+.fb-guide-icon svg{width:34px;height:34px}
+.fb-guide-step small{font-size:10px;letter-spacing:1.6px;font-weight:700;color:#b48c5d}
+.fb-guide-step h3{font:400 25px/1.2 Georgia,serif;margin:10px 0 13px;color:#272a24}
+.fb-guide-step p{font-size:13px;line-height:1.85;color:#69665f;margin:0}
+.fb-guide-bottom{display:flex;justify-content:space-between;align-items:center;gap:25px;padding-top:24px;margin-top:24px;border-top:1px solid #e0d7cb}
+.fb-guide-bottom p{font-size:12px;line-height:1.7;color:#796d61;margin:0;max-width:640px}
+.fb-guide-bottom a{white-space:nowrap;text-decoration:none;color:#53412d;border-bottom:1px solid #ae8b60;padding-bottom:5px;font-size:12px;font-weight:700}
+.product-modal-info .fb-modal-assurance{display:flex;flex-wrap:wrap;gap:7px}
+.product-modal-info .fb-modal-assurance span{padding:7px 9px;background:#f4f1eb;border:1px solid #e8dccb;border-radius:4px;color:#786243;font-size:10px;font-weight:700}
+.product-modal-info .fb-modal-photo-link{display:inline-block;align-self:start;text-decoration:none;border-bottom:1px solid #b29370;padding-bottom:5px;color:#5a492f;font-size:12px;font-weight:600}
+.product-modal-info .fb-detail-extra{display:grid;gap:8px;margin:5px 0}
+.product-modal-info .fb-detail-extra details{border:1px solid #e5d9ca;border-radius:5px;padding:10px 12px;background:#fcfaf7}
+.product-modal-info .fb-detail-extra summary{cursor:pointer;font-size:12px;font-weight:600;color:#3f413b}
+.product-modal-info .fb-detail-extra p{font-size:12px;margin:9px 0 0;line-height:1.7}
+html[data-theme="dark"] .fb-categories,html[data-theme="dark"] .fb-order-guide{background:#1b211c;color:#f6e8d1}
+html[data-theme="dark"] .fb-heading>p,html[data-theme="dark"] .fb-guide-step p,html[data-theme="dark"] .fb-guide-bottom p{color:#c0b6a6}
+html[data-theme="dark"] .fb-cat-foot{border-color:#53544b;color:#b6a88e}
+html[data-theme="dark"] .fb-cat-foot a,html[data-theme="dark"] .fb-guide-bottom a{color:#ead4b1}
+html[data-theme="dark"] .fb-feature{background:#141a16}
+html[data-theme="dark"] .fb-feature-shell,html[data-theme="dark"] .fb-feature-copy{background:#30372f;color:#f4e5cc}
+html[data-theme="dark"] .fb-feature-copy p{color:#c9c0b1}
+html[data-theme="dark"] .fb-feature-actions>a{color:#e2c8a2}
+html[data-theme="dark"] .fb-feature-copy small{color:#c5ab83}
+html[data-theme="dark"] .fb-guide-step{background:#292e29;border-color:#50594f}
+html[data-theme="dark"] .fb-guide-step h3{color:#f5e8d0}
+html[data-theme="dark"] .fb-guide-bottom{border-color:#51564d}
+html[data-theme="dark"] .product-modal-info .fb-modal-assurance span{background:#303b32;border-color:#566050;color:#ead5b3}
+html[data-theme="dark"] .product-modal-info .fb-modal-photo-link{color:#ead0a2}
+html[data-theme="dark"] .product-modal-info .fb-detail-extra details{background:#29312b;border-color:#576058}
+html[data-theme="dark"] .product-modal-info .fb-detail-extra summary{color:#f1e5d1}
+@media(max-width:1050px){.fb-categories-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.fb-category-card{height:390px}}
+@media(max-width:700px){
+.fb-categories,.fb-order-guide{padding:59px 5%}
+.fb-heading{display:block;margin-bottom:24px}
+.fb-heading>p{margin:12px 0 0}
+.fb-category-card{height:clamp(245px,73vw,365px)}
+.fb-categories-grid{gap:10px}
+.fb-cat-info{bottom:15px;left:13px;right:13px;gap:6px}
+.fb-cat-label{font-size:9px}
+.fb-cat-info strong{font-size:clamp(22px,6vw,29px)}
+.fb-cat-action{font-size:9px;letter-spacing:.4px;padding-top:8px}
+.fb-cat-foot{font-size:9px;letter-spacing:.5px}
+.fb-feature{padding:40px 5%}
+.fb-feature-shell{display:flex;flex-direction:column}
+.fb-feature-photo{height:340px;min-height:340px}
+.fb-feature-photo img{height:340px}
+.fb-feature-copy{padding:33px 25px 40px}
+.fb-feature-copy h2{font-size:clamp(34px,8.5vw,46px)}
+.fb-guide-grid{grid-template-columns:1fr;gap:11px}
+.fb-guide-step{min-height:0;padding:24px}
+.fb-guide-icon{width:52px;height:52px;margin-bottom:15px}
+.fb-guide-icon svg{width:29px;height:29px}
+.fb-guide-step h3{font-size:23px}
+.fb-guide-bottom{flex-direction:column;align-items:start;gap:14px}
+}
+
+</style>
 </head>
 
 <body>
@@ -326,90 +425,31 @@ html[data-theme="dark"] .sl-products-section .product .sl-product-photo-frame::a
 <div class="hero-benefits" aria-label="Mağaza bilgileri">
   <span>KADIN GİYİM</span><span>ZAMANSIZ STİLLER</span><span>WHATSAPP İLE İLETİŞİM</span>
 </div>
-<!-- NEDEN FUBERİ — ONAYLANAN SİYAH/ALTIN TASARIM -->
-<section class="why-saltasline" id="why-saltasline" aria-labelledby="whyHeading">
-  <div class="why-shell">
-    <div class="why-intro">
-      <svg class="why-flower" viewBox="0 0 72 47" role="img" aria-label="FUBERİ zarafet simgesi" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M36 40C28 33 27 24 36 5c9 19 8 28 0 35Z"/>
-        <path d="M32 40C19 38 11 28 13 17c11 3 19 12 23 24M40 40c13-2 21-12 19-23-11 3-19 12-23 24"/>
-        <path d="M23 38C12 39 7 35 4 29c9-4 18 0 25 9M49 38c11 1 16-3 19-9-9-4-18 0-25 9"/>
-        <path d="M20 42c10 3 22 3 32 0"/>
-      </svg>
-      <div class="why-mark">FUBERİ</div>
-      <p class="why-mark-sub">İLK VE TEK</p>
-      <h2 class="why-heading" id="whyHeading">Neden <span>FUBERİ?</span></h2>
-      <span class="why-heading-line" aria-hidden="true"></span>
-      <p class="why-description">Zarif alışveriş deneyimi için seçilen ayrıcalıklar</p>
-    </div>
 
-    <div class="why-grid">
-      <article class="why-card">
-        <span class="why-card-number" aria-hidden="true">01</span>
-        <div class="why-icon" aria-hidden="true">
-          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-            <path d="m24 5 17 9v20l-17 9-17-9V14l17-9Z"/>
-            <path d="m7 14 17 10 17-10M24 24v19M15 9l18 10M33 9 15 19M16 19v8l5 3"/>
-          </svg>
-        </div>
-        <h3>Kargo Dahil Fiyatlar</h3>
-        <span class="why-card-rule" aria-hidden="true"></span>
-        <p>Ürünlerde son fiyatı görürsünüz, sepette sürpriz ücret çıkmaz.</p>
-      </article>
-
-      <article class="why-card">
-        <span class="why-card-number" aria-hidden="true">02</span>
-        <div class="why-icon" aria-hidden="true">
-          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M24 6a17.5 17.5 0 0 0-15 27L7 42l9-2.2A17.5 17.5 0 1 0 24 6Z"/>
-            <path d="M17 16c.8-1 1.6-.9 2.4-.3l2 3.1-1.3 2.1c1.6 3.1 3.3 4.8 6.5 6.5l2.1-1.3 3.1 2c.6.8.7 1.6-.3 2.4-1.3 1.1-2.6 1.3-4.4.7-6.5-2.3-10.5-6.3-12.8-12.8-.6-1.8-.4-3.1.6-4.4Z"/>
-          </svg>
-        </div>
-        <h3>WhatsApp Desteği</h3>
-        <span class="why-card-rule" aria-hidden="true"></span>
-        <p>Ürün, beden ve stok bilgisi için hızlıca bize ulaşabilirsiniz.</p>
-      </article>
-
-      <article class="why-card">
-        <span class="why-card-number" aria-hidden="true">03</span>
-        <div class="why-icon" aria-hidden="true">
-          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M24 4c7 5 13 6 17 7v11c0 11-7 18-17 22C14 40 7 33 7 22V11c4-1 10-2 17-7Z"/>
-            <path d="M15 24a9 9 0 1 1 3.8 7.4M15 24v-6m0 6 6-1"/>
-          </svg>
-        </div>
-        <h3>İade &amp; Cayma</h3>
-        <span class="why-card-rule" aria-hidden="true"></span>
-        <p>Yasal haklarınız ve iade süreci açık ve anlaşılır şekilde sunulur.</p>
-      </article>
-
-      <article class="why-card">
-        <span class="why-card-number" aria-hidden="true">04</span>
-        <div class="why-icon" aria-hidden="true">
-          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 28v-7a15 15 0 0 1 30 0v7"/>
-            <rect x="5" y="24" width="8" height="13" rx="3"/>
-            <rect x="35" y="24" width="8" height="13" rx="3"/>
-            <path d="M39 36v2c0 4-4 6-9 6h-4"/>
-            <rect x="20" y="41" width="7" height="4" rx="2"/>
-          </svg>
-        </div>
-        <h3>Kolay İletişim</h3>
-        <span class="why-card-rule" aria-hidden="true"></span>
-        <p>Telefon, e-posta ve WhatsApp ile doğrudan destek alabilirsiniz.</p>
-      </article>
-    </div>
-
-    <div class="why-actions">
-      <a class="why-cta why-cta-primary" href="#products">
-        <span>Koleksiyonu Keşfet</span><span class="why-cta-arrow" aria-hidden="true">⟶</span>
-      </a>
-      <a class="why-cta why-cta-secondary" href="https://wa.me/905301103944" target="_blank" rel="noopener noreferrer">
-        <span>WhatsApp ile İletişim</span><span class="why-cta-arrow" aria-hidden="true">⟶</span>
-      </a>
-    </div>
+<section class="fb-categories" id="koleksiyonlar" aria-labelledby="fb-cat-title">
+  <div class="fb-heading"><div><span class="fb-kicker">FUBERİ / KOLEKSİYONU KEŞFET</span><h2 id="fb-cat-title">Tarzını <em>seç.</em></h2></div><p>Elbiselerden günlük parçalara, özenle seçilen modellere göz atın.</p></div>
+  <div class="fb-categories-grid">
+    <a class="fb-category-card" href="#products" data-jump-category="elbise" style="--fb-photo:url('elbise4.jpg')" aria-label="Elbiseler koleksiyonunu incele">
+      <img src="elbise4.jpg" alt="FUBERİ elbiseler koleksiyonundan ürün" loading="lazy">
+      <span class="fb-cat-info"><span class="fb-cat-label">02 MODEL</span><strong>Elbiseler</strong><span class="fb-cat-action">KOLEKSİYONU GÖR <span aria-hidden="true">↗</span></span></span>
+    </a>
+    <a class="fb-category-card" href="#products" data-jump-category="takim" style="--fb-photo:url('elbise3.jpg')" aria-label="Takımlar koleksiyonunu incele">
+      <img src="elbise3.jpg" alt="FUBERİ takımlar koleksiyonundan ürün" loading="lazy">
+      <span class="fb-cat-info"><span class="fb-cat-label">01 MODEL</span><strong>Takımlar</strong><span class="fb-cat-action">KOLEKSİYONU GÖR <span aria-hidden="true">↗</span></span></span>
+    </a>
+    <a class="fb-category-card" href="#products" data-jump-category="bluz" style="--fb-photo:url('elbise2.jpg')" aria-label="Bluzlar koleksiyonunu incele">
+      <img src="elbise2.jpg" alt="FUBERİ bluzlar koleksiyonundan ürün" loading="lazy">
+      <span class="fb-cat-info"><span class="fb-cat-label">01 MODEL</span><strong>Bluzlar</strong><span class="fb-cat-action">KOLEKSİYONU GÖR <span aria-hidden="true">↗</span></span></span>
+    </a>
+    <a class="fb-category-card" href="#products" data-jump-category="gomlek" style="--fb-photo:url('elbise5.jpg')" aria-label="Gömlekler koleksiyonunu incele">
+      <img src="elbise5.jpg" alt="FUBERİ gömlekler koleksiyonundan ürün" loading="lazy">
+      <span class="fb-cat-info"><span class="fb-cat-label">01 MODEL</span><strong>Gömlekler</strong><span class="fb-cat-action">KOLEKSİYONU GÖR <span aria-hidden="true">↗</span></span></span>
+    </a>
   </div>
+  <div class="fb-cat-foot"><span>FUBERİ · İLK VE TEK</span><a href="#products">TÜM ÜRÜNLERE GİT <span aria-hidden="true">⟶</span></a></div>
 </section>
+
+
 
 <style>
 
@@ -938,11 +978,31 @@ background:#b8955f;
     });
   }
   filters.forEach(btn=>btn.addEventListener("click",()=>{active=btn.dataset.filter;update();}));
+  document.querySelectorAll("[data-jump-category]").forEach(link=>{
+    link.addEventListener("click",()=>{
+      const selected=filters.find(btn=>btn.dataset.filter===link.dataset.jumpCategory);
+      if(!selected) return;
+      input.value="";
+      selected.click();
+    });
+  });
   input.addEventListener("input",update);
   reset.addEventListener("click",()=>{active="all";input.value="";update();input.focus();});
   update();
 })();
 </script>
+
+<section class="fb-feature" id="ozel-secim" aria-labelledby="fb-feature-title">
+  <div class="fb-feature-shell">
+    <div class="fb-feature-photo"><img src="elbise5.jpg" alt="FUBERİ pembe gömlek, tam görünüm" loading="lazy"><span>FUBERİ / STİL EDİTİ</span></div>
+    <div class="fb-feature-copy"><span class="fb-kicker">ÖZEL SEÇİM / GÜNLÜK ŞIKLIK</span><span class="fb-feature-line" aria-hidden="true"></span>
+      <h2 id="fb-feature-title">Günlük stile <em>zarif</em> bir dokunuş.</h2>
+      <p>Yumuşak pembe tonuyla kombinlere eşlik eden gömleği keşfedin. Beden ve renk seçenekleri sipariş öncesinde teyit edilir.</p>
+      <div class="fb-feature-actions"><button type="button" data-look-product="elbise5">Pembe Gömleği İncele <span aria-hidden="true">↗</span></button><a href="#stil-seckisi">Stil Seçkisine Bak ⟶</a></div>
+      <small>FUBERİ · KDV VE KARGO DAHİL FİYATLAR</small>
+    </div>
+  </div>
+</section>
 <!-- FUBERİ STİL SEÇKİSİ: özgün ürün fotoğraflarıyla editoryal galeri -->
 <section class="sl-lookbook" id="stil-seckisi" aria-labelledby="lookbookTitle">
   <div class="sl-lookbook-inner">
@@ -1018,6 +1078,102 @@ background:#b8955f;
 </script>
   
 
+<!-- NEDEN FUBERİ — ONAYLANAN SİYAH/ALTIN TASARIM -->
+<section class="why-saltasline" id="why-saltasline" aria-labelledby="whyHeading">
+  <div class="why-shell">
+    <div class="why-intro">
+      <svg class="why-flower" viewBox="0 0 72 47" role="img" aria-label="FUBERİ zarafet simgesi" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M36 40C28 33 27 24 36 5c9 19 8 28 0 35Z"/>
+        <path d="M32 40C19 38 11 28 13 17c11 3 19 12 23 24M40 40c13-2 21-12 19-23-11 3-19 12-23 24"/>
+        <path d="M23 38C12 39 7 35 4 29c9-4 18 0 25 9M49 38c11 1 16-3 19-9-9-4-18 0-25 9"/>
+        <path d="M20 42c10 3 22 3 32 0"/>
+      </svg>
+      <div class="why-mark">FUBERİ</div>
+      <p class="why-mark-sub">İLK VE TEK</p>
+      <h2 class="why-heading" id="whyHeading">Neden <span>FUBERİ?</span></h2>
+      <span class="why-heading-line" aria-hidden="true"></span>
+      <p class="why-description">Zarif alışveriş deneyimi için seçilen ayrıcalıklar</p>
+    </div>
+
+    <div class="why-grid">
+      <article class="why-card">
+        <span class="why-card-number" aria-hidden="true">01</span>
+        <div class="why-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m24 5 17 9v20l-17 9-17-9V14l17-9Z"/>
+            <path d="m7 14 17 10 17-10M24 24v19M15 9l18 10M33 9 15 19M16 19v8l5 3"/>
+          </svg>
+        </div>
+        <h3>Kargo Dahil Fiyatlar</h3>
+        <span class="why-card-rule" aria-hidden="true"></span>
+        <p>Ürünlerde son fiyatı görürsünüz, sepette sürpriz ücret çıkmaz.</p>
+      </article>
+
+      <article class="why-card">
+        <span class="why-card-number" aria-hidden="true">02</span>
+        <div class="why-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M24 6a17.5 17.5 0 0 0-15 27L7 42l9-2.2A17.5 17.5 0 1 0 24 6Z"/>
+            <path d="M17 16c.8-1 1.6-.9 2.4-.3l2 3.1-1.3 2.1c1.6 3.1 3.3 4.8 6.5 6.5l2.1-1.3 3.1 2c.6.8.7 1.6-.3 2.4-1.3 1.1-2.6 1.3-4.4.7-6.5-2.3-10.5-6.3-12.8-12.8-.6-1.8-.4-3.1.6-4.4Z"/>
+          </svg>
+        </div>
+        <h3>WhatsApp Desteği</h3>
+        <span class="why-card-rule" aria-hidden="true"></span>
+        <p>Ürün, beden ve stok bilgisi için hızlıca bize ulaşabilirsiniz.</p>
+      </article>
+
+      <article class="why-card">
+        <span class="why-card-number" aria-hidden="true">03</span>
+        <div class="why-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M24 4c7 5 13 6 17 7v11c0 11-7 18-17 22C14 40 7 33 7 22V11c4-1 10-2 17-7Z"/>
+            <path d="M15 24a9 9 0 1 1 3.8 7.4M15 24v-6m0 6 6-1"/>
+          </svg>
+        </div>
+        <h3>İade &amp; Cayma</h3>
+        <span class="why-card-rule" aria-hidden="true"></span>
+        <p>Yasal haklarınız ve iade süreci açık ve anlaşılır şekilde sunulur.</p>
+      </article>
+
+      <article class="why-card">
+        <span class="why-card-number" aria-hidden="true">04</span>
+        <div class="why-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 28v-7a15 15 0 0 1 30 0v7"/>
+            <rect x="5" y="24" width="8" height="13" rx="3"/>
+            <rect x="35" y="24" width="8" height="13" rx="3"/>
+            <path d="M39 36v2c0 4-4 6-9 6h-4"/>
+            <rect x="20" y="41" width="7" height="4" rx="2"/>
+          </svg>
+        </div>
+        <h3>Kolay İletişim</h3>
+        <span class="why-card-rule" aria-hidden="true"></span>
+        <p>Telefon, e-posta ve WhatsApp ile doğrudan destek alabilirsiniz.</p>
+      </article>
+    </div>
+
+    <div class="why-actions">
+      <a class="why-cta why-cta-primary" href="#products">
+        <span>Koleksiyonu Keşfet</span><span class="why-cta-arrow" aria-hidden="true">⟶</span>
+      </a>
+      <a class="why-cta why-cta-secondary" href="https://wa.me/905301103944" target="_blank" rel="noopener noreferrer">
+        <span>WhatsApp ile İletişim</span><span class="why-cta-arrow" aria-hidden="true">⟶</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="fb-order-guide" id="nasil-siparis-verilir" aria-labelledby="fb-guide-title">
+  <div class="fb-guide-shell">
+    <div class="fb-heading"><div><span class="fb-kicker">KOLAYCA KEŞFEDİN</span><h2 id="fb-guide-title">Nasıl <em>sipariş verilir?</em></h2></div><p>Beğendiğiniz parçayı seçin; beden ve renk stoğunu birlikte teyit edelim.</p></div>
+    <div class="fb-guide-grid">
+      <article class="fb-guide-step"><span class="fb-guide-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="17" width="28" height="25" rx="2"/><path d="M17 19v-6a7 7 0 0 1 14 0v6"/></svg></span><small>ADIM 01</small><h3>Ürünü seçin</h3><p>Koleksiyondan beğendiğiniz ürünü açın ve detaylarını inceleyin.</p></article>
+      <article class="fb-guide-step"><span class="fb-guide-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="11" width="32" height="26" rx="2"/><path d="M14 18h20M14 24h14M14 30h9"/></svg></span><small>ADIM 02</small><h3>Beden ve rengi belirtin</h3><p>Tercihinizi sepete ekleyin. Beden ve renk stokları ayrıca teyit edilir.</p></article>
+      <article class="fb-guide-step"><span class="fb-guide-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 10h30v23H21l-9 6v-6H9z"/><path d="M16 20h16M16 26h11"/></svg></span><small>ADIM 03</small><h3>WhatsApp'tan teyit edin</h3><p>Sepetinizi bize iletin; stok, fiyat ve kullanılabilecek ödeme yöntemi netleşsin.</p></article>
+    </div>
+    <div class="fb-guide-bottom"><p>Şu anda web sitemizde kartla ödeme aktif değildir. Sipariş WhatsApp görüşmesi ve teyitle ilerler.</p><a href="#products">Ürünleri Keşfet ↗</a></div>
+  </div>
+</section>
 <!-- HAKKIMIZDA — FUBERİ marka hikayesi -->
 <section class="about-story" id="about" aria-labelledby="aboutTitle">
   <div class="about-layout">
@@ -1029,7 +1185,7 @@ background:#b8955f;
         <img src="elbise5.jpg" alt="FUBERİ koleksiyonundan pembe gömlek" loading="lazy">
       </div>
       <div class="about-gallery-seal" aria-label="FUBERİ, İlk ve Tek">
-        <span>İLK VE TEK</span><strong>SL</strong><small>FUBERİ</small>
+        <span>İLK VE TEK</span><strong>F</strong><small>FUBERİ</small>
       </div>
     </div>
     <div class="about-story-content">
@@ -1744,11 +1900,17 @@ Kapat
       <h2 id="modalName"></h2>
       <div id="modalPrice" class="modal-price" aria-live="polite"></div>
       <small id="modalPriceBreakdown" class="modal-price-breakdown"></small>
+      <div class="fb-modal-assurance" aria-label="Fiyat kapsamı"><span>✓ KDV DAHİL</span><span>✓ KARGO DAHİL</span></div>
+      <a id="modalPhotoOpen" class="fb-modal-photo-link" href="elbise1.jpg.jpeg" target="_blank" rel="noopener noreferrer">Fotoğrafı büyük görüntüle ↗</a>
       <p>KDV ve kargo satış fiyatına dahildir. Sepette ek kargo bedeli yoktur; beden ve renk stoğu teyit edilir.</p>
       <label for="modalSize">Beden seçimi (stok teyidine tabidir)</label>
       <select id="modalSize"><option value="">Beden seçiniz</option><option>36</option><option>38</option><option>40</option><option>42</option><option>44</option><option>46</option><option>48</option><option>50</option><option>Standart</option><option>Diğer / Emin değilim</option></select>
       <label for="modalColor">İstediğiniz renk (stok teyidine tabidir)</label>
       <input id="modalColor" type="text" maxlength="40" placeholder="Örn. fotoğraftaki renk">
+      <div class="fb-detail-extra">
+        <details><summary>Kumaş, kalıp ve ürün ölçüleri</summary><p>Kumaş türü, ürün boyu ve kalıp/ölçü bilgileri henüz ürün bazında doğrulanmadı. Ayrıntılar için WhatsApp'tan bize yazabilirsiniz.</p></details>
+        <details><summary>Beden seçimi hakkında</summary><p>Size uygun bedeni belirlemek için ölçülerinizi paylaşabilirsiniz. Gösterilen beden ve renkler stok garantisi vermez.</p></details>
+      </div>
       <label for="modalQuantity">Adet</label>
       <div class="modal-qty"><button id="modalMinus" type="button">−</button><output id="modalQuantity">1</output><button id="modalPlus" type="button">+</button></div>
       <button id="modalAdd" class="modal-add" type="button">Sepete Ekle</button>
@@ -1948,6 +2110,8 @@ html[data-theme="dark"] .modal-price-breakdown{color:#c9d1c5}
     modalPrice.classList.toggle("is-campaign", isCampaign);
     modalImage.src = product.querySelector("img").getAttribute("src");
     modalImage.alt = modalName.textContent;
+    const photoLink = document.getElementById("modalPhotoOpen");
+    if(photoLink) photoLink.href = modalImage.src;
     modalSize.value = "";
     modalColor.value = "";
     selectedQuantity = 1;
