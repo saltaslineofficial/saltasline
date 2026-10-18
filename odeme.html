@@ -36,7 +36,7 @@ footer{text-align:center;padding:20px;color:#6a655d;font-size:13px}
 <div class="layout">
   <section class="card" aria-labelledby="buyerHeading">
     <h2 id="buyerHeading">Teslimat bilgileriniz</h2>
-    <div class="notice" id="setupNotice">PayTR entegrasyonu henüz etkinleştirilmedi. Kargo 130,00 TL olarak belirlendi; KDV, stoklar ve güvenli ödeme servisi tamamlanmadan gerçek tahsilat yapılamaz.</div>
+    <div class="notice" id="setupNotice">PayTR entegrasyonu henüz etkinleştirilmedi. Giyim ürünleri için %10 KDV hesabı eklendi. Kargonun vergisel durumu, stoklar ve güvenli ödeme servisi onaylanmadan gerçek tahsilat yapılamaz.</div>
     <form id="checkoutForm" novalidate>
       <div class="form-grid">
         <div class="field full"><label for="name">Ad soyad</label><input id="name" name="name" autocomplete="name" maxlength="60" required></div>
@@ -58,10 +58,11 @@ footer{text-align:center;padding:20px;color:#6a655d;font-size:13px}
   <aside class="card" aria-labelledby="basketHeading">
     <h2 id="basketHeading">Sipariş özeti</h2>
     <div id="orderItems"><p>Sepetinizden ürün aktarılmadı.</p></div>
-    <div class="breakdown"><span>Ürünler toplamı</span><span id="subtotal">Fiyat bekleniyor</span></div>
+    <div class="breakdown"><span>Ürünler (KDV hariç)</span><span id="subtotal">Fiyat bekleniyor</span></div>
+    <div class="breakdown"><span>Ürün KDV (%10)</span><span id="vat">0,00 ₺</span></div>
     <div class="breakdown"><span>Kargo (sipariş başına)</span><span id="shipping">0,00 ₺</span></div>
     <div class="total"><span>Genel toplam</span><span id="total">Fiyat bekleniyor</span></div>
-    <p class="tax-note">KDV hesabı henüz kesinleşmedi. Vergiler dahil nihai tutar teyit edilmeden gerçek kartla tahsilat açılmaz.</p>
+    <p class="tax-note">Giyim ürünlerinde %10 KDV hesaplanır. Kargo 130 TL sabit ücret olarak alınır; kargonun fatura/KDV uygulaması muhasebeciyle teyit edilmeden canlı ödeme açılmaz.</p>
     <a href="index.html#products">← Ürünlere dön</a>
   </aside>
 </div></main><footer>SALTAŞLİNE · Ödeme işlemleri etkinleştirilmeden tahsilat yapılamaz.</footer>
@@ -72,6 +73,8 @@ footer{text-align:center;padding:20px;color:#6a655d;font-size:13px}
 const PAYMENT_API_BASE = "";
 const storageKey = "SALTASLINE_CHECKOUT_V1";
 const SHIPPING_KURUS = 13000; // Standart sipariş başına 130 TL.
+const CLOTHING_VAT_PERCENT = 10;
+const vatPerUnitKurus = baseKurus => Math.round(baseKurus * CLOTHING_VAT_PERCENT / 100);
 const button = document.getElementById("payButton");
 const notice = document.getElementById("setupNotice");
 const error = document.getElementById("error");
@@ -83,7 +86,7 @@ try {
 } catch {}
 const orderItems = document.getElementById("orderItems");
 orderItems.replaceChildren();
-let totalKurus = 0, complete = items.length>0;
+let totalKurus = 0, vatTotalKurus = 0, complete = items.length>0;
 const asPrice = n => new Intl.NumberFormat("tr-TR",{style:"currency",currency:"TRY"}).format(n);
 for(const item of items){
   const row=document.createElement("div");row.className="item";
@@ -91,12 +94,18 @@ for(const item of items){
   const detail=document.createElement("div");const title=document.createElement("strong");title.textContent=String(item.name||"Ürün");
   const details=document.createElement("small");details.textContent="Beden: "+item.size+" · Renk: "+item.color+" · "+item.quantity+" adet";
   detail.append(title,details);row.append(image,detail);orderItems.append(row);
-  if(!Number.isFinite(item.price)||item.price<=0)complete=false;else totalKurus+=Math.round(item.price*100)*item.quantity;
+  if(!Number.isFinite(item.price)||item.price<=0)complete=false;
+  else {
+    const priceKurus = Math.round(item.price*100);
+    totalKurus += priceKurus * item.quantity;
+    vatTotalKurus += vatPerUnitKurus(priceKurus) * item.quantity;
+  }
 }
 if(items.length===0)orderItems.textContent="Sepet boş. Önce ürün seçiniz.";
 document.getElementById("subtotal").textContent=complete?asPrice(totalKurus/100):"Fiyatlar bekleniyor";
+document.getElementById("vat").textContent=complete?asPrice(vatTotalKurus/100):"Fiyatlar bekleniyor";
 document.getElementById("shipping").textContent=asPrice(items.length?SHIPPING_KURUS/100:0);
-document.getElementById("total").textContent=complete?asPrice((totalKurus+SHIPPING_KURUS)/100):"Fiyatlar bekleniyor";
+document.getElementById("total").textContent=complete?asPrice((totalKurus+vatTotalKurus+SHIPPING_KURUS)/100):"Fiyatlar bekleniyor";
 let ready=false, confirmedTotalKurus=null;
 const requestItems=()=>items.map(i=>({productId:i.productId,size:i.size,color:i.color,quantity:i.quantity}));
 async function loadStatus(){
@@ -109,12 +118,13 @@ async function loadStatus(){
       method:"POST",mode:"cors",headers:{"Content-Type":"application/json"},body:JSON.stringify({items:requestItems()})});
     const quote=await quoteResponse.json();
     if(!quoteResponse.ok)throw new Error(quote.error||"Fiyat doğrulanamadı.");
-    if(!Number.isSafeInteger(quote.totalKurus) || !Number.isSafeInteger(quote.shippingKurus) || !Number.isSafeInteger(quote.subtotalKurus))
+    if(!Number.isSafeInteger(quote.totalKurus) || !Number.isSafeInteger(quote.shippingKurus) || !Number.isSafeInteger(quote.subtotalKurus) || !Number.isSafeInteger(quote.vatKurus) || quote.vatRatePercent!==CLOTHING_VAT_PERCENT)
       throw new Error("Sunucu fiyatı geçersiz.");
-    if(quote.shippingKurus!==SHIPPING_KURUS || quote.totalKurus!==quote.subtotalKurus+quote.shippingKurus)
+    if(quote.shippingKurus!==SHIPPING_KURUS || quote.totalKurus!==quote.subtotalKurus+quote.vatKurus+quote.shippingKurus)
       throw new Error("Kargo veya toplam tutar değişmiş. Sipariş öncesi kontrol gerekiyor.");
     confirmedTotalKurus=quote.totalKurus;ready=true;
     document.getElementById("subtotal").textContent=asPrice(quote.subtotalKurus/100);
+    document.getElementById("vat").textContent=asPrice(quote.vatKurus/100);
     document.getElementById("shipping").textContent=asPrice(quote.shippingKurus/100);
     document.getElementById("total").textContent=asPrice(confirmedTotalKurus/100);
     button.disabled=false;button.textContent="PayTR ile güvenli ödeme";
