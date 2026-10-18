@@ -225,60 +225,62 @@ html[data-theme="dark"] .sl-products-section .product .buy:hover{background:#f0d
 
 </style>
 <style id="sl-product-card-photo-fit">
-/* FUBERİ — Yeni Gelen Ürünler: bluz, palazzo takım ve gömlek tam kadraj */
-.sl-products-section .product .sl-product-photo-frame{
+/* FUBERİ / Yeni Gelen Ürünler — bluz, takım, gömlek: ön izlemede tam fotoğraf.
+   Tek orijinal fotoğraf, sabit ve temiz zemin, yakınlaştırma ya da tekrar yok. */
+.sl-products-section #productGrid{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+}
+.sl-products-section .product[data-product-id="elbise2"] .sl-product-photo-frame,
+.sl-products-section .product[data-product-id="elbise3"] .sl-product-photo-frame,
+.sl-products-section .product[data-product-id="elbise5"] .sl-product-photo-frame{
   position:relative;
-  display:grid;
-  place-items:center;
-  isolation:isolate;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   width:100%;
   height:380px;
+  box-sizing:border-box;
+  padding:7px;
   overflow:hidden;
-  background:#e9e4dd;
+  background:#f3f0eb;
+  border-bottom:1px solid #e4ddd3;
 }
-.sl-products-section .product .sl-product-photo-frame::before{
-  content:"";
-  position:absolute;
-  inset:-22px;
-  z-index:-1;
-  background-image:var(--product-ambient-image);
-  background-position:center;
-  background-size:cover;
-  background-repeat:no-repeat;
-  filter:blur(23px) saturate(.72) brightness(1.07);
-  opacity:.6;
-  transform:scale(1.06);
-  pointer-events:none;
-}
-.sl-products-section .product .sl-product-photo-frame::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:-1;
-  background:linear-gradient(90deg,rgba(242,238,231,.28),transparent 32%,transparent 68%,rgba(242,238,231,.23));
-  pointer-events:none;
-}
+.sl-products-section .product[data-product-id="elbise2"] .sl-product-photo-frame{background:#efe9e5}
+.sl-products-section .product[data-product-id="elbise3"] .sl-product-photo-frame{background:#eaeae3}
+.sl-products-section .product[data-product-id="elbise5"] .sl-product-photo-frame{background:#f4eeeb}
+/* Fotoğrafları kırpmadan göster, büyütme efekti uygulama. */
 .sl-products-section .product .sl-product-photo-frame>img{
-  position:relative;
-  z-index:1;
   display:block;
+  position:relative;
   width:100%;
   height:100%;
-  object-fit:contain;
-  object-position:center;
+  max-width:100%;
+  max-height:100%;
+  object-fit:contain!important;
+  object-position:center center!important;
+  transform:none!important;
+  transition:none!important;
   background:transparent;
-  transform:none;
-  transition:none;
 }
-.sl-products-section .product:hover .sl-product-photo-frame>img{
-  transform:none;
+.sl-products-section .product:hover .sl-product-photo-frame>img,
+.sl-products-section .product:focus-within .sl-product-photo-frame>img{
+  transform:none!important;
 }
-html[data-theme="dark"] .sl-products-section .product .sl-product-photo-frame{background:#2e332e}
-html[data-theme="dark"] .sl-products-section .product .sl-product-photo-frame::after{
-  background:linear-gradient(90deg,rgba(25,30,26,.24),transparent 35%,transparent 65%,rgba(25,30,26,.24));
+html[data-theme="dark"] .sl-products-section .product .sl-product-photo-frame{
+  background:#2c322c;
+  border-bottom-color:#4b514a;
 }
-@media(max-width:700px){
-  .sl-products-section .product .sl-product-photo-frame{height:235px}
+@media(max-width:950px){
+  .sl-products-section #productGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:600px){
+  .sl-products-section #productGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .sl-products-section .product[data-product-id="elbise2"] .sl-product-photo-frame,
+  .sl-products-section .product[data-product-id="elbise3"] .sl-product-photo-frame,
+  .sl-products-section .product[data-product-id="elbise5"] .sl-product-photo-frame{
+    height:clamp(225px,58vw,280px);
+    padding:4px;
+  }
 }
 </style>
 <style id="fb-editorial-style">
@@ -902,7 +904,7 @@ background:#b8955f;
 
 <article class="product" data-category="bluz" data-product-id="elbise2">
 <span class="shipping-included">KARGO DAHİL</span>
-<div class="sl-product-photo-frame" style="--product-ambient-image:url('elbise2.jpg')"><img src="elbise2.jpg" alt="Siyah Puantiyeli Bluz" loading="lazy"></div>
+<div class="sl-product-photo-frame"><img src="elbise2.jpg" alt="Siyah Puantiyeli Bluz" loading="lazy"></div>
 <div class="product-info">
 <h3>Siyah Puantiyeli Bluz</h3>
 <div class="price" data-price-kurus="342999" hidden>3.429,99 ₺</div>
@@ -912,7 +914,7 @@ background:#b8955f;
 
 <article class="product" data-category="takim" data-product-id="elbise3">
 <span class="shipping-included">KARGO DAHİL</span>
-<div class="sl-product-photo-frame" style="--product-ambient-image:url('elbise3.jpg')"><img src="elbise3.jpg" alt="Haki Yeşil Takım" loading="lazy"></div>
+<div class="sl-product-photo-frame"><img src="elbise3.jpg" alt="Haki Yeşil Takım" loading="lazy"></div>
 <div class="product-info">
 <h3>Haki Yeşil Takım</h3>
 <div class="price" data-price-kurus="397999" hidden>3.979,99 ₺</div>
@@ -933,7 +935,7 @@ background:#b8955f;
 <article class="product" data-category="gomlek" data-product-id="elbise5" data-campaign="true">
 <span class="product-promo">KAMPANYA</span>
 <span class="shipping-included">KARGO DAHİL</span>
-<div class="sl-product-photo-frame" style="--product-ambient-image:url('elbise5.jpg')"><img src="elbise5.jpg" alt="Pembe Gömlek" loading="lazy"></div>
+<div class="sl-product-photo-frame"><img src="elbise5.jpg" alt="Pembe Gömlek" loading="lazy"></div>
 <div class="product-info">
 <h3>Pembe Gömlek</h3>
 <div class="price" data-price-kurus="177999" hidden>1.779,99 ₺</div>
