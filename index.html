@@ -726,6 +726,154 @@ font-size:14px;
 color:#aaa;
 
 }
+
+/* SALTAŞLİNE footer yenileme — sade, premium, mobil uyumlu */
+footer.site-footer{
+  background:#0d110f;
+  color:#f5f1e9;
+  padding:72px clamp(22px,7vw,120px) 0;
+  margin-top:70px;
+  border-top:1px solid #39443b;
+}
+.site-footer .footer-grid{
+  display:grid;
+  grid-template-columns:minmax(235px,1.32fr) minmax(125px,.66fr) minmax(215px,1.16fr) minmax(205px,1fr);
+  gap:clamp(24px,3.25vw,56px);
+  max-width:1320px;
+  margin:0 auto;
+  align-items:start;
+}
+.site-footer .footer-brand{min-width:0;max-width:340px}
+.site-footer .footer-grid .footer-brand-name{
+  display:inline-block;
+  width:auto;
+  margin:0;
+  padding:0;
+  font-family:Poppins,Arial,sans-serif;
+  font-size:clamp(25px,2.35vw,35px);
+  font-weight:700;
+  letter-spacing:1.6px;
+  line-height:1.28;
+  color:#f6f3eb;
+  background:transparent;
+  text-decoration:none;
+  white-space:nowrap;
+  text-shadow:none;
+}
+.site-footer .footer-grid .footer-brand-name:hover{color:#f3d2a2}
+.site-footer .footer-brand-rule{
+  display:block;
+  width:60px;
+  height:2px;
+  margin:22px 0 18px;
+  background:#c4a274;
+}
+.site-footer .footer-brand-motto{
+  margin:0 0 12px;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:3.3px;
+  color:#cfb18c;
+}
+.site-footer .footer-brand-description{
+  margin:0;
+  max-width:290px;
+  font-size:13px;
+  line-height:1.9;
+  color:#c9cec7;
+}
+.site-footer .footer-grid .footer-brand-collection{
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  margin:20px 0 0;
+  color:#f2d7b4;
+  background:none;
+  font-size:12px;
+  font-weight:600;
+  text-decoration:none;
+  border-bottom:1px solid rgba(242,215,180,.5);
+  padding-bottom:5px;
+  transition:color .2s,border-color .2s;
+}
+.site-footer .footer-grid .footer-brand-collection:hover{
+  color:#fff;
+  border-color:#fff;
+}
+.site-footer .footer-column{min-width:0}
+.site-footer .footer-column h3{
+  margin:5px 0 21px;
+  color:#cfb18c;
+  font-size:14px;
+  font-weight:600;
+  line-height:1.4;
+  letter-spacing:.35px;
+}
+.site-footer .footer-grid .footer-column a{
+  display:block;
+  width:fit-content;
+  max-width:100%;
+  margin:0 0 12px;
+  font-size:13px;
+  font-weight:400;
+  line-height:1.65;
+  color:#d6ddd4;
+  text-decoration:none;
+  overflow-wrap:anywhere;
+  transition:color .18s;
+}
+.site-footer .footer-grid .footer-column a:hover{
+  color:#fff;
+  text-decoration:underline;
+  text-decoration-color:#b99a6f;
+  text-underline-offset:5px;
+}
+.site-footer .footer-contact-location{
+  font-size:13px;
+  line-height:1.65;
+  color:#d6ddd4;
+  margin:0 0 12px;
+}
+.site-footer .footer-contact span{color:#cfb18c;margin-right:8px}
+.site-footer .footer-bottom{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:12px 22px;
+  max-width:1320px;
+  margin:58px auto 0;
+  padding:21px 0 26px;
+  border-top:1px solid #354037;
+  font-size:12px;
+  color:#abb6ad;
+  text-align:left;
+  line-height:1.6;
+}
+.site-footer .footer-bottom-signature{color:#cfb18c}
+.site-footer .footer-grid a:focus-visible{
+  outline:2px solid #e8c496;
+  outline-offset:5px;
+  border-radius:2px;
+}
+html[data-theme="dark"] footer.site-footer{background:#0a0e0c;color:#f6f3eb}
+@media(max-width:1100px){
+  .site-footer .footer-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    column-gap:40px;
+    row-gap:46px;
+  }
+}
+@media(max-width:620px){
+  footer.site-footer{padding:50px 6% 0}
+  .site-footer .footer-grid{grid-template-columns:1fr;row-gap:33px}
+  .site-footer .footer-brand{max-width:100%;padding-bottom:6px}
+  .site-footer .footer-grid .footer-brand-name{font-size:29px;letter-spacing:1px}
+  .site-footer .footer-brand-rule{margin:17px 0 15px}
+  .site-footer .footer-column h3{margin:0 0 13px}
+  .site-footer .footer-bottom{margin-top:35px;padding:20px 0 23px}
+}
+
 .cart-item{
 
 display:flex;
@@ -891,66 +1039,44 @@ html[data-theme="dark"] .cart-tax-note{color:#c6c9bd}
 💬
 
 </a>
-<footer>
+<footer class="site-footer" aria-label="SALTAŞLİNE site alt bilgileri">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a class="footer-brand-name" href="#home" aria-label="SALTAŞLİNE — ana sayfaya dön">SALTAŞLİNE</a>
+      <span class="footer-brand-rule" aria-hidden="true"></span>
+      <p class="footer-brand-motto">İLK VE TEK</p>
+      <p class="footer-brand-description">Premium kadın giyim.<br>Modern, şık ve güvenilir alışveriş.</p>
+      <a class="footer-brand-collection" href="#products">Koleksiyonu keşfet <span aria-hidden="true">↗</span></a>
+    </div>
 
-<div class="footer-grid">
+    <nav class="footer-column" aria-label="Kurumsal">
+      <h3>Kurumsal</h3>
+      <a href="#about">Hakkımızda</a>
+      <a href="#contact">İletişim</a>
+      <a href="#faq">Sık Sorulan Sorular</a>
+    </nav>
 
-<div>
+    <nav class="footer-column" aria-label="Yasal bilgilendirme">
+      <h3>Yasal Bilgilendirme</h3>
+      <a href="gizlilik.html">Gizlilik Politikası</a>
+      <a href="kvkk.html">KVKK Aydınlatma Metni</a>
+      <a href="mesafeli-satis.html">Mesafeli Satış ve Ön Bilgilendirme</a>
+      <a href="iade.html">İptal, İade ve Cayma Hakkı</a>
+      <a href="teslimat-kargo.html">Teslimat ve Kargo</a>
+    </nav>
 
-<h3>SALTAŞLİNE</h3>
+    <div class="footer-column footer-contact">
+      <h3>İletişim</h3>
+      <p class="footer-contact-location"><span aria-hidden="true">⌖</span> İstanbul / Türkiye</p>
+      <a href="tel:+905301103944"><span aria-hidden="true">✆</span> 0530 110 3944</a>
+      <a href="mailto:saltasfurkan9@gmail.com"><span aria-hidden="true">✉</span> saltasfurkan9@gmail.com</a>
+    </div>
+  </div>
 
-<p>
-
-Premium Kadın Giyim
-
-Modern • Şık • Güvenilir
-
-</p>
-
-</div>
-
-<div>
-
-<h3>Kurumsal</h3>
-
-<a href="#about">Hakkımızda</a>
-
-<a href="#contact">İletişim</a>
-
-<a href="#faq">Sık Sorulan Sorular</a>
-
-</div>
-
-<div>
-
-<h3>Yasal Bilgilendirme</h3>
-<a href="gizlilik.html">Gizlilik Politikası</a>
-<a href="kvkk.html">KVKK Aydınlatma Metni</a>
-<a href="mesafeli-satis.html">Mesafeli Satış ve Ön Bilgilendirme</a>
-<a href="iade.html">İptal, İade ve Cayma Hakkı</a>
-<a href="teslimat-kargo.html">Teslimat ve Kargo</a>
-
-</div>
-
-<div>
-
-<h3>İletişim</h3>
-
-<p>📍 İstanbul / Türkiye</p>
-
-<p><a href="tel:+905301103944">📞 0530 110 3944</a></p>
-
-<p><a href="mailto:saltasfurkan9@gmail.com">✉️ saltasfurkan9@gmail.com</a></p>
-
-</div>
-
-</div>
-
-<div class="footer-bottom">
-
-© 2026 SALTAŞLİNE | Tüm Hakları Saklıdır.
-
-</div>
+  <div class="footer-bottom">
+    <span>© 2026 SALTAŞLİNE · Tüm hakları saklıdır.</span>
+    <span class="footer-bottom-signature">Kadın giyimde zarif seçimler.</span>
+  </div>
 <div id="cartPanel">
 
 <h2>🛒 Sepetim</h2>
