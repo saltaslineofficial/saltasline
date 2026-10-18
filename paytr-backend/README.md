@@ -6,10 +6,10 @@ Canlı tahsilat hazır değildir; ödeme anahtarları GitHub'a yazılmamıştır
 ## Güvenlik tasarımı
 
 - Kart numarası, CVV ve kartın son kullanma tarihi SALTAŞLİNE sunucularına **gönderilmez**. Form PayTR'ın kendi iFrame'i ile sunulur.
-- Web sayfasından gelen **fiyat/toplam değerlerine güvenilmez**; `src/catalog.js` içindeki **KDV hariç** kuruş fiyatları ve doğrulanmış varyantlar esas alınır. Sunucu %10 giyim KDV'sini birim bazında hesaplayarak toplamına ekler.
-- Satış fiyatları girildi (Bordo 249999 kr, Siyah Bluz 299999 kr, Haki Takım 349999 kr, Ekru 299999 kr, Pembe Gömlek kampanyalı 149999 kr). Varyantlar hâlâ `[]`; gerçek beden/renk/stok teyidi olmadan ödeme açılamaz.
-- Kargo bedeli sipariş başına **130,00 TL / 13000 kuruş** olarak belirlendi. `SHIPPING_KURUS` sunucuda tanımlanmıştır.
-- **Giyim ürünlerine %10 KDV hesaplanıyor.** Ancak kargonun fatura/KDV uygulaması henüz teyit edilmediği için `TAX_VALIDATED="0"` doğrulama kilidi korunur; teyit edilmeden `1` yapılmamalıdır.
+- Web sayfasından gelen **fiyat/toplam değerlerine güvenilmez**; `src/catalog.js` içinde KDV ve kargo dahil **nihai müşteri birim fiyatları** kuruş cinsinden saklanır. %10 giyim KDV'si bu tutardan içeriden ayrıştırılır; tahsilata ikinci kez eklenmez.
+- Nihai birim fiyatlar (KDV ve kargo dahil): Bordo 287999 kr, Siyah Bluz 342999 kr, Haki Takım 397999 kr, Ekru 342999 kr, Pembe Gömlek kampanyalı 177999 kr. Eski vergiler dahil ürün fiyatlarına her ürün için 130 TL teslimat maliyeti dahil edilmiştir. **Birden fazla üründe fiyat her birim için geçerlidir**. Varyantlar hâlâ `[]`; gerçek beden/renk/stok teyidi olmadan ödeme açılamaz.
+- Müşteriye ayrıca kargo ücreti yansıtılmaz. `SHIPPING_KURUS="0"` güvenlik kilididir; farklı bir değer verilirse `configured()` ödeme sistemini hazır saymaz.
+- **Giyim ürünlerine %10 KDV nihai fiyatın içinden ayrılır**. Kargo maliyetinin ürün fiyatına gömülmesinin fatura/vergi gösterimi muhasebeci tarafından doğrulanana kadar `TAX_VALIDATED="0"` doğrulama kilidi korunur; teyit edilmeden `1` yapılmamalıdır.
 - `PAYTR_ACTIVE=0` ve `PAYTR_TEST_MODE=1` güvenli ilk ayarlardır. Canlı geçiş ancak test ve işletme onayından sonra yapılır.
 - `merchant_id`, `merchant_key`, `merchant_salt` **asla HTML, JavaScript dosyası veya GitHub commit'ine yazılmamalı**. Worker secret olarak saklanmalı.
 - Siparişler D1 veri tabanına kaydedilir. `merchant_oid` benzersizdir. PayTR bildirimi sunucu tarafında HMAC ile doğrulanır. Tekrar eden bildirimlerde ikinci kez işleme alınmaz.
@@ -23,18 +23,18 @@ Canlı tahsilat hazır değildir; ödeme anahtarları GitHub'a yazılmamıştır
 3. `npm install`; `npx wrangler d1 create saltasline-paytr-orders` komutu ile DB oluşturulur ve dönen UUID `wrangler.toml` dosyasına (örneği `wrangler.toml.example`) yazılır.
 4. `npx wrangler d1 execute saltasline-paytr-orders --remote --file=./schema.sql` ile tablolar kurulur.
 5. Worker secrets olarak `npx wrangler secret put PAYTR_MERCHANT_ID`, `npx wrangler secret put PAYTR_MERCHANT_KEY`, `npx wrangler secret put PAYTR_MERCHANT_SALT` çalıştırılır. **Anahtarları sohbet üzerinden göndermeyin.**
-6. Ürün fiyatları satıcının belirttiği KDV hariç tutarlarla dolduruldu. Worker %10 giyim KDV'sini ayrıca hesaplar. Gerçek beden/renk/stok kombinasyonlarını `src/catalog.js` içine girin. Sipariş sırasında gerçek stokların eşzamanlı korunması için stok rezervasyon tasarımı tamamlanmalıdır.
-7. `SHIPPING_KURUS = "13000"` olarak ayarlandı: sipariş başına müşteriye yansıtılan sabit 130,00 TL, ürün sayısıyla çarpılmaz. Ürünlerde %10 KDV ayrıca hesaplanır. **Kargonun faturadaki KDV uygulaması henüz netleşmediğinden**, vergisel kayıtlar ve toplamın doğruluğu muhasebeciyle teyit edilmeden ödeme açmayın.
+6. Ürün satış fiyatları müşteriye gösterilen KDV + kargo dahil son tutarlarla dolduruldu. Worker bu fiyata ilave KDV veya kargo eklemez. Gerçek beden/renk/stok kombinasyonlarını `src/catalog.js` içine girin. Sipariş sırasında gerçek stokların eşzamanlı korunması için stok rezervasyon tasarımı tamamlanmalıdır.
+7. `SHIPPING_KURUS = "0"` olarak ayarlandı: **sipariş başına ek kargo 0 TL**, tüm teslimat maliyeti fiyatlara dahil. Muhasebeci ürün satış fiyatına gömülen bu maliyetin vergisel kayıtlarını teyit edene kadar ödeme açılmamalıdır.
 8. `npx wrangler deploy` ile Worker yayınlanır. PayTR Mağaza Paneli'nde **Bildirim URL**: `https://WORKER_ADRESI/api/paytr/callback`. HTTPS üzerinden dışarıdan POST alabilmeli.
 9. GitHub Pages'teki `odeme.html` ve `odeme-sonuc.html` içinde `PAYMENT_API_BASE` değişkeni gerçek Worker HTTPS kök adresiyle güncellenmeli.
 10. PayTR panelinden test modunda deneme, HMAC yanlış bildirim reddi, tekrarlanan bildirim, tutar hatası, sepet miktarı manipülasyonu, iade ve sipariş durumuyla ilgili testler yapılmalı. PayTR dokümanı: https://dev.paytr.com/iframe-api/iframe-api-1-adim ve https://dev.paytr.com/iframe-api/iframe-api-2-adim
-11. Kargo ücretiyle ilgili vergisel durumu ve tüm vergiler dahil nihai fiyatları işletmenin muhasebecisiyle teyit ettikten sonra `TAX_VALIDATED="1"` yapılabilir. Yalnızca testler geçince `PAYTR_ACTIVE="1"` ile yetkiyi açın; **gerçek kartlardan tahsilat** için ayrıca `PAYTR_TEST_MODE="0"` ve PayTR mağaza canlı onayı gerekir.
+11. Kargo dahil satış fiyatının vergi/fatura niteliğini işletmenin muhasebecisiyle teyit ettikten sonra `TAX_VALIDATED="1"` yapılabilir. Yalnızca testler geçince `PAYTR_ACTIVE="1"` ile yetkiyi açın; **gerçek kartlardan tahsilat** için ayrıca `PAYTR_TEST_MODE="0"` ve PayTR mağaza canlı onayı gerekir.
 12. Canlıya geçmeden önce ödeme öncesi metinlerin, toplam fiyatın ve tüketicinin onay akışının mevzuata uygunluğu kontrol edilmelidir. `mesafeli-satis.html` mevcut hâliyle genel ön bilgilendirmedir; siparişe özel sözleşme/onay kayıtları ayrıca gerekir.
 
 ## API
 
 - `GET /api/payment/config` → `{ready:false}` başlangıçta; tüm ön koşullar sağlanınca `true`.
-- `POST /api/payment/quote` → doğrulanmış `subtotalKurus` (KDV hariç ürünler), `vatKurus` (%10 giyim KDV'si), `vatRatePercent`, `shippingKurus` ve `totalKurus` döndürür.
+- `POST /api/payment/quote` → `subtotalKurus` (KDV ve teslimat dahil ürünlerin toplamı), `vatKurus` (fiyatın içindeki %10 KDV, ayrıca tahsil edilmez), `vatIncluded:true`, `shippingIncluded:true`, `shippingKurus:0`, `totalKurus` (toplam ürün bedeli) döndürür.
 - `POST /api/payment/start` → `{items:[{productId,size,color,quantity}], buyer:{name,email,phone,address}, acceptTerms:true}`; sunucu fiyat ve stok doğrular, PayTR'dan iFrame token ister, siparişi D1'e kaydeder. Canlı kodda müşteri verilerinin kullanımına ilişkin KVKK süreçleri tamamlanmalıdır.
 - `POST /api/paytr/callback` → PayTR'ın HMAC doğrulamalı bildirim uç noktası; başarılı ve başarısız sonucu D1'e yazar, `OK` döner.
 - `GET /api/payment/status/:oid?receipt=... ` → yalnızca sipariş referansı ve rastgele özel makbuz anahtarıyla ödeme durumunu döner.
@@ -43,6 +43,6 @@ Canlı tahsilat hazır değildir; ödeme anahtarları GitHub'a yazılmamıştır
 
 Site statik GitHub Pages'te kalır. Cloudflare Worker yalnızca güvenli sunucu işlemleri içindir.
 Buradaki `wrangler.toml.example` bir şablondur; `wrangler.toml` gizli veriler içermemelidir.
-Bu dal ve taslak PR, müşteri ödeme ortamına **merge edilmemelidir**: Yetkili hesap, kargonun KDV/fatura ayrıntısı, stok, depolama ve gerçek testler eksik.
+Bu dal ve taslak PR, müşteri ödeme ortamına **merge edilmemelidir**: PayTR yetkili hesap, kargo dahil fiyatın muhasebe/fatura ayrıntısı, teyitli stok, Worker/D1 depolama ve gerçek testler eksik.
 
 Kaynak: PayTR resmî iFrame 1-2. adım API belgeleri.
