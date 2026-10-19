@@ -478,6 +478,25 @@ html[data-theme="dark"] .sl-products-section #productGrid>.product .product-info
 }
 
 </style>
+<style id="fb-favorites-styles">
+
+/* FUBERİ favoriler ve doğrudan ürün sorusu */
+.sl-products-section #categoryFilters [data-filter="favorites"]{border-color:#b8996d;background:#fff8ef;color:#79572d;font-weight:650}
+.sl-products-section #categoryFilters [data-filter="favorites"].active{background:#775a38;color:#fff;border-color:#775a38}
+.sl-products-section .fb-fav-toggle{display:inline-flex;align-self:center;align-items:center;justify-content:center;gap:7px;max-width:100%;min-height:36px;margin:2px auto 4px;padding:7px 11px;border:1px solid #e1d5c7;border-radius:30px;background:#f9f6f1;color:#735b40;font:600 11px/1.3 Poppins,system-ui,sans-serif;cursor:pointer}
+.sl-products-section .fb-fav-toggle:hover{background:#f1e7db}
+.sl-products-section .fb-fav-toggle[aria-pressed="true"]{background:#fff0f1;border-color:#dcaeb6;color:#9b3e55}
+.sl-products-section .fb-fav-toggle .fb-fav-icon{font:normal 18px/1 Georgia,serif}
+.sl-products-section .fb-fav-toggle:focus-visible{outline:3px solid #bd986a;outline-offset:2px}
+.fb-product-ask{display:flex;align-items:center;justify-content:center;text-align:center;text-decoration:none;border:1px solid #64856c;border-radius:8px;background:#f0f8f2;color:#2a5936;padding:13px;font:600 12px/1.5 Poppins,system-ui,sans-serif}
+.fb-product-ask:hover,.fb-product-ask:focus-visible{background:#dff0e4}
+html[data-theme="dark"] .sl-products-section #categoryFilters [data-filter="favorites"]{background:#393125;color:#f2d7b0;border-color:#9e7d54}
+html[data-theme="dark"] .sl-products-section #categoryFilters [data-filter="favorites"].active{background:#bc9b6d;color:#171d17}
+html[data-theme="dark"] .sl-products-section .fb-fav-toggle{background:#2d3830;color:#eedac0;border-color:#64725f}
+html[data-theme="dark"] .sl-products-section .fb-fav-toggle[aria-pressed="true"]{background:#503038;color:#fbcbd3;border-color:#b07a86}
+html[data-theme="dark"] .fb-product-ask{background:#263c2c;color:#e3f1e6;border-color:#67836d}
+@media(max-width:600px){.sl-products-section .fb-fav-toggle{font-size:10px;min-height:34px;padding:7px 8px;gap:4px;margin:0 auto 3px}}
+</style>
 </head>
 
 <body>
@@ -1000,6 +1019,7 @@ background:#b8955f;
       <button class="sl-filter" type="button" data-filter="takim" aria-pressed="false" aria-controls="productGrid">Takım</button>
       <button class="sl-filter" type="button" data-filter="bluz" aria-pressed="false" aria-controls="productGrid">Bluz</button>
       <button class="sl-filter" type="button" data-filter="gomlek" aria-pressed="false" aria-controls="productGrid">Gömlek</button>
+      <button class="sl-filter" type="button" data-filter="favorites" aria-pressed="false" aria-controls="productGrid">♡ Favorilerim <span id="fbFavoriteCount">0</span></button>
     </div>
   </div>
   <div class="sl-results-bar" aria-live="polite" aria-atomic="true">
@@ -1013,6 +1033,7 @@ background:#b8955f;
 <img src="elbise1.jpg.jpeg" alt="Bordo Uzun Elbise" loading="lazy" fetchpriority="low" decoding="async">
 <div class="product-info">
 <h3>Bordo Uzun Elbise</h3>
+<button class="fb-fav-toggle" type="button" aria-pressed="false"><span class="fb-fav-icon" aria-hidden="true">♡</span><span class="fb-fav-label">Favorilere ekle</span></button>
 <div class="price" data-price-kurus="287999" hidden>2.879,99 ₺</div>
 <button class="buy" type="button">Ürünü İncele · Beden Seç</button>
 </div>
@@ -1023,6 +1044,7 @@ background:#b8955f;
 <div class="sl-product-photo-frame"><img src="elbise2.jpg" alt="Siyah Puantiyeli Bluz" loading="lazy" fetchpriority="low" decoding="async"></div>
 <div class="product-info">
 <h3>Siyah Puantiyeli Bluz</h3>
+<button class="fb-fav-toggle" type="button" aria-pressed="false"><span class="fb-fav-icon" aria-hidden="true">♡</span><span class="fb-fav-label">Favorilere ekle</span></button>
 <div class="price" data-price-kurus="342999" hidden>3.429,99 ₺</div>
 <button class="buy" type="button">Ürünü İncele · Beden Seç</button>
 </div>
@@ -1033,6 +1055,7 @@ background:#b8955f;
 <div class="sl-product-photo-frame"><img src="elbise3.jpg" alt="Haki Yeşil Takım" loading="lazy" fetchpriority="low" decoding="async"></div>
 <div class="product-info">
 <h3>Haki Yeşil Takım</h3>
+<button class="fb-fav-toggle" type="button" aria-pressed="false"><span class="fb-fav-icon" aria-hidden="true">♡</span><span class="fb-fav-label">Favorilere ekle</span></button>
 <div class="price" data-price-kurus="397999" hidden>3.979,99 ₺</div>
 <button class="buy" type="button">Ürünü İncele · Beden Seç</button>
 </div>
@@ -1043,6 +1066,7 @@ background:#b8955f;
 <img src="elbise4.jpg" alt="Ekru Uzun Elbise" loading="lazy" fetchpriority="low" decoding="async">
 <div class="product-info">
 <h3>Ekru Uzun Elbise</h3>
+<button class="fb-fav-toggle" type="button" aria-pressed="false"><span class="fb-fav-icon" aria-hidden="true">♡</span><span class="fb-fav-label">Favorilere ekle</span></button>
 <div class="price" data-price-kurus="342999" hidden>3.429,99 ₺</div>
 <button class="buy" type="button">Ürünü İncele · Beden Seç</button>
 </div>
@@ -1054,6 +1078,7 @@ background:#b8955f;
 <div class="sl-product-photo-frame"><img src="elbise5.jpg" alt="Pembe Gömlek" loading="lazy" fetchpriority="low" decoding="async"></div>
 <div class="product-info">
 <h3>Pembe Gömlek</h3>
+<button class="fb-fav-toggle" type="button" aria-pressed="false"><span class="fb-fav-icon" aria-hidden="true">♡</span><span class="fb-fav-label">Favorilere ekle</span></button>
 <div class="price" data-price-kurus="177999" hidden>1.779,99 ₺</div>
 <button class="buy" type="button">Ürünü İncele · Beden Seç</button>
 </div>
@@ -1062,7 +1087,7 @@ background:#b8955f;
 </section>
 
 <script>
-/* FUBERİ: canlı ürün arama ve kategori filtreleme (yalnızca mevcut ürünlere uygulanır). */
+/* FUBERİ — arama, kategori ve üyelik gerektirmeyen favoriler */
 (function(){
   "use strict";
   const input=document.getElementById("searchBox");
@@ -1071,42 +1096,75 @@ background:#b8955f;
   const count=document.getElementById("shownCount");
   const empty=document.getElementById("noProducts");
   const reset=document.getElementById("resetFilters");
-  if(!input || !filters.length || !products.length || !count || !empty || !reset) return;
+  const favoriteCount=document.getElementById("fbFavoriteCount");
+  if(!input||!filters.length||!products.length||!count||!empty||!reset||!favoriteCount)return;
+  const key="fuberi-favorites-v1";
+  const allowed=new Set(products.map(p=>p.dataset.productId).filter(Boolean));
+  let stored=[];
+  try{
+    const raw=JSON.parse(localStorage.getItem(key)||"[]");
+    if(Array.isArray(raw))stored=raw.filter(id=>typeof id==="string"&&allowed.has(id));
+  }catch(e){}
+  const favs=new Set(stored);
   let active="all";
-  function normalized(text){
-    return String(text || "").toLocaleLowerCase("tr-TR").normalize("NFKD").replace(/[\u0300-\u036f]/g,"");
+  const norm=value=>String(value||"").toLocaleLowerCase("tr-TR").normalize("NFKD").replace(/[\u0300-\u036f]/g,"");
+  function renderFavs(){
+    favoriteCount.textContent=String(favs.size);
+    products.forEach(product=>{
+      const button=product.querySelector(".fb-fav-toggle");
+      if(!button)return;
+      const yes=favs.has(product.dataset.productId);
+      const name=product.querySelector("h3")?.textContent.trim()||"Ürün";
+      button.setAttribute("aria-pressed",String(yes));
+      button.setAttribute("aria-label",name+(yes?" favorilerimden çıkar":" favorilerime ekle"));
+      button.querySelector(".fb-fav-icon").textContent=yes?"♥":"♡";
+      button.querySelector(".fb-fav-label").textContent=yes?"Favorilerimde":"Favorilere ekle";
+    });
   }
   function update(){
-    const keyword=normalized(input.value.trim());
+    const keyword=norm(input.value.trim());
     let shown=0;
     products.forEach(product=>{
-      const category=product.dataset.category || "";
-      const name=normalized(product.querySelector("h3")?.textContent || "");
-      const isVisible=(active==="all" || active===category) && (!keyword || name.includes(keyword));
-      product.hidden=!isVisible;
-      if(isVisible) shown++;
+      const category=product.dataset.category||"";
+      const name=norm(product.querySelector("h3")?.textContent||"");
+      const match=active==="all"||active===category||(active==="favorites"&&favs.has(product.dataset.productId));
+      product.hidden=!(match&&(!keyword||name.includes(keyword)));
+      if(!product.hidden)shown++;
     });
-    count.textContent=shown + " ürün gösteriliyor";
+    count.textContent=shown+" ürün gösteriliyor";
     empty.hidden=shown!==0;
-    reset.hidden=active==="all" && !input.value.trim();
-    filters.forEach(btn=>{
-      const selected=btn.dataset.filter===active;
-      btn.classList.toggle("active",selected);
-      btn.setAttribute("aria-pressed",String(selected));
+    empty.textContent=active==="favorites"&&favs.size===0
+      ?"Henüz favori ürününüz yok. Beğendiğiniz ürünün altındaki kalbe dokunabilirsiniz."
+      :"Bu aramada ürün bulunamadı. Başka bir kelime deneyebilir veya filtreleri temizleyebilirsiniz.";
+    reset.hidden=active==="all"&&!input.value.trim();
+    filters.forEach(button=>{
+      const selected=button.dataset.filter===active;
+      button.classList.toggle("active",selected);
+      button.setAttribute("aria-pressed",String(selected));
     });
   }
-  filters.forEach(btn=>btn.addEventListener("click",()=>{active=btn.dataset.filter;update();}));
+  products.forEach(product=>{
+    const button=product.querySelector(".fb-fav-toggle");
+    if(!button)return;
+    button.addEventListener("click",()=>{
+      const id=product.dataset.productId;
+      if(!allowed.has(id))return;
+      if(favs.has(id))favs.delete(id);else favs.add(id);
+      try{localStorage.setItem(key,JSON.stringify([...favs]));}catch(e){}
+      renderFavs();update();
+    });
+  });
+  filters.forEach(button=>button.addEventListener("click",()=>{active=button.dataset.filter;update();}));
   document.querySelectorAll("[data-jump-category]").forEach(link=>{
     link.addEventListener("click",()=>{
-      const selected=filters.find(btn=>btn.dataset.filter===link.dataset.jumpCategory);
-      if(!selected) return;
-      input.value="";
-      selected.click();
+      const match=filters.find(btn=>btn.dataset.filter===link.dataset.jumpCategory);
+      if(!match)return;
+      input.value="";match.click();
     });
   });
   input.addEventListener("input",update);
   reset.addEventListener("click",()=>{active="all";input.value="";update();input.focus();});
-  update();
+  renderFavs();update();
 })();
 </script>
 
@@ -2036,6 +2094,7 @@ Kapat
       <div class="modal-qty"><button id="modalMinus" type="button">−</button><output id="modalQuantity">1</output><button id="modalPlus" type="button">+</button></div>
       <button id="modalAdd" class="modal-add" type="button">Sepete Ekle</button>
       <p id="modalError" class="modal-error" role="status"></p>
+      <a class="fb-product-ask" id="fbProductAsk" href="https://wa.me/905301103944" target="_blank" rel="noopener noreferrer">Bu ürünle ilgili WhatsApp’tan sor ↗</a>
     </div>
   </div>
 </div>
@@ -2224,11 +2283,24 @@ html[data-theme="dark"] .modal-price-breakdown{color:#c9d1c5}
   const modalPriceBreakdown = document.getElementById("modalPriceBreakdown");
   const modalSize = document.getElementById("modalSize");
   const modalColor = document.getElementById("modalColor");
+  const fbProductAsk = document.getElementById("fbProductAsk");
   const modalQuantity = document.getElementById("modalQuantity");
   const modalError = document.getElementById("modalError");
   let selectedProduct = null;
   let selectedQuantity = 1;
   let previousFocus = null;
+  if(fbProductAsk){
+    fbProductAsk.addEventListener("click",()=>{
+      const itemName=modalName.textContent.trim();
+      const size=modalSize.value.trim();
+      const color=modalColor.value.trim();
+      const message="Merhaba, FUBERİ'deki "+itemName+" hakkında bilgi almak istiyorum."
+        +(size?" Tercih ettiğim beden: "+size+".":"")
+        +(color?" İstediğim renk: "+color+".":"")
+        +" Kumaş, ölçü ve stok hakkında bilgi verebilir misiniz?";
+      fbProductAsk.href="https://wa.me/905301103944?text="+encodeURIComponent(message);
+    });
+  }
 
   function closeProduct() {
     modal.hidden = true;
