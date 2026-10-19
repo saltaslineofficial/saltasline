@@ -1,0 +1,39 @@
+/* FUBERİ — çerez ve yerel depolama tercihleri (anasayfa + yasal sayfalar) */
+.fb-cookie-banner,.fb-cookie-dialog{font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;box-sizing:border-box}
+.fb-cookie-banner *,.fb-cookie-dialog *{box-sizing:border-box}
+.fb-cookie-banner[hidden]{display:none!important}
+.fb-cookie-banner{position:fixed;z-index:1000300;bottom:18px;left:18px;width:min(520px,calc(100vw - 36px));padding:22px;background:#fffdf8;color:#24231f;border:1px solid #e7d8c2;border-top:4px solid #b99a6a;border-radius:18px;box-shadow:0 20px 70px rgba(10,10,10,.22);line-height:1.55;text-align:left}
+.fb-cookie-banner .fb-cookie-eyebrow,.fb-cookie-dialog .fb-cookie-eyebrow{display:block;color:#8d714b;letter-spacing:.18em;font-size:10px;font-weight:800;margin-bottom:7px}
+.fb-cookie-banner h2,.fb-cookie-dialog h2{font:normal 27px/1.2 Georgia,serif!important;letter-spacing:normal;margin:0 0 9px;color:#211e19}
+.fb-cookie-banner p,.fb-cookie-dialog p{color:#5c574f;font-size:13px;line-height:1.65;margin:0 0 14px}
+.fb-cookie-banner a,.fb-cookie-dialog a{color:#795a2e;text-decoration:underline;text-underline-offset:3px}
+.fb-cookie-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:18px}
+.fb-cookie-actions button,.fb-cookie-dialog .fb-cookie-save{min-height:44px;border:1px solid #2d2c28;border-radius:9px;padding:10px 6px;font:700 12px/1.3 system-ui,-apple-system,"Segoe UI",sans-serif;cursor:pointer;background:#262822;color:#fff;transition:background .2s}
+.fb-cookie-actions button:hover,.fb-cookie-actions button:focus-visible,.fb-cookie-dialog .fb-cookie-save:hover,.fb-cookie-dialog .fb-cookie-save:focus-visible{background:#665035}
+.fb-cookie-actions button:focus-visible,.fb-cookie-dialog button:focus-visible,.fb-cookie-dialog input:focus-visible,.fb-cookie-open:focus-visible{outline:3px solid #b79c70;outline-offset:3px}
+.fb-cookie-open{display:inline-flex;align-items:center;justify-content:center;min-height:35px;margin:0;border:1px solid currentColor;border-radius:6px;background:transparent;color:inherit;padding:6px 10px;font:600 12px/1.3 system-ui,-apple-system,"Segoe UI",sans-serif;cursor:pointer;text-align:center}
+.fb-cookie-open:hover{opacity:.8}
+.fb-cookie-dialog{position:fixed;z-index:1000301;max-width:560px;width:calc(100% - 32px);max-height:min(90vh,730px);overflow:auto;padding:0;border:1px solid #e7d8c2;border-radius:18px;background:#fffdf9;color:#24231f;box-shadow:0 24px 75px rgba(0,0,0,.25)}
+.fb-cookie-dialog:not([open]){display:none}
+.fb-cookie-dialog::backdrop{background:rgba(0,0,0,.56)}
+.fb-cookie-dialog-inner{padding:28px}
+.fb-cookie-dialog-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.fb-cookie-close{width:36px;height:36px;border:1px solid #e7d8c2;border-radius:50%;background:#fff;color:#24231f;font-size:21px;cursor:pointer;flex-shrink:0}
+.fb-cookie-option{display:flex;align-items:flex-start;justify-content:space-between;gap:13px;padding:15px 0;border-top:1px solid #e8e1d8;cursor:pointer}
+.fb-cookie-option:first-of-type{margin-top:10px}
+.fb-cookie-option h3{font-size:14px;font-weight:750;margin:0 0 5px;color:#312b21}
+.fb-cookie-option p{font-size:12px;margin:0;color:#655f55}
+.fb-cookie-option input{width:22px;height:22px;flex-shrink:0;margin-top:3px;accent-color:#816337;cursor:pointer}
+.fb-cookie-required{white-space:nowrap;color:#73644e;font-size:11px;font-weight:700;padding-top:4px}
+.fb-cookie-dialog .fb-cookie-save{display:block;width:100%;margin-top:18px}
+.fb-cookie-dialog .fb-cookie-subnote{font-size:11px;margin-top:12px;margin-bottom:0}
+@media(max-width:540px){
+ .fb-cookie-banner{bottom:9px;left:9px;width:calc(100vw - 18px);border-radius:13px;padding:17px 14px}
+ .fb-cookie-banner h2{font-size:23px!important}
+ .fb-cookie-banner p{font-size:12px;line-height:1.5}
+ .fb-cookie-actions{gap:6px;margin-top:13px}
+ .fb-cookie-actions button{min-height:42px;padding:8px 4px;font-size:11px}
+ .fb-cookie-dialog-inner{padding:22px 18px}
+ .fb-cookie-dialog h2{font-size:25px!important}
+}
+@media(prefers-reduced-motion:reduce){.fb-cookie-actions button{transition:none}}
