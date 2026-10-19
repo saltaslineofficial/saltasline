@@ -497,9 +497,44 @@ html[data-theme="dark"] .sl-products-section .fb-fav-toggle[aria-pressed="true"]
 html[data-theme="dark"] .fb-product-ask{background:#263c2c;color:#e3f1e6;border-color:#67836d}
 @media(max-width:600px){.sl-products-section .fb-fav-toggle{font-size:10px;min-height:34px;padding:7px 8px;gap:4px;margin:0 auto 3px}}
 </style>
+<style id="fb-consent-style">
+.fb-consent[hidden],.fb-consent-settings[hidden]{display:none!important}
+.fb-consent{position:fixed;z-index:1000050;bottom:14px;left:12px;right:12px;max-width:900px;margin:auto;padding:19px 22px;border:1px solid #bca17c;border-radius:15px;background:#fffdf8;color:#29241e;box-shadow:0 12px 50px #0005;font:13px/1.55 Poppins,system-ui,sans-serif}
+.fb-consent h2{font:600 22px/1.2 Georgia,serif;margin:0 0 8px}
+.fb-consent p{margin:0 0 12px}
+.fb-consent a{color:#6c4e27;text-decoration:underline}
+.fb-consent-actions{display:flex;flex-wrap:wrap;gap:9px}
+.fb-consent button,.fb-consent-manage{border:1px solid #79603e;border-radius:8px;padding:10px 12px;background:transparent;color:inherit;font:600 12px/1.4 Poppins,system-ui,sans-serif;cursor:pointer}
+.fb-consent .fb-consent-accept{background:#1c2b20;color:#fff;border-color:#1c2b20}
+.fb-consent-settings{padding:12px 0;margin-top:9px;border-top:1px solid #e2d7c6}
+.fb-consent-settings label{display:flex;gap:9px;align-items:flex-start;margin:8px 0}
+.fb-consent-settings input{accent-color:#886d45;margin-top:4px;width:16px;height:16px}
+.fb-consent-manage{margin-top:10px}
+.fb-consent button:focus-visible,.fb-consent-manage:focus-visible{outline:3px solid #bda176;outline-offset:2px}
+html[data-theme="dark"] .fb-consent{background:#242921;color:#f5eadd;border-color:#8c7455}
+html[data-theme="dark"] .fb-consent a{color:#ebcc9b}
+html[data-theme="dark"] .fb-consent .fb-consent-accept{background:#e4c89f;color:#1e281f}
+html[data-theme="dark"] .fb-consent-settings{border-color:#6b604d}
+@media(max-width:550px){.fb-consent{padding:15px;bottom:8px;left:8px;right:8px}.fb-consent h2{font-size:19px}.fb-consent-actions button{flex:1 1 120px;padding:11px 6px;font-size:11px}}
+</style>
 </head>
 
 <body>
+<div id="fbConsent" class="fb-consent" role="region" aria-label="Çerez ve gizlilik tercihleri" hidden>
+  <h2>Gizliliğiniz bizim için önemli</h2>
+  <p>FUBERİ reklam veya analiz çerezi kullanmıyor. Onayınız ve seçtiğiniz tema gibi gerekli tercihler bu cihazda tutulabilir. İsteğe bağlı olarak favorilerinizi sonraki ziyaretiniz için hatırlayabiliriz. <a href="gizlilik.html">Gizlilik politikası</a></p>
+  <div class="fb-consent-settings" id="fbConsentSettings" hidden>
+    <label><input type="checkbox" checked disabled><span><strong>Gerekli depolama:</strong> Onay ve görünüm tercihi; kapatılamaz.</span></label>
+    <label><input type="checkbox" id="fbConsentFavorites"><span><strong>Favorileri hatırla:</strong> Seçtiğiniz ürünler bu tarayıcıda saklansın.</span></label>
+    <p>Reddetseniz de favoriler sayfa açıkken kullanılabilir. Harici hizmetlerin kendi veri işleme kuralları geçerli olabilir.</p>
+  </div>
+  <div class="fb-consent-actions">
+    <button id="fbConsentReject" type="button">Zorunlu olanlarla devam</button>
+    <button id="fbConsentOptions" type="button" aria-expanded="false" aria-controls="fbConsentSettings">Tercihleri yönet</button>
+    <button id="fbConsentAccept" class="fb-consent-accept" type="button">Tümünü kabul et</button>
+  </div>
+</div>
+
 
 <div class="sl-announcement" aria-label="FUBERİ alışveriş bilgileri">
   <span class="sl-announcement-spark" aria-hidden="true">✦</span>
@@ -1102,7 +1137,7 @@ background:#b8955f;
   const allowed=new Set(products.map(p=>p.dataset.productId).filter(Boolean));
   let stored=[];
   try{
-    const raw=JSON.parse(localStorage.getItem(key)||"[]");
+    const raw=JSON.parse(window.fuberiPrivacyAllowsFavorites?.() ? (localStorage.getItem(key)||"[]") : "[]");
     if(Array.isArray(raw))stored=raw.filter(id=>typeof id==="string"&&allowed.has(id));
   }catch(e){}
   const favs=new Set(stored);
@@ -1150,7 +1185,7 @@ background:#b8955f;
       const id=product.dataset.productId;
       if(!allowed.has(id))return;
       if(favs.has(id))favs.delete(id);else favs.add(id);
-      try{localStorage.setItem(key,JSON.stringify([...favs]));}catch(e){}
+      try{if(window.fuberiPrivacyAllowsFavorites?.())localStorage.setItem(key,JSON.stringify([...favs]));}catch(e){}
       renderFavs();update();
     });
   });
@@ -1164,6 +1199,10 @@ background:#b8955f;
   });
   input.addEventListener("input",update);
   reset.addEventListener("click",()=>{active="all";input.value="";update();input.focus();});
+  document.addEventListener("fuberi:privacy-changed",event=>{
+    if(!event.detail?.favorites){try{localStorage.removeItem(key)}catch(e){}}
+    else{try{localStorage.setItem(key,JSON.stringify([...favs]))}catch(e){}}
+  });
   renderFavs();update();
 })();
 </script>
@@ -2032,7 +2071,7 @@ html[data-theme="dark"] .cart-tax-note{color:#c6c9bd}
     </div>
   </div>
 
-  <div class="footer-bottom">
+  <div class="footer-bottom"><button id="fbConsentManage" class="fb-consent-manage" type="button">Çerez tercihlerini yönet</button>
     <div class="footer-ornament" aria-hidden="true">
       <span class="footer-ornament-line"></span>
       <svg class="footer-ornament-flower" viewBox="0 0 56 30" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -2412,6 +2451,45 @@ html[data-theme="dark"] .modal-price-breakdown{color:#c9d1c5}
 })();
 </script>
 
+<script>
+/* FUBERİ gizlilik tercihleri; zorunlu olmayan depolama rızaya bağlıdır. */
+(function(){
+ "use strict";
+ const key="fuberi-privacy-consent-v1";
+ const favKey="fuberi-favorites-v1";
+ const bar=document.getElementById("fbConsent");
+ const settings=document.getElementById("fbConsentSettings");
+ const checkbox=document.getElementById("fbConsentFavorites");
+ const options=document.getElementById("fbConsentOptions");
+ const manage=document.getElementById("fbConsentManage");
+ const accept=document.getElementById("fbConsentAccept");
+ const reject=document.getElementById("fbConsentReject");
+ if(!bar||!settings||!checkbox||!options||!manage||!accept||!reject)return;
+ function read(){
+  try{const v=JSON.parse(localStorage.getItem(key)||"null");return v&&v.version===1&&typeof v.favorites==="boolean"?v:null}catch(e){return null}
+ }
+ function show(){
+  checkbox.checked=Boolean(read()?.favorites);
+  settings.hidden=true;options.setAttribute("aria-expanded","false");
+  bar.hidden=false;
+ }
+ function save(allow){
+  try{
+   localStorage.setItem(key,JSON.stringify({version:1,favorites:allow,updated:new Date().toISOString()}));
+   if(!allow)localStorage.removeItem(favKey);
+  }catch(e){}
+  bar.hidden=true;
+  document.dispatchEvent(new CustomEvent("fuberi:privacy-changed",{detail:{favorites:allow}}));
+  manage.focus();
+ }
+ options.addEventListener("click",()=>{settings.hidden=!settings.hidden;options.setAttribute("aria-expanded",String(!settings.hidden));if(!settings.hidden)checkbox.focus()});
+ accept.addEventListener("click",()=>save(true));
+ reject.addEventListener("click",()=>save(false));
+ manage.addEventListener("click",show);
+ if(!read())show();
+ window.fuberiPrivacyAllowsFavorites=()=>Boolean(read()?.favorites);
+})();
+</script>
 </body>
 </html>
   
