@@ -578,6 +578,25 @@ html[data-theme="dark"] .fb-consent-settings{border-color:#6b604d}
   window.addEventListener("resize",()=>{if(window.innerWidth>700)closeMenu()});
 })();
 </script>
+<style id="sl-quick-categories-style">
+.sl-quick-categories{background:#fffdf9;border-bottom:1px solid #e7dfd4;padding:20px 5% 22px;text-align:center}
+.sl-quick-categories p{font:500 11px Poppins,sans-serif;letter-spacing:2px;color:#8a7055;margin:0 0 13px}
+.sl-quick-links{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;max-width:960px;margin:auto}
+.sl-quick-links a{display:inline-flex;align-items:center;justify-content:center;min-height:45px;padding:10px 23px;border:1px solid #d8cbbc;border-radius:3px;background:#faf7f2;color:#26251f;text-decoration:none;font:500 13px Poppins,sans-serif;transition:background .2s,border-color .2s}
+.sl-quick-links a:hover,.sl-quick-links a:focus-visible{background:#eee4d5;border-color:#a88c68}
+.sl-quick-links a:first-child{background:#253027;color:#fff;border-color:#253027}
+html[data-theme="dark"] .sl-quick-categories{background:#202820;border-color:#465046}
+html[data-theme="dark"] .sl-quick-links a{background:#2d362e;color:#f4ebdf;border-color:#566252}
+@media(max-width:600px){.sl-quick-categories{padding:17px 4% 19px}.sl-quick-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.sl-quick-links a{padding:10px 5px;min-height:44px;font-size:12px}}
+</style>
+<nav class="sl-quick-categories" aria-label="Hızlı ürün kategorileri"><p>NE ARIYORSUNUZ?</p><div class="sl-quick-links">
+<a href="#products" data-jump-category="all">Tüm Ürünler</a>
+<a href="#products" data-jump-category="elbise">Elbise</a>
+<a href="#products" data-jump-category="pantolon">Pantolon</a>
+<a href="#products" data-jump-category="takim">Takım</a>
+<a href="#products" data-jump-category="bluz">Bluz</a>
+<a href="#products" data-jump-category="gomlek">Gömlek</a>
+</div></nav>
 <section class="hero" id="home" aria-label="SALTAŞ LİNE koleksiyonu">
   <div class="hero-copy">
     <span class="hero-eyebrow">SALTAŞ LİNE · İLK VE TEK</span>
@@ -1053,6 +1072,7 @@ background:#b8955f;
     <div class="sl-category-filters" id="categoryFilters" role="group" aria-label="Ürün kategorileri">
       <button class="sl-filter active" type="button" data-filter="all" aria-pressed="true" aria-controls="productGrid">Tüm Ürünler</button>
       <button class="sl-filter" type="button" data-filter="elbise" aria-pressed="false" aria-controls="productGrid">Elbise</button>
+      <button class="sl-filter" type="button" data-filter="pantolon" aria-pressed="false" aria-controls="productGrid">Pantolon</button>
       <button class="sl-filter" type="button" data-filter="takim" aria-pressed="false" aria-controls="productGrid">Takım</button>
       <button class="sl-filter" type="button" data-filter="bluz" aria-pressed="false" aria-controls="productGrid">Bluz</button>
       <button class="sl-filter" type="button" data-filter="gomlek" aria-pressed="false" aria-controls="productGrid">Gömlek</button>
@@ -1063,7 +1083,7 @@ background:#b8955f;
     <span id="shownCount">5 ürün gösteriliyor</span>
     <button id="resetFilters" type="button" hidden>Filtreleri temizle <span aria-hidden="true">×</span></button>
   </div>
-  <p id="noProducts" class="sl-no-results" hidden>Bu aramada ürün bulunamadı. Başka bir kelime deneyebilir veya filtreleri temizleyebilirsin.</p>
+  <p id="noProducts" class="sl-no-results" hidden>Bu kategoride henüz ürün bulunmuyor. Diğer kategorilere göz atabilir veya filtreleri temizleyebilirsiniz.</p>
   <div class="products" id="productGrid">
 <article class="product" data-category="elbise" data-product-id="elbise1">
 <span class="shipping-included">KARGO DAHİL</span>
