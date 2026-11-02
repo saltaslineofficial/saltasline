@@ -589,7 +589,7 @@ html[data-theme="dark"] .sl-quick-categories{background:#202820;border-color:#46
 html[data-theme="dark"] .sl-quick-links a{background:#2d362e;color:#f4ebdf;border-color:#566252}
 @media(max-width:600px){.sl-quick-categories{padding:17px 4% 19px}.sl-quick-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.sl-quick-links a{padding:10px 5px;min-height:44px;font-size:12px}}
 </style>
-<nav class="sl-quick-categories" aria-label="Hızlı ürün kategorileri"><p>NE ARIYORSUNUZ?</p><div class="sl-quick-links">
+<nav id="koleksiyonlar" class="sl-quick-categories" aria-label="Hızlı ürün kategorileri"><p>NE ARIYORSUNUZ?</p><div class="sl-quick-links">
 <a href="#products" data-jump-category="all">Tüm Ürünler</a>
 <a href="#products" data-jump-category="elbise">Elbise</a>
 <a href="#products" data-jump-category="pantolon">Pantolon</a>
@@ -597,6 +597,40 @@ html[data-theme="dark"] .sl-quick-links a{background:#2d362e;color:#f4ebdf;borde
 <a href="#products" data-jump-category="bluz">Bluz</a>
 <a href="#products" data-jump-category="gomlek">Gömlek</a>
 </div></nav>
+<style id="sl-clean-layout-v2">
+/* A compact storefront: three category photographs, product grid, contact, footer. */
+.hero,.hero-benefits,.fb-feature,.sl-lookbook,.why-saltasline,.fb-order-guide,.about-story,.help-section{display:none!important}
+.sl-announcement{min-height:32px!important;padding:6px 3%!important}
+.sl-quick-categories{padding:18px 4% 15px!important}
+.fb-categories{padding:25px 4% 38px!important;margin:0!important}
+.fb-heading{margin-bottom:18px!important}
+.fb-heading h2{font-size:clamp(25px,3.4vw,40px)!important}
+.fb-heading p,.fb-cat-foot,.fb-cat-label,.fb-cat-action{display:none!important}
+.fb-categories-grid{max-width:1150px!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:15px!important}
+.fb-category-card{height:clamp(230px,32vw,430px)!important;border-radius:5px!important;overflow:hidden!important}
+.fb-category-card:nth-child(4){display:none!important}
+.fb-cat-info{padding:18px!important}
+.fb-cat-info strong{font-size:clamp(16px,2vw,26px)!important}
+.sl-products-section{padding:44px 5% 55px!important;margin:0!important}
+.sl-shop-header{margin-bottom:20px!important}
+.sl-shop-header h2{font-size:clamp(25px,3.4vw,38px)!important}
+.sl-shop-header p{margin-top:8px!important}
+.contact-section{padding:40px 5% 45px!important;margin:0!important}
+.site-footer{margin-top:0!important;padding-top:35px!important}
+@media(max-width:700px){
+.sl-announcement{font-size:10px!important}
+.sl-quick-categories{padding:13px 3% 12px!important}
+.fb-categories{padding:20px 3% 30px!important}
+.fb-heading{margin-bottom:14px!important}
+.fb-categories-grid{gap:7px!important}
+.fb-category-card{height:clamp(170px,55vw,250px)!important}
+.fb-cat-info{padding:9px!important}
+.fb-cat-info strong{font-size:13px!important}
+.sl-products-section{padding:35px 4% 40px!important}
+.sl-products-section .products{gap:10px!important}
+.sl-shop-header p{font-size:12px!important}
+}
+</style>
 <style id="sl-editorial-refresh">
 /* Clean, image-led storefront; all shopping functions remain available. */
 .sl-quick-categories{order:0;padding:18px 4%;border:0}
@@ -628,7 +662,7 @@ html[data-theme="dark"] .sl-quick-links a{background:#2d362e;color:#f4ebdf;borde
 .fb-heading p{max-width:320px}
 }
 </style>
-<section class="hero" id="home" aria-label="SALTAŞ LİNE koleksiyonu">
+<section class="hero" aria-label="SALTAŞ LİNE koleksiyonu">
   <div class="hero-copy">
     <span class="hero-eyebrow">SALTAŞ LİNE · İLK VE TEK</span>
     <h1>Stiline <em>zarif</em><br>bir dokunuş.</h1>
@@ -650,7 +684,7 @@ html[data-theme="dark"] .sl-quick-links a{background:#2d362e;color:#f4ebdf;borde
   <span>KADIN GİYİM</span><span>ZAMANSIZ STİLLER</span><span>WHATSAPP İLE İLETİŞİM</span>
 </div>
 
-<section class="fb-categories" id="koleksiyonlar" aria-labelledby="fb-cat-title">
+<section class="fb-categories" id="home" aria-labelledby="fb-cat-title">
   <div class="fb-heading"><div><span class="fb-kicker">SALTAŞ LİNE / KOLEKSİYON</span><h2 id="fb-cat-title">Koleksiyonları <em>keşfet.</em></h2></div><p>Üç seçili kategori, zamansız bir stil.</p></div>
   <div class="fb-categories-grid">
     <a class="fb-category-card" href="#products" data-jump-category="elbise" style="--fb-photo:url('elbise4.jpg')" aria-label="Elbiseler koleksiyonunu incele">
