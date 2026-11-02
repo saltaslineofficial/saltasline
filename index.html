@@ -507,6 +507,8 @@ html[data-theme="dark"] .fb-product-ask{background:#263c2c;color:#e3f1e6;border-
 .fb-consent button,.fb-consent-manage{border:1px solid #79603e;border-radius:8px;padding:10px 12px;background:transparent;color:inherit;font:600 12px/1.4 Poppins,system-ui,sans-serif;cursor:pointer}
 .fb-consent .fb-consent-accept{background:#1c2b20;color:#fff;border-color:#1c2b20}
 .fb-consent-settings{padding:12px 0;margin-top:9px;border-top:1px solid #e2d7c6}
+.fb-consent{max-height:min(85dvh,560px);overflow-y:auto;overscroll-behavior:contain}
+.fb-consent-actions button{min-height:42px}
 .fb-consent-settings label{display:flex;gap:9px;align-items:flex-start;margin:8px 0}
 .fb-consent-settings input{accent-color:#886d45;margin-top:4px;width:16px;height:16px}
 .fb-consent-manage{margin-top:10px}
@@ -2454,7 +2456,8 @@ html[data-theme="dark"] .modal-price-breakdown{color:#c9d1c5}
   }catch(e){}
   bar.hidden=true;
   document.dispatchEvent(new CustomEvent("saltasline:privacy-changed",{detail:{favorites:allow}}));
-  manage.focus();
+  // Avoid focusing the footer button, which scrolls the visitor to the bottom.
+  if(document.activeElement && bar.contains(document.activeElement))document.activeElement.blur();
  }
  options.addEventListener("click",()=>{settings.hidden=!settings.hidden;options.setAttribute("aria-expanded",String(!settings.hidden));if(!settings.hidden)checkbox.focus()});
  accept.addEventListener("click",()=>save(true));
