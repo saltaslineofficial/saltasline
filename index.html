@@ -597,6 +597,37 @@ html[data-theme="dark"] .sl-quick-links a{background:#2d362e;color:#f4ebdf;borde
 <a href="#products" data-jump-category="bluz">Bluz</a>
 <a href="#products" data-jump-category="gomlek">Gömlek</a>
 </div></nav>
+<style id="sl-editorial-refresh">
+/* Clean, image-led storefront; all shopping functions remain available. */
+.sl-quick-categories{order:0;padding:18px 4%;border:0}
+.hero{min-height:0!important;max-height:none!important;padding:58px 6% 48px!important;gap:30px!important;background:#faf8f4!important}
+.hero-copy{max-width:720px!important}
+.hero-copy h1{font-size:clamp(35px,5vw,64px)!important;line-height:1.1!important}
+.hero-visual{min-height:340px!important;max-height:480px!important}
+.hero-benefits{padding:16px 5%!important}
+.fb-categories{padding:56px 5% 70px!important;background:#fff!important}
+.fb-heading{margin-bottom:26px!important}
+.fb-categories-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:18px!important}
+.fb-category-card{height:clamp(300px,38vw,530px)!important}
+.fb-category-card:nth-child(4){display:none!important}
+.fb-cat-info{padding:24px!important}
+.fb-category-card img{width:100%;height:100%;object-fit:cover}
+.fb-feature,.sl-lookbook,.why-saltasline,.fb-order-guide{display:none!important}
+.sl-products-section{padding-top:65px!important}
+.sl-shop-header{margin-bottom:28px!important}
+.about-story{padding-top:55px!important;padding-bottom:55px!important}
+@media(max-width:700px){
+.hero{padding:38px 5% 30px!important}
+.hero-visual{min-height:290px!important}
+.fb-categories{padding:40px 4% 48px!important}
+.fb-categories-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important}
+.fb-category-card{height:clamp(185px,57vw,300px)!important}
+.fb-cat-info{padding:10px!important}
+.fb-cat-info strong{font-size:clamp(13px,3vw,19px)!important}
+.fb-cat-label,.fb-cat-action{font-size:8px!important;letter-spacing:0!important}
+.fb-heading p{max-width:320px}
+}
+</style>
 <section class="hero" id="home" aria-label="SALTAŞ LİNE koleksiyonu">
   <div class="hero-copy">
     <span class="hero-eyebrow">SALTAŞ LİNE · İLK VE TEK</span>
@@ -620,7 +651,7 @@ html[data-theme="dark"] .sl-quick-links a{background:#2d362e;color:#f4ebdf;borde
 </div>
 
 <section class="fb-categories" id="koleksiyonlar" aria-labelledby="fb-cat-title">
-  <div class="fb-heading"><div><span class="fb-kicker">SALTAŞ LİNE / KOLEKSİYONU KEŞFET</span><h2 id="fb-cat-title">Tarzını <em>seç.</em></h2></div><p>Elbiselerden günlük parçalara, özenle seçilen modellere göz atın.</p></div>
+  <div class="fb-heading"><div><span class="fb-kicker">SALTAŞ LİNE / KOLEKSİYON</span><h2 id="fb-cat-title">Koleksiyonları <em>keşfet.</em></h2></div><p>Üç seçili kategori, zamansız bir stil.</p></div>
   <div class="fb-categories-grid">
     <a class="fb-category-card" href="#products" data-jump-category="elbise" style="--fb-photo:url('elbise4.jpg')" aria-label="Elbiseler koleksiyonunu incele">
       <img src="elbise4.jpg" alt="SALTAŞ LİNE elbiseler koleksiyonundan ürün" loading="lazy" fetchpriority="low" decoding="async">
