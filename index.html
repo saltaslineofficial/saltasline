@@ -37,6 +37,116 @@
 }
 </script>
 
+<!-- SALTAŞ LİNE — ürün kataloğu yapılandırılmış verisi; stok durumu doğrulanmadan ilan edilmez -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "SALTAŞ LİNE Kadın Giyim Koleksiyonu",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@type": "Product",
+        "name": "Bordo Uzun Elbise",
+        "image": "https://saltaslineofficial.github.io/saltasline/elbise1.jpg.jpeg",
+        "url": "https://saltaslineofficial.github.io/saltasline/#products",
+        "brand": {
+          "@type": "Brand",
+          "name": "SALTAŞ LİNE"
+        },
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "TRY",
+          "price": "2879.99",
+          "url": "https://saltaslineofficial.github.io/saltasline/#products"
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "@type": "Product",
+        "name": "Siyah Puantiyeli Bluz",
+        "image": "https://saltaslineofficial.github.io/saltasline/elbise2.jpg",
+        "url": "https://saltaslineofficial.github.io/saltasline/#products",
+        "brand": {
+          "@type": "Brand",
+          "name": "SALTAŞ LİNE"
+        },
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "TRY",
+          "price": "3429.99",
+          "url": "https://saltaslineofficial.github.io/saltasline/#products"
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "item": {
+        "@type": "Product",
+        "name": "Haki Yeşil Takım",
+        "image": "https://saltaslineofficial.github.io/saltasline/elbise3.jpg",
+        "url": "https://saltaslineofficial.github.io/saltasline/#products",
+        "brand": {
+          "@type": "Brand",
+          "name": "SALTAŞ LİNE"
+        },
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "TRY",
+          "price": "3979.99",
+          "url": "https://saltaslineofficial.github.io/saltasline/#products"
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "item": {
+        "@type": "Product",
+        "name": "Ekru Uzun Elbise",
+        "image": "https://saltaslineofficial.github.io/saltasline/elbise4.jpg",
+        "url": "https://saltaslineofficial.github.io/saltasline/#products",
+        "brand": {
+          "@type": "Brand",
+          "name": "SALTAŞ LİNE"
+        },
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "TRY",
+          "price": "3429.99",
+          "url": "https://saltaslineofficial.github.io/saltasline/#products"
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 5,
+      "item": {
+        "@type": "Product",
+        "name": "Pembe Gömlek",
+        "image": "https://saltaslineofficial.github.io/saltasline/elbise5.jpg",
+        "url": "https://saltaslineofficial.github.io/saltasline/#products",
+        "brand": {
+          "@type": "Brand",
+          "name": "SALTAŞ LİNE"
+        },
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "TRY",
+          "price": "1779.99",
+          "url": "https://saltaslineofficial.github.io/saltasline/#products"
+        }
+      }
+    }
+  ]
+}
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="theme.css">
@@ -1130,6 +1240,18 @@ background:#b8955f;
 @media(max-width:600px) { .products { grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; } .product img { height:240px; } .product-info { padding:12px; } .product-info h3 { font-size:15px; } .price { font-size:13px; } .buy { font-size:12px; padding:10px 12px; } }
 </style>
 
+<style>
+/* Kısa, sade alışveriş bilgilendirmesi; mevcut ana sayfa düzenini korur. */
+.sl-trust-mini{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:8px 23px;padding:14px 5%;background:#e9e4dc;border-top:1px solid #ded7cd;border-bottom:1px solid #ded7cd;color:#3e3933;font-size:12px;line-height:1.6;text-align:center}
+.sl-trust-mini a{color:inherit;text-underline-offset:3px}
+.sl-trust-mini strong{font-weight:600}
+@media(max-width:600px){.sl-trust-mini{gap:7px 13px;font-size:11px;padding:12px 4%}}
+</style>
+<div class="sl-trust-mini" aria-label="Alışveriş bilgilendirmesi">
+  <span><strong>✓ KDV ve kargo dahil</strong> fiyatlar</span>
+  <span><strong>✓ WhatsApp</strong> ile sipariş desteği</span>
+  <span><a href="teslimat-kargo.html">Teslimat bilgileri</a> ve <a href="iade.html">iade koşulları</a></span>
+</div>
 <section id="products" class="sl-products-section" aria-labelledby="productsTitle">
   <div class="sl-shop-header">
     <span class="sl-shop-eyebrow">SALTAŞ LİNE / SEÇİLİ PARÇALAR</span>
@@ -2201,7 +2323,7 @@ html{scroll-padding-top:115px}
   <div class="cart-total-row"><span>Ürünler (KDV + kargo dahil)</span><strong id="cartSubtotal">0,00 ₺</strong></div>
   <div class="cart-total-row"><span>Fiyata dahil KDV (%10)</span><strong id="cartVat">0,00 ₺</strong></div>
   <div class="cart-total-row cart-grand-total"><span>Genel toplam</span><strong id="cartGrandTotal">0,00 ₺</strong></div>
-  <p class="cart-tax-note">KDV ve kargo satış fiyatlarına dahildir; sepette ek ücret çıkmaz. Stok teyidi ve PayTR onayı bekleniyor.</p>
+  <p class="cart-tax-note">KDV ve kargo satış fiyatlarına dahildir; sepette ek ücret çıkmaz. Stok teyidi ve kartlı ödeme entegrasyonu bekleniyor.</p>
 </div>
 <button id="clearCart" type="button">🗑️ Sepeti Temizle</button>
 <button id="whatsappOrder" class="whatsapp-order" type="button">💬 Sepeti WhatsApp ile Paylaş</button>
